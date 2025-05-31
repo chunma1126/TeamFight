@@ -1,0 +1,97 @@
+# ========== 빌드 파일 ==========
+*.obj
+*.o
+*.lo
+*.la
+*.al
+*.libs
+*.dll
+*.exe
+*.so
+*.dylib
+*.lib
+*.a
+*.pch
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.log
+
+# ========== Visual Studio ==========
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+*.user
+*.suo
+*.ncb
+*.cache
+*.db
+*.ipch
+*.iobj
+*.ipdb
+*.rsp
+*.rpt
+*.exp
+
+.vs/
+*.dir/
+*.log
+
+# ========== macOS ==========
+.DS_Store
+
+# ========== Android ==========
+.gradle/
+local.properties
+*.iml
+.gradle/
+.idea/
+build/
+captures/
+.externalNativeBuild/
+
+# ========== Xcode ==========
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+DerivedData/
+*.xcodeproj/project.xcworkspace/xcuserdata
+
+# ========== CMake ==========
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+*.build/
+
+# ========== cocos2d-x 자동 생성/임시 ==========
+cocos2d/build/
+cocos2d/external/build/
+cocos2d/external/xxhash/.build/
+bin/
+bin-debug/
+bin-release/
+tmp/
+
+# ========== 기타 ==========
+*.tmp
+*.bak
+*.swp
+*.swo
+*.rej
+*.orig
+*.aps
+Thumbs.db
+ehthumbs.db
+
+# ========== 로그나 환경파일 ==========
+*.log
+*.env
+*.tags
