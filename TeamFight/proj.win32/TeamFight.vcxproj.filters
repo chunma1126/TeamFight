@@ -33,9 +33,6 @@
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\CloseSelected.png">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\HelloWorld.png">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\fonts\Marker Felt.ttf">
       <Filter>Resources\fonts</Filter>
     </ClInclude>

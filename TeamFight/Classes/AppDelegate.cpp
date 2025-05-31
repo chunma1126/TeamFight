@@ -73,7 +73,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("TeamFight", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("TeamFight", cocos2d::Rect(0, 0, mediumResolutionSize.width, mediumResolutionSize.height));
 #else
         glview = GLViewImpl::create("TeamFight");
 #endif
@@ -107,7 +107,26 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    // create a scene. it's an autorelease object
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+
+
+    HWND hwnd = glview->getWin32Window();
+    RECT windowRect;
+    GetWindowRect(hwnd, &windowRect);
+
+    int width = windowRect.right - windowRect.left;
+    int height = windowRect.bottom - windowRect.top;
+
+    int screenSizeX = GetSystemMetrics(SM_CXSCREEN);
+    int screenSizeY = GetSystemMetrics(SM_CYSCREEN);
+
+    MoveWindow(hwnd, screenSizeX / 2 - width / 2, screenSizeY / 2 - height / 2, width, height, false);
+#endif
+
+
+
+
+
     auto scene = HelloWorld::createScene();
 
     // run
