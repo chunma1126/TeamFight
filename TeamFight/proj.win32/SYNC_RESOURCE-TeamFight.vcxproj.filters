@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\CMakeFiles\d9b34eba27ca613b69a5499a647eeae4\SYNC_RESOURCE-TeamFight.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\CMakeFiles\SYNC_RESOURCE-TeamFight" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7C0148E1-9A3E-3A4C-B3DA-0364F2AD7B21}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
