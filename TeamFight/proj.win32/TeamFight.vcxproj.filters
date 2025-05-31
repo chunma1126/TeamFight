@@ -13,6 +13,9 @@
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
@@ -41,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity.h">
+      <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
