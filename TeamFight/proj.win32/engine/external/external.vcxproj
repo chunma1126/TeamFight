@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|win32">
+      <Configuration>Debug</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|win32">
+      <Configuration>Release</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F6C50782-78CF-365F-90A0-DB2D0F67F6CD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>win32</Platform>
+    <ProjectName>external</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\lib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">external.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">external</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|win32'">C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|win32'">external.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|win32'">external</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|win32'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/Box2D/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/chipmunk/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/freetype2/include/win32/freetype2" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/jpeg/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/uv/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/webp/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/bullet/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/bullet/include/bullet" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/openssl/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/tiff/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/websockets/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/curl/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/png/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/sqlite3/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/icon/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/OggDecoder/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/glfw3/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;LWS_WITH_LIBUV;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;LWS_WITH_LIBUV;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\Box2D\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\chipmunk\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\freetype2\include\win32\freetype2;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\jpeg\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\uv\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\webp\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include\bullet;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\openssl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tiff\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\websockets\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\curl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\png\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\sqlite3\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\gles\include\OGLES;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\icon\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\MP3Decoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OggDecoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OpenalSoft\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\glfw3\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\Box2D\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\chipmunk\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\freetype2\include\win32\freetype2;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\jpeg\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\uv\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\webp\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include\bullet;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\openssl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tiff\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\websockets\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\curl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\png\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\sqlite3\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\gles\include\OGLES;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\icon\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\MP3Decoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OggDecoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OpenalSoft\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\glfw3\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/Box2D/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/chipmunk/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/freetype2/include/win32/freetype2" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/jpeg/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/uv/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/webp/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/bullet/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/bullet/include/bullet" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/openssl/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/tiff/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/websockets/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/curl/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/png/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/sqlite3/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/gles/include/OGLES" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/icon/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/MP3Decoder/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/OggDecoder/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/win32-specific/OpenalSoft/include" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/glfw3/include/win32" /external:I "C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/zlib/../win32-specific/zlib/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;LWS_WITH_LIBUV;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;LWS_WITH_LIBUV;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\Box2D\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\chipmunk\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\freetype2\include\win32\freetype2;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\jpeg\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\uv\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\webp\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include\bullet;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\openssl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tiff\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\websockets\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\curl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\png\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\sqlite3\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\gles\include\OGLES;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\icon\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\MP3Decoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OggDecoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OpenalSoft\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\glfw3\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\editor-support;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\recast\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tinyxml2\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxhash\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\xxtea\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\clipper\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\edtaa3func\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\ConvertUTF\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\poly2tri\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\md5\..;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\unzip\.;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\Box2D\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\chipmunk\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\freetype2\include\win32\freetype2;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\jpeg\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\uv\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\webp\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\bullet\include\bullet;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\openssl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\tiff\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\websockets\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\curl\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\png\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\sqlite3\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\gles\include\OGLES;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\icon\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\MP3Decoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OggDecoder\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\win32-specific\OpenalSoft\include;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\glfw3\include\win32;C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\zlib\..\win32-specific\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">Building Custom Rule C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Desktop/TeamFight/TeamFight -BC:/Users/user/Desktop/TeamFight/TeamFight/proj.win32 --check-stamp-file C:/Users/user/Desktop/TeamFight/TeamFight/proj.win32/engine/external/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|win32'">Building Custom Rule C:/Users/user/Desktop/TeamFight/TeamFight/cocos2d/external/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Desktop/TeamFight/TeamFight -BC:/Users/user/Desktop/TeamFight/TeamFight/proj.win32 --check-stamp-file C:/Users/user/Desktop/TeamFight/TeamFight/proj.win32/engine/external/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|win32'">C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\external\empty.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\ZERO_CHECK.vcxproj">
+      <Project>{86BBCFD0-3938-3F96-A061-37D54D202CBD}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\clipper\ext_clipper.vcxproj">
+      <Project>{236695FC-1160-3EAF-BCD6-240BB5807D69}</Project>
+      <Name>ext_clipper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\ConvertUTF\ext_convertUTF.vcxproj">
+      <Project>{1B8A7B82-C63E-3D25-8B0D-58E8EE66FB5D}</Project>
+      <Name>ext_convertUTF</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\edtaa3func\ext_edtaa3func.vcxproj">
+      <Project>{D0624321-323B-377A-834C-8D56945E3827}</Project>
+      <Name>ext_edtaa3func</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\md5\ext_md5.vcxproj">
+      <Project>{1D11F7B0-3EE0-3CDE-AD60-BB9D31A7A313}</Project>
+      <Name>ext_md5</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\poly2tri\ext_poly2tri.vcxproj">
+      <Project>{7C379955-9F52-3A14-8EC3-DAFFE278B657}</Project>
+      <Name>ext_poly2tri</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\recast\ext_recast.vcxproj">
+      <Project>{09176A92-BE96-3E73-AD32-87D56642F3CC}</Project>
+      <Name>ext_recast</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\tinyxml2\ext_tinyxml2.vcxproj">
+      <Project>{CDD4E305-59C1-39F8-A43E-5358914A0A0E}</Project>
+      <Name>ext_tinyxml2</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\unzip\ext_unzip.vcxproj">
+      <Project>{D1F0DCD7-CC51-3405-A01D-A353483B41E1}</Project>
+      <Name>ext_unzip</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\xxhash\ext_xxhash.vcxproj">
+      <Project>{3B8C8D79-7D26-32A3-BAB1-5EE6910AE46A}</Project>
+      <Name>ext_xxhash</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\engine\external\xxtea\ext_xxtea.vcxproj">
+      <Project>{FE709928-15DB-3BD0-AC7F-8C12D8783B04}</Project>
+      <Name>ext_xxtea</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
