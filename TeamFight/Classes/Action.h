@@ -1,40 +1,30 @@
 #pragma once
 #include <functional>
-#include <vector>
-#include <algorithm>
+#include <unordered_map>
 
 template<typename ...Args>
-class Action
-{
+class Action {
 public:
-	~Action() 
-	{
-		callbacks.clear();
-	}
-public:
-	using Callback = std::function<void(Args...)>;
-	
-	void add(Callback _callback) 
-	{
-		callbacks.push_back(_callback);
-	}
+    using Callback = std::function<void(Args...)>;
+    using CallbackId = std::size_t;
 
-	void remove(Callback _callback) 
-	{
-		auto it = std::find(callbacks.begin(), callbacks.end(), _callback);
-		if (it != callbacks.end()) {
-			callbacks.erase(it);
-		}
-	}
+    CallbackId add(Callback callback) {
+        CallbackId id = nextId++;
+        callbacks[id] = std::move(callback);
+        return id;
+    }
 
-	void invoke(Args... args) 
-	{
-		for (const auto& cb : callbacks) 
-		{
-			cb(args...);
-		}
-	}
+    void remove(CallbackId id) {
+        callbacks.erase(id);
+    }
 
+    void invoke(Args... args) const {
+        for (const auto& [id, cb] : callbacks) {
+            cb(args...);
+        }
+    }
+    
 private:
-	std::vector<Callback> callbacks;
+    std::unordered_map<CallbackId, Callback> callbacks;
+    CallbackId nextId = 1;
 };
