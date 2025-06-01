@@ -1,6 +1,6 @@
 #include "StatController.h"
 #include <algorithm>
-
+#include <cocos2d.h>
 
 StatController::StatController()
 {
@@ -14,15 +14,15 @@ StatController::~StatController()
 
 void StatController::init()
 {
-    _stats[STAT_TYPE::ATK] = Stat(1.0f);
-    _stats[STAT_TYPE::DEF] = Stat(1.0f);
-    _stats[STAT_TYPE::SPD] = Stat(1.0f);
-    _stats[STAT_TYPE::HP] = Stat(1.0f);
+    _stats[STAT_TYPE::ATK] = Stat(10.0f);
+    _stats[STAT_TYPE::DEF] = Stat(5.0f);
+    _stats[STAT_TYPE::SPD] = Stat(5.0f);
+    _stats[STAT_TYPE::HP] = Stat(20.0f);
 }
 
 void StatController::update(float dt)
 {
-    
+    //CCLOG("hp : %f" , _stats[STAT_TYPE::HP].getValue());
 }
 
 void StatController::setDefaultStat(STAT_TYPE stat, float amount)

@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "StatController.h"
+
 bool Entity::init()
 {
     if (!Node::init()) 
@@ -7,10 +7,16 @@ bool Entity::init()
         return false;
     }
 
-    _statController = new StatController();
+    _statController = std::make_unique<StatController>();
 
+    scheduleUpdate();
 
     return true;
+}
+
+void Entity::update(float dt)
+{
+    _statController->update(dt);
 }
 
 void Entity::playAnimation(ANIMATION_STATE state, bool loop)
