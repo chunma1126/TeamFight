@@ -16,6 +16,9 @@
     <ClCompile Include="..\Classes\Entity.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\StatController.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
@@ -46,6 +49,12 @@
       <Filter>Resources\res</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Entity.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StatController.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Action.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
   </ItemGroup>

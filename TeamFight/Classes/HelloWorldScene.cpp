@@ -34,14 +34,18 @@ bool HelloWorld::init()
         addChild(map,-100);
     }
 
-
     //init entity
     {
         Entity* entity = Entity::create();
-        entity->setPosition(screenCenter);
-        entity->playAnimation(STATE::IDLE , true);
+        entity->setAnimationSheet("Characters/Knights/Troops/Warrior/Red/Warrior_Red.png");
+
+        Vec2 pos = { visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y };
+        entity->setPosition(pos);
+
         this->addChild(entity);
     }
+
+
 
 
 
