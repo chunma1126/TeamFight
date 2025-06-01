@@ -1,7 +1,8 @@
 #pragma once
 #include "cocos2d.h"
 #include <map>
-#include <memory>
+#include <unordered_map>
+
 USING_NS_CC;
 
 enum class ANIMATION_STATE 
@@ -14,7 +15,6 @@ enum class ANIMATION_STATE
     END
 };
 
-class StatController;
 class Entity : public Node
 {
 public :
@@ -25,7 +25,7 @@ public :
 private:
     Sprite* _sprite; 
     
-    std::unique_ptr<StatController> _statController ;
+    class StatController* _statController ;
     std::unordered_map<ANIMATION_STATE, Vector<SpriteFrame*>> _animator;
 };
 

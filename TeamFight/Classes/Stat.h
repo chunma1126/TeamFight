@@ -1,5 +1,5 @@
 #pragma once
-#include <Action.h>
+#include "Action.h"       
 
 enum class STAT_TYPE
 {
@@ -16,16 +16,15 @@ public:
     Stat();
     Stat(float value);
 
-    float getValue() const;
+    const float getValue() const;
     void setValue(float value);
     void addStat(float value);
     void removeStat(float value);
-    void addOnChangeValueEvent(std::function<void(float)> callback);
-    void removeOnChangeValueEvent(std::function<void(float)> callback);
+public:
+    ::Action<float> onChangeValueEvent;
 
 private:
     float _value;
     float _amountValue;
-    Action<float> _onChangeValueEvent;
 };
 

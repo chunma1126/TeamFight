@@ -40,7 +40,7 @@ void StatController::removeStat(STAT_TYPE stat, float amount)
     _stats[stat].removeStat(amount);
 }
 
-float StatController::getValue(STAT_TYPE stat)
+const float StatController::getValue(STAT_TYPE stat) 
 {
-    _stats[stat].getValue();
+    return _stats[stat].getValue();
 }

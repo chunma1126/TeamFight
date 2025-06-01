@@ -7,7 +7,7 @@ bool Entity::init()
         return false;
     }
 
-    _statController = std::make_unique<StatController>();
+    _statController = new StatController();
 
 
     return true;
