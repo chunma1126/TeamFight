@@ -34,6 +34,9 @@
     <ClCompile Include="..\Classes\Team.cpp">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Skill.cpp">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
@@ -93,6 +96,9 @@
     <ClInclude Include="..\Classes\Team.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Skill.h">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\CMakeLists.txt" />
@@ -126,6 +132,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\02.Scene">
       <UniqueIdentifier>{bdc2b042-740b-426a-815c-19f7e6d8cae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat">
+      <UniqueIdentifier>{878516fe-30fc-43f9-9de3-aad80b036e40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

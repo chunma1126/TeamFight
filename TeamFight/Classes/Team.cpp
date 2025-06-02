@@ -3,6 +3,7 @@
 
 Team::Team()
 {
+	_entityList.reserve(3);
 }
 
 Team::~Team()
@@ -17,16 +18,25 @@ void Team::add(ENTITY_TYPE entityType, Entity* entity)
 	_entityList.push_back(entity);
 
 	std::sort(_entityList.begin(), _entityList.end(),
-		[](Entity* a,Entity* b) {
+		[](Entity* a,Entity* b) 
+		{
 			return a->getStatController()->getValue(STAT_TYPE::SPD) >
-				b->getStatController()->getValue(STAT_TYPE::SPD);
+				   b->getStatController()->getValue(STAT_TYPE::SPD);
 		});
 
 }
 
 bool Team::isAllDead()
 {
-	return false;
+	for (const auto& entity : _entityMap)
+	{
+		if (entity.second->getStatController()->getValue(STAT_TYPE::HP) > 0)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 Entity* Team::getEntity()

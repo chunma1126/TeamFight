@@ -2,7 +2,6 @@
 
 #include "Entities.h"
 
-
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -31,6 +30,10 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 screenCenter = { visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y };
 
+    mainLabel = Label::createWithTTF("Team Fight", "fonts/SunBatang/SunBatang-Bold.ttf", 35);
+
+    mainLabel->setPosition(screenCenter.x , visibleSize.height * 0.92f);
+    addChild(mainLabel);
 
     //init tilemap
     {
@@ -78,7 +81,34 @@ bool HelloWorld::init()
         addChild(playerTeam->getEntity((ENTITY_TYPE)entityType));
     }
 
+    //mouse Event
+    {
+        auto mouseListener = EventListenerMouse::create();
 
+        mouseListener->onMouseDown = [&](EventMouse* event) 
+            {
+                Vec2 worldClick = event->getLocation();
+
+                for (int entityType = 0; entityType < (int)ENTITY_TYPE::END; entityType++)
+                {
+                    ENTITY_TYPE type = (ENTITY_TYPE)(entityType);
+                    Rect entityRect = playerTeam->getEntity(type)->getSpriteBoundingBox();
+
+                    Vec2 localPos = playerTeam->getEntity(type)->convertToNodeSpace(worldClick);
+
+
+                    if (entityRect.containsPoint(localPos))
+                    {
+                        //CCLOG("%s", playerTeam->getEntity(type)->getSkill()->name.c_str());
+                        mainLabel->setString(playerTeam->getEntity(type)->getSkill()->name.c_str());
+                    }
+                }
+
+                
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+    }
     
     
 

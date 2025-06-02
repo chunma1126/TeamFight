@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "StatController.h"
+#include "Skill.h"
 
 USING_NS_CC;
 
@@ -45,14 +46,15 @@ public:
     virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
 
     StatController* getStatController() const { return _statController.get(); }
-
+    Skill* getSkill() const { return skil; }
+    Rect getSpriteBoundingBox() { return _mainSprite->getBoundingBox(); }
 
 protected:
     void setDeadAnimationSheet();
     void setAnimationSheet(float frameHeight, float frameWidth, int animationCount, Texture2D* animationSheets, ANIMATION_STATE defaultEndState);
     AnimationSheetInfo getAnimationSheetInfo(const std::string& path);
 protected:
-    Sprite* _sprite; 
+    Sprite* _mainSprite; 
     
     std::unique_ptr<StatController> _statController;
     std::unordered_map<ANIMATION_STATE, Vector<SpriteFrame*>> _animator;
@@ -61,6 +63,7 @@ protected:
     float _animationSheetFrameWidth = 0;
     float _animationSheetFrameHeight = 0;
 
+    Skill* skil;
 
 };
 

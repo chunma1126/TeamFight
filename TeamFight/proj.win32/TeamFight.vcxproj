@@ -842,6 +842,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Knight.h" />
     <ClInclude Include="..\Classes\Pawn.h" />
+    <ClInclude Include="..\Classes\Skill.h" />
     <ClInclude Include="..\Classes\Stat.h" />
     <ClInclude Include="..\Classes\StatController.h" />
     <ClInclude Include="..\Classes\Team.h" />
@@ -853,6 +854,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\Entity.cpp" />
     <ClCompile Include="..\Classes\Knight.cpp" />
     <ClCompile Include="..\Classes\Pawn.cpp" />
+    <ClCompile Include="..\Classes\Skill.cpp" />
     <ClCompile Include="..\Classes\Stat.cpp" />
     <ClCompile Include="..\Classes\StatController.cpp" />
     <ClCompile Include="..\Classes\Team.cpp" />

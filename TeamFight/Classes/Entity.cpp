@@ -9,6 +9,11 @@ bool Entity::init()
 
     _statController = std::make_unique<StatController>();
 
+    for (size_t state = 0; state < (int)ANIMATION_STATE::END; state++)
+    {
+        _animator[(ANIMATION_STATE)state].reserve(6);
+    }
+
     scheduleUpdate();
     return true;
 }
@@ -28,11 +33,11 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop)
     auto animation = Animation::createWithSpriteFrames(it->second, frameInterval);
     auto animate = Animate::create(animation);
 
-    _sprite->stopAllActions();
+    _mainSprite->stopAllActions();
     if (loop)
-        _sprite->runAction(RepeatForever::create(animate));
+        _mainSprite->runAction(RepeatForever::create(animate));
     else
-        _sprite->runAction(animate);
+        _mainSprite->runAction(animate);
 }
 
 void Entity::initAnimationSheet(const std::string& path,int row, int col,ANIMATION_STATE animationState)
@@ -40,9 +45,9 @@ void Entity::initAnimationSheet(const std::string& path,int row, int col,ANIMATI
     _animationSheetInfo = getAnimationSheetInfo(path);
     _animationSheetFrameWidth = _animationSheetInfo.contentSize.x / row;
     _animationSheetFrameHeight = _animationSheetInfo.contentSize.y / col;
-
-    _sprite = Sprite::createWithTexture(_animationSheetInfo.animationSheet, Rect(0, 0, _animationSheetFrameWidth, _animationSheetFrameHeight));
-    addChild(_sprite);
+    
+    _mainSprite = Sprite::createWithTexture(_animationSheetInfo.animationSheet, Rect(0, 0, _animationSheetFrameWidth, _animationSheetFrameHeight));
+    addChild(_mainSprite);
     
     setAnimationSheet(_animationSheetFrameWidth, _animationSheetFrameHeight, 6, _animationSheetInfo.animationSheet, animationState);
 

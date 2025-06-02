@@ -14,6 +14,8 @@ bool Pawn::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 20);
     _statController->setDefaultStat(STAT_TYPE::HP, 25);
 
+    skil = new Skill("Hammer Attack", 10, SKILL_TYPE::DAMAGE);
+
     return true;
 }
 
