@@ -838,6 +838,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="..\Classes\Action.h" />
     <ClInclude Include="..\Classes\Archer.h" />
+    <ClInclude Include="..\Classes\BattleManager.h" />
+    <ClInclude Include="..\Classes\BattleCommand.h" />
     <ClInclude Include="..\Classes\Entities.h" />
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Knight.h" />
@@ -851,6 +853,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\resource.h" />
     <ClCompile Include="..\Classes\Archer.cpp" />
+    <ClCompile Include="..\Classes\BattleManager.cpp" />
+    <ClCompile Include="..\Classes\BattleCommand.cpp" />
     <ClCompile Include="..\Classes\Entity.cpp" />
     <ClCompile Include="..\Classes\Knight.cpp" />
     <ClCompile Include="..\Classes\Pawn.cpp" />

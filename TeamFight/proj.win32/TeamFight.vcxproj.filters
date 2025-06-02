@@ -37,6 +37,12 @@
     <ClCompile Include="..\Classes\Skill.cpp">
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BattleManager.cpp">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleCommand.cpp">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
@@ -97,6 +103,12 @@
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Skill.h">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleManager.h">
+      <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleCommand.h">
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClInclude>
   </ItemGroup>

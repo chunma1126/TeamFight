@@ -11,6 +11,7 @@ public:
 public:
 	void add(ENTITY_TYPE entityType , Entity* entity);
 	bool isAllDead();
+	void activeTeam(bool active);
 	Entity* getEntity();
 	Entity* getEntity(ENTITY_TYPE entityType);
 	const std::vector<Entity*> getAllEntities() { return _entityList; }

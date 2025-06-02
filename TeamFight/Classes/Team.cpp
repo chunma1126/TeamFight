@@ -39,6 +39,24 @@ bool Team::isAllDead()
 	return true;
 }
 
+void Team::activeTeam(bool active)
+{
+	if (active) 
+	{
+		for (const auto& entity : getAllEntities())
+		{
+			entity->getMainSprite()->setOpacity(255);
+		}
+	}
+	else {
+		for (const auto& entity : getAllEntities())
+		{
+			entity->getMainSprite()->setOpacity(128);
+		}
+	}
+}
+
+
 Entity* Team::getEntity()
 {
 	size_t nextIndex = _nextEntity++ % _entityList.size();
@@ -49,3 +67,4 @@ Entity* Team::getEntity(ENTITY_TYPE entityType)
 {
 	return _entityMap[entityType];
 }
+
