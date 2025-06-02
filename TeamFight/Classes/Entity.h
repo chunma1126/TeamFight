@@ -24,7 +24,9 @@ enum class ENTITY_TYPE
     KNIGHT,
     ARCHER,
     PAWN,
-    END
+    PLAYER_ENTITY_END,
+    GOBLIN,
+    ENEMY_ENEITY_END
 };
 
 struct AnimationSheetInfo
@@ -47,7 +49,7 @@ public:
 
     StatController* getStatController() const { return _statController.get(); }
     Skill* getSkill() const { return skil; }
-    Rect getSpriteBoundingBox() { return _mainSprite->getBoundingBox(); }
+    Sprite* getMainSprite() const { return _mainSprite; }
 
 protected:
     void setDeadAnimationSheet();
@@ -55,7 +57,7 @@ protected:
     AnimationSheetInfo getAnimationSheetInfo(const std::string& path);
 protected:
     Sprite* _mainSprite; 
-    
+
     std::unique_ptr<StatController> _statController;
     std::unordered_map<ANIMATION_STATE, Vector<SpriteFrame*>> _animator;
 

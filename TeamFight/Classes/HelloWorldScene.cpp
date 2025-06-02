@@ -17,20 +17,20 @@ static void problemLoading(const char* filename)
 
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Scene::init() )
     {
         return false;
     }
 
     playerTeam = std::make_unique<Team>();
+    enemyTeam = std::make_unique<Team>();
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 screenCenter = { visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y };
 
-    mainLabel = Label::createWithTTF("Team Fight", "fonts/SunBatang/SunBatang-Bold.ttf", 35);
+    std::string defaultString = "hellow";
+    mainLabel = Label::createWithTTF(defaultString.c_str(), "fonts/SunBatang/SunBatang-Bold.ttf", 35);
 
     mainLabel->setPosition(screenCenter.x , visibleSize.height * 0.92f);
     addChild(mainLabel);
@@ -59,7 +59,7 @@ bool HelloWorld::init()
         Archer* entity = Archer::create();
         //entity->playAnimation(ANIMATION_STATE::ATTACK2);
 
-        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.4f + origin.y };
+        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.3f + origin.y };
         entity->setPosition(pos);
 
         playerTeam->add(ENTITY_TYPE::ARCHER, entity);
@@ -70,47 +70,115 @@ bool HelloWorld::init()
         Pawn* entity = Pawn::create();
         //entity->playAnimation(ANIMATION_STATE::ATTACK2);
 
-        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.6f + origin.y };
+        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.7f + origin.y };
         entity->setPosition(pos);
 
         playerTeam->add(ENTITY_TYPE::PAWN, entity);
     }
     
-    for (int entityType = 0; entityType < (int)ENTITY_TYPE::END; entityType++)
+    for (const auto& entity : playerTeam->getAllEntities())
     {
-        addChild(playerTeam->getEntity((ENTITY_TYPE)entityType));
+#if false
+        auto drawNode = DrawNode::create();
+        auto boundingBox = entity->getMainSprite()->getBoundingBox();
+
+        Vec2 bottomLeft(boundingBox.getMinX(), boundingBox.getMinY());
+        Vec2 bottomRight(boundingBox.getMaxX(), boundingBox.getMinY());
+        Vec2 topRight(boundingBox.getMaxX(), boundingBox.getMaxY());
+        Vec2 topLeft(boundingBox.getMinX(), boundingBox.getMaxY());
+
+        drawNode->drawPolygon(
+            std::vector<Vec2>{bottomLeft, bottomRight, topRight, topLeft}.data(),
+            4,
+            Color4F(0, 0, 0, 0),
+            1.0f,
+            Color4F::RED
+        );
+
+        entity->addChild(drawNode);
+#endif 
+
+        addChild(entity);
+    }
+    
+    //enemyInit
+    {
+        Entity* entity = Entity::create();
+        entity->initAnimationSheet("Characters/Goblins/Troops/Torch/Blue/Torch_Blue.png" ,7 ,5 );
+        entity->getMainSprite()->setFlippedX(true);
+        entity->playAnimation(ANIMATION_STATE::IDLE , true);
+
+
+        Vec2 pos = { visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y };
+        entity->setPosition(pos);
+        
+        enemyTeam->add(ENTITY_TYPE::KNIGHT, entity);
+        addChild(entity);
     }
 
     //mouse Event
     {
         auto mouseListener = EventListenerMouse::create();
-
-        mouseListener->onMouseDown = [&](EventMouse* event) 
-            {
-                Vec2 worldClick = event->getLocation();
-
-                for (int entityType = 0; entityType < (int)ENTITY_TYPE::END; entityType++)
-                {
-                    ENTITY_TYPE type = (ENTITY_TYPE)(entityType);
-                    Rect entityRect = playerTeam->getEntity(type)->getSpriteBoundingBox();
-
-                    Vec2 localPos = playerTeam->getEntity(type)->convertToNodeSpace(worldClick);
-
-
-                    if (entityRect.containsPoint(localPos))
-                    {
-                        //CCLOG("%s", playerTeam->getEntity(type)->getSkill()->name.c_str());
-                        mainLabel->setString(playerTeam->getEntity(type)->getSkill()->name.c_str());
-                    }
-                }
-
-                
-            };
+        mouseListener->onMouseDown = CC_CALLBACK_1(HelloWorld::mouseDownEvent , this);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
     }
     
-    
 
     return true;
+}
+
+void HelloWorld::mouseDownEvent(EventMouse* event)
+{
+    Vec2 worldClick = event->getLocationInView();
+    currentEntity = selectPlayerEntity(worldClick);
+
+    if (currentEntity != nullptr)
+    {
+        auto sizeUpEvent = ScaleTo::create(0.1f, 1.1f);
+        currentEntity->runAction(sizeUpEvent);
+    }
+    else
+    {
+        mainLabel->setString("");
+    }
+
+    for (const auto& entity : enemyTeam->getAllEntities())
+    {
+        Rect entityRect = entity->getMainSprite()->getBoundingBox();
+        Vec2 localPos = entity->convertToNodeSpace(worldClick);
+
+        if (entityRect.containsPoint(localPos))
+        {
+            currentEntity->playAnimation(ANIMATION_STATE::ATTACK1,false);
+            mainLabel->setString("enemy");
+        }
+    }
+
+    
+
+}
+
+Entity* HelloWorld::selectPlayerEntity(cocos2d::Vec2& worldClick)
+{
+    //currentEntity = nullptr;
+
+    for (const auto& entity : playerTeam->getAllEntities())
+    {
+        Rect entityRect = entity->getMainSprite()->getBoundingBox();
+        Vec2 localPos = entity->convertToNodeSpace(worldClick);
+
+        auto resizeAction = ScaleTo::create(0.1f, 1.0f);
+        entity->runAction(resizeAction);
+
+        if (entityRect.containsPoint(localPos))
+        {
+            currentEntity = entity;
+            mainLabel->setString(currentEntity->getSkill()->name.c_str());
+        }
+    }
+
+    
+    
+    return currentEntity;
 }

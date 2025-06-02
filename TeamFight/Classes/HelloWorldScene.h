@@ -11,6 +11,16 @@ public:
     
     CREATE_FUNC(HelloWorld);
 private:
-    std::unique_ptr<Team> playerTeam;
-    cocos2d::Label* mainLabel;
+    void mouseDownEvent(EventMouse* event);
+
+    Entity* selectPlayerEntity(cocos2d::Vec2& worldClick);
+
+private:
+    std::unique_ptr<Team> playerTeam = nullptr;
+    std::unique_ptr<Team> enemyTeam = nullptr;
+
+
+    cocos2d::Label* mainLabel = nullptr;
+    Entity* currentEntity;
+
 };

@@ -13,6 +13,7 @@ public:
 	bool isAllDead();
 	Entity* getEntity();
 	Entity* getEntity(ENTITY_TYPE entityType);
+	const std::vector<Entity*> getAllEntities() { return _entityList; }
 private:
 	std::unordered_map<ENTITY_TYPE,Entity*> _entityMap;
 	std::vector<Entity*> _entityList;

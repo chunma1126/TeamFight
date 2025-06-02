@@ -34,10 +34,18 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop)
     auto animate = Animate::create(animation);
 
     _mainSprite->stopAllActions();
+
     if (loop)
         _mainSprite->runAction(RepeatForever::create(animate));
-    else
-        _mainSprite->runAction(animate);
+    else {
+        auto callback = CallFunc::create([this]() {
+            this->playAnimation(ANIMATION_STATE::IDLE, true); 
+            });
+
+        auto seq = Sequence::create(animate, callback, nullptr);
+        _mainSprite->runAction(seq);
+    }
+
 }
 
 void Entity::initAnimationSheet(const std::string& path,int row, int col,ANIMATION_STATE animationState)
