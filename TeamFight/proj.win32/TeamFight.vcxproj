@@ -838,11 +838,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="..\Classes\Action.h" />
     <ClInclude Include="..\Classes\Archer.h" />
+    <ClInclude Include="..\Classes\Entities.h" />
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Knight.h" />
     <ClInclude Include="..\Classes\Pawn.h" />
     <ClInclude Include="..\Classes\Stat.h" />
     <ClInclude Include="..\Classes\StatController.h" />
+    <ClInclude Include="..\Classes\Team.h" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.h" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h" />
@@ -853,9 +855,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\Pawn.cpp" />
     <ClCompile Include="..\Classes\Stat.cpp" />
     <ClCompile Include="..\Classes\StatController.cpp" />
+    <ClCompile Include="..\Classes\Team.cpp" />
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp" />
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.cpp" />
+    <ClInclude Include="Entities.h" />
     <ResourceCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\game.rc" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\CloseNormal.png" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\CloseSelected.png" />

@@ -10,7 +10,6 @@ bool Entity::init()
     _statController = std::make_unique<StatController>();
 
     scheduleUpdate();
-
     return true;
 }
 

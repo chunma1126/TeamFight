@@ -8,6 +8,11 @@ bool Archer::init()
     
     initAnimationSheet("Characters/Knights/Troops/Archer/Red/Archer_Red.png", 8, 7, ANIMATION_STATE::MOVE);
 
+    _statController->setDefaultStat(STAT_TYPE::ATK , 20);
+    _statController->setDefaultStat(STAT_TYPE::SPD , 15);
+    _statController->setDefaultStat(STAT_TYPE::DEF , 5);
+    _statController->setDefaultStat(STAT_TYPE::HP , 10);
+
     return true;
 }
 
@@ -27,7 +32,7 @@ void Archer::initAnimationSheet(const std::string& path, int row, int col, ANIMA
         Rect frameRect = Rect(startX, startY, _animationSheetFrameWidth, _animationSheetFrameHeight);
         auto spriteFrame = SpriteFrame::createWithTexture(_animationSheetInfo.animationSheet, frameRect);
         _animator[ANIMATION_STATE::ATTACK1].pushBack(spriteFrame);
-        //_animator[ANIMATION_STATE::ATTACK2].pushBack(spriteFrame);
+        _animator[ANIMATION_STATE::ATTACK2].pushBack(spriteFrame);
     }
    
     playAnimation(ANIMATION_STATE::IDLE, true);

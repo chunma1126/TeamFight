@@ -14,10 +14,10 @@ StatController::~StatController()
 
 void StatController::init()
 {
-    _stats[STAT_TYPE::ATK] = Stat(10.0f);
-    _stats[STAT_TYPE::DEF] = Stat(5.0f);
-    _stats[STAT_TYPE::SPD] = Stat(5.0f);
-    _stats[STAT_TYPE::HP] = Stat(20.0f);
+    _stats[STAT_TYPE::ATK] = Stat(0.0f);
+    _stats[STAT_TYPE::DEF] = Stat(0.0f);
+    _stats[STAT_TYPE::SPD] = Stat(0.0f);
+    _stats[STAT_TYPE::HP] = Stat(0.0f);
 }
 
 void StatController::update(float dt)

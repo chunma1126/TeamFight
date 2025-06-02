@@ -4,9 +4,6 @@
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
@@ -31,12 +28,15 @@
     <ClCompile Include="..\Classes\Pawn.cpp">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.cpp">
+      <Filter>Source Files\Classes\02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Team.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -81,6 +81,18 @@
     <ClInclude Include="..\Classes\Pawn.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Entities.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entities.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.h">
+      <Filter>Source Files\Classes\02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Team.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\CMakeLists.txt" />
@@ -111,6 +123,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\01.Entity">
       <UniqueIdentifier>{0938e49d-bc84-4716-b33c-98a55cc50fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\02.Scene">
+      <UniqueIdentifier>{bdc2b042-740b-426a-815c-19f7e6d8cae8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

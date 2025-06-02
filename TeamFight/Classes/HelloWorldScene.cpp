@@ -1,8 +1,6 @@
 #include "HelloWorldScene.h"
 
-#include "Knight.h"
-#include "Archer.h"
-#include "Pawn.h"
+#include "Entities.h"
 
 
 USING_NS_CC;
@@ -27,9 +25,12 @@ bool HelloWorld::init()
         return false;
     }
 
+    playerTeam = std::make_unique<Team>();
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 screenCenter = { visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y };
+
 
     //init tilemap
     {
@@ -39,39 +40,47 @@ bool HelloWorld::init()
         addChild(map,-100);
     }
 
-    //init entity
+    //init knight
     {
         Knight* entity = Knight::create();
-        entity->playAnimation(ANIMATION_STATE::MOVE);
-         
+        //entity->playAnimation(ANIMATION_STATE::ATTACK2);
 
         Vec2 pos = { visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y };
         entity->setPosition(pos);
 
-        this->addChild(entity);
+        playerTeam->add(ENTITY_TYPE::KNIGHT , entity);
     }
 
-    //init entity
+    //init archer
     {
         Archer* entity = Archer::create();
-        entity->playAnimation(ANIMATION_STATE::MOVE);
+        //entity->playAnimation(ANIMATION_STATE::ATTACK2);
+
         Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.4f + origin.y };
         entity->setPosition(pos);
 
-        this->addChild(entity);
+        playerTeam->add(ENTITY_TYPE::ARCHER, entity);
     }
 
-    //init entity
+    //init pawn
     {
         Pawn* entity = Pawn::create();
-     
-        entity->playAnimation(ANIMATION_STATE::MOVE);
+        //entity->playAnimation(ANIMATION_STATE::ATTACK2);
 
         Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.6f + origin.y };
         entity->setPosition(pos);
 
-        this->addChild(entity);
+        playerTeam->add(ENTITY_TYPE::PAWN, entity);
     }
     
+    for (int entityType = 0; entityType < (int)ENTITY_TYPE::END; entityType++)
+    {
+        addChild(playerTeam->getEntity((ENTITY_TYPE)entityType));
+    }
+
+
+    
+    
+
     return true;
 }

@@ -18,12 +18,19 @@ enum class ANIMATION_STATE
     END
 };
 
+enum class ENTITY_TYPE
+{
+    KNIGHT,
+    ARCHER,
+    PAWN,
+    END
+};
+
 struct AnimationSheetInfo
 {
     Texture2D* animationSheet;
     Vec2 contentSize;
 };
-
 
 class StatController;
 class Entity : public Node
@@ -33,8 +40,13 @@ public :
     virtual void update(float dt);
 
     CREATE_FUNC(Entity);
+public:
     void playAnimation(ANIMATION_STATE state, bool loop = true);
     virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
+
+    StatController* getStatController() const { return _statController.get(); }
+
+
 protected:
     void setDeadAnimationSheet();
     void setAnimationSheet(float frameHeight, float frameWidth, int animationCount, Texture2D* animationSheets, ANIMATION_STATE defaultEndState);
