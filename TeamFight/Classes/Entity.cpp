@@ -36,40 +36,44 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop)
         _sprite->runAction(animate);
 }
 
-void Entity::setAnimationSheet(const std::string& path)
+void Entity::initAnimationSheet(const std::string& path,int row, int col,ANIMATION_STATE animationState)
 {
-    auto animationSheet = Director::getInstance()->getTextureCache()->addImage(path);
+    _animationSheetInfo = getAnimationSheetInfo(path);
+    _animationSheetFrameWidth = _animationSheetInfo.contentSize.x / row;
+    _animationSheetFrameHeight = _animationSheetInfo.contentSize.y / col;
 
-    int animationSheetWidht = animationSheet->getContentSize().width;
-    int animationSheetHeight = animationSheet->getContentSize().height;
-
-    int frameWidth = animationSheetWidht / 6;
-    int frameHeight = animationSheetHeight / 8;
-
-    _sprite = Sprite::createWithTexture(animationSheet, Rect(0, 0, frameWidth, frameHeight));
+    _sprite = Sprite::createWithTexture(_animationSheetInfo.animationSheet, Rect(0, 0, _animationSheetFrameWidth, _animationSheetFrameHeight));
     addChild(_sprite);
+    
+    setAnimationSheet(_animationSheetFrameWidth, _animationSheetFrameHeight, 6, _animationSheetInfo.animationSheet, animationState);
 
-    for (size_t state = 0; state < (int)ANIMATION_STATE::DEAD; state++)
+    playAnimation(ANIMATION_STATE::IDLE, true);
+}
+
+void Entity::setAnimationSheet(float frameWidth ,float frameHeight,int animationCount, Texture2D* animationSheets, ANIMATION_STATE defaultEndState)
+{
+    for (size_t state = 0; state <= (int)defaultEndState; state++)
     {
-        int animationCount = 6;
         int startY = state * frameHeight;
         for (size_t i = 0; i < animationCount; i++)
         {
             int startX = i * frameWidth;
 
             Rect frameRect = Rect(startX, startY, frameWidth, frameHeight);
-            auto spriteFrame = SpriteFrame::createWithTexture(animationSheet, frameRect);
+            auto spriteFrame = SpriteFrame::createWithTexture(animationSheets, frameRect);
             _animator[(ANIMATION_STATE)state].pushBack(spriteFrame);
         }
     }
+    setDeadAnimationSheet();
+}
 
-    auto deadanimationSheet = Director::getInstance()->getTextureCache()->addImage("Characters/Knights/Troops/Dead/Dead.png");
+void Entity::setDeadAnimationSheet()
+{
+    std::string deadAnimationSheetPath = "Characters/Knights/Troops/Dead/Dead.png";
+    AnimationSheetInfo deadAnimationInfo = getAnimationSheetInfo(deadAnimationSheetPath);
 
-    animationSheetWidht = deadanimationSheet->getContentSize().width;
-    animationSheetHeight = deadanimationSheet->getContentSize().height;
-
-    frameWidth = animationSheetWidht / 7;
-    frameHeight = animationSheetHeight / 2;
+    float frameWidth = deadAnimationInfo.contentSize.x / 7;
+    float frameHeight = deadAnimationInfo.contentSize.y / 2;
 
     for (size_t i = 0; i < 2; i++)
     {
@@ -80,11 +84,24 @@ void Entity::setAnimationSheet(const std::string& path)
             int startX = i * frameWidth;
 
             Rect frameRect = Rect(startX, startY, frameWidth, frameHeight);
-            auto spriteFrame = SpriteFrame::createWithTexture(deadanimationSheet, frameRect);
+
+            auto spriteFrame = SpriteFrame::createWithTexture(deadAnimationInfo.animationSheet, frameRect);
             _animator[ANIMATION_STATE::DEAD].pushBack(spriteFrame);
         }
     }
-
-    playAnimation(ANIMATION_STATE::IDLE, true);
-        
 }
+
+AnimationSheetInfo Entity::getAnimationSheetInfo(const std::string& path)
+{
+    AnimationSheetInfo animationInfo;
+
+    auto deadanimationSheet = Director::getInstance()->getTextureCache()->addImage(path);
+    animationInfo.animationSheet = deadanimationSheet;
+
+    float animationSheetWidht = deadanimationSheet->getContentSize().width;
+    float animationSheetHeight = deadanimationSheet->getContentSize().height;
+    animationInfo.contentSize = Vec2(animationSheetWidht, animationSheetHeight);
+
+    return  animationInfo;
+}
+

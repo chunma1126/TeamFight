@@ -1,5 +1,10 @@
 #include "HelloWorldScene.h"
-#include "Entity.h"
+
+#include "Knight.h"
+#include "Archer.h"
+#include "Pawn.h"
+
+
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -36,8 +41,9 @@ bool HelloWorld::init()
 
     //init entity
     {
-        Entity* entity = Entity::create();
-        entity->setAnimationSheet("Characters/Knights/Troops/Warrior/Red/Warrior_Red.png");
+        Knight* entity = Knight::create();
+        entity->playAnimation(ANIMATION_STATE::MOVE);
+         
 
         Vec2 pos = { visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y };
         entity->setPosition(pos);
@@ -45,9 +51,27 @@ bool HelloWorld::init()
         this->addChild(entity);
     }
 
+    //init entity
+    {
+        Archer* entity = Archer::create();
+        entity->playAnimation(ANIMATION_STATE::MOVE);
+        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.4f + origin.y };
+        entity->setPosition(pos);
 
+        this->addChild(entity);
+    }
 
+    //init entity
+    {
+        Pawn* entity = Pawn::create();
+     
+        entity->playAnimation(ANIMATION_STATE::MOVE);
 
+        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.6f + origin.y };
+        entity->setPosition(pos);
 
+        this->addChild(entity);
+    }
+    
     return true;
 }

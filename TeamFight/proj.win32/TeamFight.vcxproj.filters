@@ -13,14 +13,23 @@
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StatController.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Stat.cpp">
       <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Archer.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Knight.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Pawn.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +60,6 @@
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\StatController.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
@@ -62,6 +68,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Stat.h">
       <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Archer.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Knight.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pawn.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +108,9 @@
     </Filter>
     <Filter Include="Source Files\proj.win32">
       <UniqueIdentifier>{743D1192-760C-3A7E-8F81-702B2D531593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity">
+      <UniqueIdentifier>{0938e49d-bc84-4716-b33c-98a55cc50fc4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
