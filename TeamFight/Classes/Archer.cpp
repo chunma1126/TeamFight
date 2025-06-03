@@ -1,4 +1,5 @@
 #include "Archer.h"
+#include "RangeSkill.h"
 
 bool Archer::init()
 {
@@ -13,7 +14,7 @@ bool Archer::init()
     _statController->setDefaultStat(STAT_TYPE::DEF , 5);
     _statController->setDefaultStat(STAT_TYPE::HP , 10);
 
-    skil = new Skill("Arrow Shot" , 10 , SKILL_TYPE::DAMAGE);
+    skil = new RangeSkill("Legend Shot" , 10 , SKILL_TYPE::DAMAGE);
 
     return true;
 }

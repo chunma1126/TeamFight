@@ -4,6 +4,8 @@
 
 #include "Team.h"
 #include "BattleCommand.h"
+#include "Entity.h"
+
 enum class TURN_TYPE
 {
 	PLAYER,
@@ -25,6 +27,11 @@ public:
     void runCommand(float dt);
 
     void changeTurn();
+    Entity* selectPlayerEntity();
+    Entity* selectEnemyEntity(Vec2 worldMousePos);
+
+    void PlayPlayerTurn(Entity* enemyEntity);
+
     std::string TurnTypeToString(TURN_TYPE turn)
     {
         switch (turn)
@@ -38,10 +45,13 @@ private:
     std::queue<TURN_TYPE> _turnQueue;
     std::queue<BattleCommand*> _commandQueue;
     BattleCommand* _currentCommand = nullptr;
-    TURN_TYPE _currentTurn = TURN_TYPE::END;
-    Team* _playerTeam;
-    Team* _enemyTeam;
+    Team* _playerTeam = nullptr;
+    Team* _enemyTeam = nullptr;
 
+    Entity* _currentEnemyEntity;
+    Entity* _currentPlayerEntity;
+
+    TURN_TYPE _currentTurn = TURN_TYPE::END;
 
     bool _startTurn;
     bool _usedPlayerCommand = false;

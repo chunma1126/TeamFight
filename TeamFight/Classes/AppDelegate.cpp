@@ -23,7 +23,7 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "BattleScene.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -124,10 +124,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #endif
 
 
-
-
-
-    auto scene = HelloWorld::createScene();
+    auto scene = BattleScene::createScene();
 
     // run
     director->runWithScene(scene);

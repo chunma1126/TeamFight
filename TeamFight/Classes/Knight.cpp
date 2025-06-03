@@ -14,7 +14,7 @@ bool Knight::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 15);
     _statController->setDefaultStat(STAT_TYPE::HP, 20);
 
-    skil = new Skill("I am king", 7, SKILL_TYPE::DAMAGE);
+    skil = new MeleeAttackSkill("Dragon Slash", 7, SKILL_TYPE::DAMAGE);
 
     return true;
 }

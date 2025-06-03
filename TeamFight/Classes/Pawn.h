@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include "MeleeAttackSkill.h"
 class Pawn : public Entity
 {
 public:

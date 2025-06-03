@@ -46,10 +46,10 @@ public :
 public:
     void playAnimation(ANIMATION_STATE state, bool loop = true);
     virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
-
-    StatController* getStatController() const { return _statController.get(); }
+public:
     Skill* getSkill() const { return skil; }
     Sprite* getMainSprite() const { return _mainSprite; }
+    StatController* getStatController() const { return _statController.get(); }
 
 protected:
     void setDeadAnimationSheet();
@@ -57,6 +57,7 @@ protected:
     AnimationSheetInfo getAnimationSheetInfo(const std::string& path);
 protected:
     Sprite* _mainSprite; 
+    Skill* skil;
 
     std::unique_ptr<StatController> _statController;
     std::unordered_map<ANIMATION_STATE, Vector<SpriteFrame*>> _animator;
@@ -64,9 +65,6 @@ protected:
     AnimationSheetInfo _animationSheetInfo = {};
     float _animationSheetFrameWidth = 0;
     float _animationSheetFrameHeight = 0;
-
-    Skill* skil;
-
 };
 
 

@@ -1,7 +1,6 @@
 #include "BattleManager.h"
 #include "cocos2d.h"
 
-
 BattleManager::BattleManager()
 {
     _turnQueue.push(TURN_TYPE::PLAYER);
@@ -64,8 +63,6 @@ void BattleManager::runCommand(float dt)
 {
     if (_commandQueue.empty() && !_turnQueue.empty() && _startTurn)
     {
-        _startTurn = false;
-
         changeTurn();
         return;
     }
@@ -95,12 +92,14 @@ void BattleManager::runCommand(float dt)
 
 void BattleManager::changeTurn()
 {
+    _startTurn = false;
+
     _currentTurn = _turnQueue.front();
     _turnQueue.pop();
 
     if (_currentTurn == TURN_TYPE::ENEMY)
     {
-        _commandQueue.push(new BattleCommand(3.0f, [&]()
+        _commandQueue.push(new BattleCommand(2.1f, [&]()
             {
                 _enemyTeam->getEntity()->playAnimation(ANIMATION_STATE::ATTACK1 , false);
             }));
@@ -110,10 +109,62 @@ void BattleManager::changeTurn()
                 _enemyTeam->activeTeam(false);
             }));
     }
-    else 
+    else if(_currentTurn == TURN_TYPE::PLAYER)
     {
+        _currentPlayerEntity = selectPlayerEntity();
         _usedPlayerCommand = false;
     }
+}
+
+Entity* BattleManager::selectPlayerEntity()
+{
+    Entity* entity = _playerTeam->getEntity();
+    CCLOG("%s", typeid(*entity).name());
+
+    auto sizeUpEvent = ScaleTo::create(0.1f, 1.1f);
+    entity->runAction(sizeUpEvent);
+
+    return entity;
+}
+
+Entity* BattleManager::selectEnemyEntity(Vec2 worldMousePos)
+{
+    for (const auto& entity : _enemyTeam->getAllEntities())
+    {
+        Rect entityRect = entity->getMainSprite()->getBoundingBox();
+        Vec2 localPos = entity->convertToNodeSpace(worldMousePos);
+
+        if (entityRect.containsPoint(localPos))
+        {
+            return entity;
+        }
+
+    }
+
+    return nullptr;
+}
+
+void BattleManager::PlayPlayerTurn(Entity* enemyEntity)
+{
+    submitPlayerCommand(new BattleCommand(0.1f, [&]()
+        {
+            for (const auto& entity : _playerTeam->getAllEntities())
+            {
+                ScaleTo* scaleResizeAction = ScaleTo::create(0.1f, 1);
+                entity->runAction(scaleResizeAction);
+            }
+        }));
+
+    submitPlayerCommand(new BattleCommand(2.1f, [=]()
+        {
+            _currentPlayerEntity->getSkill()->execute(_currentPlayerEntity, enemyEntity);
+        }));
+
+    submitPlayerCommand(new BattleCommand(0.1f, [&]()
+        {
+            _playerTeam->activeTeam(false);
+            _enemyTeam->activeTeam(true);
+        }));
 }
 
 void BattleManager::submitPlayerCommand(BattleCommand* cmd)

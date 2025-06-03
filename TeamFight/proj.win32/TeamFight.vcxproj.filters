@@ -1,41 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.cpp">
       <Filter>Source Files\proj.win32</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StatController.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Stat.cpp">
-      <Filter>Source Files\Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Entity.cpp">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Archer.cpp">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Knight.cpp">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Pawn.cpp">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\BattleScene.cpp">
       <Filter>Source Files\Classes\02.Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Team.cpp">
       <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Skill.cpp">
-      <Filter>Source Files\Classes\03.Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BattleManager.cpp">
       <Filter>Source Files\Classes\03.Combat</Filter>
@@ -43,11 +22,35 @@
     <ClCompile Include="..\Classes\BattleCommand.cpp">
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Archer.cpp">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Knight.cpp">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Pawn.cpp">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stat.cpp">
+      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StatController.cpp">
+      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill.cpp">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp">
+      <Filter>Source Files\Classes\04.Utis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MeleeAttackSkill.cpp">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RangeSkill.cpp">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
       <Filter>Source Files\proj.win32</Filter>
     </ClInclude>
@@ -69,47 +72,56 @@
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\StatController.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Action.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Stat.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Archer.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Entity.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Knight.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Pawn.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
     <ClInclude Include="Entities.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entities.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\Classes\BattleScene.h">
       <Filter>Source Files\Classes\02.Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Team.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Skill.h">
-      <Filter>Source Files\Classes\03.Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleManager.h">
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleCommand.h">
       <Filter>Source Files\Classes\03.Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Archer.h">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Knight.h">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pawn.h">
+      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Stat.h">
+      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StatController.h">
+      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill.h">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Action.h">
+      <Filter>Source Files\Classes\04.Utis</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes\04.Utis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entities.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MeleeAttackSkill.h">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RangeSkill.h">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +159,18 @@
     </Filter>
     <Filter Include="Source Files\Classes\03.Combat">
       <UniqueIdentifier>{878516fe-30fc-43f9-9de3-aad80b036e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\Player">
+      <UniqueIdentifier>{4aa44f15-cce5-4006-8857-1d8d332e81da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\Stat">
+      <UniqueIdentifier>{5fa74a7b-425b-4645-9972-575194295361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat\Skill">
+      <UniqueIdentifier>{9873ffd7-d8e2-4fa4-9d80-3da2fe84527e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\04.Utis">
+      <UniqueIdentifier>{01cd3069-a318-46f1-9281-050eecfb9697}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

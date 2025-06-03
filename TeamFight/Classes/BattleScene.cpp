@@ -1,12 +1,12 @@
-#include "HelloWorldScene.h"
+#include "BattleScene.h"
 
 #include "Entities.h"
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* BattleScene::createScene()
 {
-    return HelloWorld::create();
+    return BattleScene::create();
 }
 
 static void problemLoading(const char* filename)
@@ -15,7 +15,7 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-bool HelloWorld::init()
+bool BattleScene::init()
 {
     if ( !Scene::init() )
     {
@@ -99,7 +99,7 @@ bool HelloWorld::init()
         entity->addChild(drawNode);
 #endif 
 
-        addChild(entity);
+        addChild(entity,1);
     }
     
     //enemyInit
@@ -119,80 +119,32 @@ bool HelloWorld::init()
     //mouse Event
     {
         auto mouseListener = EventListenerMouse::create();
-        mouseListener->onMouseDown = CC_CALLBACK_1(HelloWorld::mouseDownEvent , this);
+        mouseListener->onMouseDown = CC_CALLBACK_1(BattleScene::mouseDownEvent , this);
 
         _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
     }
     
     _battleManager->setTeam(_playerTeam.get() , _enemyTeam.get());
+    _enemyTeam->activeTeam(false);
 
     scheduleUpdate();
 
     return true;
 }
 
-void HelloWorld::update(float dt)
+void BattleScene::update(float dt)
 {
     _battleManager->update(dt);
 }
 
-void HelloWorld::mouseDownEvent(EventMouse* event)
+void BattleScene::mouseDownEvent(EventMouse* event)
 {
     bool isplayerTurn = _battleManager->canPlayerInput();
-    
     if (!isplayerTurn)return;
 
     Vec2 worldClick = event->getLocationInView();
-    _currentEntity = selectPlayerEntity(worldClick);
-
-    /*if (_currentEntity != nullptr)
-    {
-        auto sizeUpEvent = ScaleTo::create(0.1f, 1.1f);
-        _currentEntity->runAction(sizeUpEvent);
-    }*/
-    
-    for (const auto& entity : _enemyTeam->getAllEntities())
-    {
-        Rect entityRect = entity->getMainSprite()->getBoundingBox();
-        Vec2 localPos = entity->convertToNodeSpace(worldClick);
-
-        if (entityRect.containsPoint(localPos))
-        {
-            _battleManager->submitPlayerCommand(new BattleCommand(3.0f, [&]()
-                {
-                    _currentEntity->playAnimation(ANIMATION_STATE::ATTACK1,false);
-                }));
-            _battleManager->submitPlayerCommand(new BattleCommand(0.4f, [&]()
-                {
-                    _playerTeam->activeTeam(false);
-                    _enemyTeam->activeTeam(true);
-                }));
-        }
-
-    }
-
+    _battleManager->PlayPlayerTurn(_battleManager->selectEnemyEntity(worldClick));
 }
 
 
 
-Entity* HelloWorld::selectPlayerEntity(cocos2d::Vec2& worldClick)
-{
-    //currentEntity = nullptr;
-
-
-    for (const auto& entity : _playerTeam->getAllEntities())
-    {
-        Rect entityRect = entity->getMainSprite()->getBoundingBox();
-        Vec2 localPos = entity->convertToNodeSpace(worldClick);
-
-        if (entityRect.containsPoint(localPos))
-        {
-            _currentEntity = entity;
-            _mainLabel->setString(_currentEntity->getSkill()->name.c_str());
-        }
-    }
-
-    
-    
-    return _currentEntity;
-}
