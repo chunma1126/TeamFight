@@ -18,21 +18,22 @@ public:
     BattleManager();
     ~BattleManager();
 
-    void setTeam(Team* playerTeam , Team* enemyTeam);
-
-    void submitPlayerCommand(BattleCommand* cmd);
-    bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
-
     void update(float dt);
     void runCommand(float dt);
 
-    void changeTurn();
     Entity* selectPlayerEntity();
     Entity* selectEnemyEntity(Vec2 worldMousePos);
 
-    void PlayPlayerTurn(Entity* enemyEntity);
-
-    std::string TurnTypeToString(TURN_TYPE turn)
+    void changeTurn();
+    void submitPlayerCommand(BattleCommand* cmd);
+    void setTeam(Team* playerTeam , Team* enemyTeam);
+    
+    void playPlayerTurn(Entity* enemyEntity);
+    void playEnemyTurn();
+    
+public:
+    bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
+    const char* turnTypeToString(TURN_TYPE turn)
     {
         switch (turn)
         {
@@ -53,7 +54,7 @@ private:
 
     TURN_TYPE _currentTurn = TURN_TYPE::END;
 
-    bool _startTurn;
+    bool _canChangeTurn = true;
     bool _usedPlayerCommand = false;
 };
 

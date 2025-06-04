@@ -39,8 +39,12 @@ void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 		{
 			caster->playAnimation(ANIMATION_STATE::ATTACK1, false);
 		});
+	auto animation2 = CallFunc::create([caster]()
+		{
+			caster->playAnimation(ANIMATION_STATE::ATTACK2, false);
+		});
 	auto moveBack = MoveTo::create(0.4f, originalPos);
-	auto sequence = Sequence::create(moveToEnemy, animation, delay, moveBack, nullptr);
+	auto sequence = Sequence::create(moveToEnemy, animation, delay->clone(), animation2, delay->clone(), moveBack, nullptr);
 
 	caster->runAction(sequence);
 }

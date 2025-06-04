@@ -23,13 +23,13 @@
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Archer.cpp">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Knight.cpp">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Pawn.cpp">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Stat.cpp">
       <Filter>Source Files\Classes\01.Entity\Stat</Filter>
@@ -48,6 +48,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\RangeSkill.cpp">
       <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Goblin.cpp">
+      <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,13 +94,13 @@
       <Filter>Source Files\Classes\03.Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Archer.h">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Knight.h">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Pawn.h">
-      <Filter>Source Files\Classes\01.Entity\Player</Filter>
+      <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Stat.h">
       <Filter>Source Files\Classes\01.Entity\Stat</Filter>
@@ -122,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RangeSkill.h">
       <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Goblin.h">
+      <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -160,9 +166,6 @@
     <Filter Include="Source Files\Classes\03.Combat">
       <UniqueIdentifier>{878516fe-30fc-43f9-9de3-aad80b036e40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\01.Entity\Player">
-      <UniqueIdentifier>{4aa44f15-cce5-4006-8857-1d8d332e81da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Classes\01.Entity\Stat">
       <UniqueIdentifier>{5fa74a7b-425b-4645-9972-575194295361}</UniqueIdentifier>
     </Filter>
@@ -171,6 +174,12 @@
     </Filter>
     <Filter Include="Source Files\Classes\04.Utis">
       <UniqueIdentifier>{01cd3069-a318-46f1-9281-050eecfb9697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\02.Enemy">
+      <UniqueIdentifier>{9688c792-d720-49c1-b36f-658f07ce5ae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\01.Player">
+      <UniqueIdentifier>{4aa44f15-cce5-4006-8857-1d8d332e81da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

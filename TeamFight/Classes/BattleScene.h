@@ -20,7 +20,8 @@ private:
     std::unique_ptr<Team> _enemyTeam = nullptr;
     std::unique_ptr<BattleManager> _battleManager = nullptr;
 private:
-    cocos2d::Label* _mainLabel = nullptr;
-    bool _canInput = true;
+
+    std::vector<Vec2> playerTeamPosition;
+    std::vector<Vec2> enemyTeamPosition;
 
 };

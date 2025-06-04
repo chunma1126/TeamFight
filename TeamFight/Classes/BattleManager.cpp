@@ -5,16 +5,6 @@ BattleManager::BattleManager()
 {
     _turnQueue.push(TURN_TYPE::PLAYER);
     _turnQueue.push(TURN_TYPE::ENEMY);
-
-    _turnQueue.push(TURN_TYPE::PLAYER);
-    _turnQueue.push(TURN_TYPE::ENEMY);
-
-    _turnQueue.push(TURN_TYPE::PLAYER);
-    _turnQueue.push(TURN_TYPE::ENEMY);
-
-    _turnQueue.push(TURN_TYPE::PLAYER);
-    _turnQueue.push(TURN_TYPE::ENEMY);
-
 }
 
 BattleManager::~BattleManager()
@@ -42,7 +32,6 @@ void BattleManager::update(float dt)
 {
     if (_turnQueue.empty())
     {
-        CCLOG("turn queue is empty");
         _turnQueue.push(TURN_TYPE::PLAYER);
         _turnQueue.push(TURN_TYPE::ENEMY);
 
@@ -61,67 +50,61 @@ void BattleManager::update(float dt)
 
 void BattleManager::runCommand(float dt)
 {
-    if (_commandQueue.empty() && !_turnQueue.empty() && _startTurn)
-    {
-        changeTurn();
-        return;
-    }
-
     if (_currentCommand != nullptr)
     {
         _currentCommand->update(dt);
+
         if (_currentCommand->isEnd())
         {
             _currentCommand->reset();
             delete _currentCommand;
-
             _currentCommand = nullptr;
-           
         }
     }
 
     if (_currentCommand == nullptr && !_commandQueue.empty())
     {
-        _startTurn = true;
+        _canChangeTurn = true;
         _currentCommand = _commandQueue.front();
         _commandQueue.pop();
         _currentCommand->start();
+    }
+
+    if (_currentCommand == nullptr && _commandQueue.empty() && _canChangeTurn)
+    {
+        changeTurn();
     }
 
 }
 
 void BattleManager::changeTurn()
 {
-    _startTurn = false;
-
+    _canChangeTurn = false;
     _currentTurn = _turnQueue.front();
     _turnQueue.pop();
 
     if (_currentTurn == TURN_TYPE::ENEMY)
     {
-        _commandQueue.push(new BattleCommand(2.1f, [&]()
-            {
-                _enemyTeam->getEntity()->playAnimation(ANIMATION_STATE::ATTACK1 , false);
-            }));
-        _commandQueue.push(new BattleCommand(0.4f, [&]()
-            {
-                _playerTeam->activeTeam(true);
-                _enemyTeam->activeTeam(false);
-            }));
+        playEnemyTurn();
+
+        _enemyTeam->activeTeam(true);
+        _playerTeam->activeTeam(false);
     }
     else if(_currentTurn == TURN_TYPE::PLAYER)
     {
         _currentPlayerEntity = selectPlayerEntity();
         _usedPlayerCommand = false;
+
+        _enemyTeam->activeTeam(false);
+        _playerTeam->activeTeam(true);
     }
 }
 
 Entity* BattleManager::selectPlayerEntity()
 {
     Entity* entity = _playerTeam->getEntity();
-    CCLOG("%s", typeid(*entity).name());
 
-    auto sizeUpEvent = ScaleTo::create(0.1f, 1.1f);
+    auto sizeUpEvent = ScaleTo::create(0.1f, 1.25f);
     entity->runAction(sizeUpEvent);
 
     return entity;
@@ -138,37 +121,40 @@ Entity* BattleManager::selectEnemyEntity(Vec2 worldMousePos)
         {
             return entity;
         }
-
     }
 
     return nullptr;
 }
 
-void BattleManager::PlayPlayerTurn(Entity* enemyEntity)
+void BattleManager::playEnemyTurn()
 {
-    submitPlayerCommand(new BattleCommand(0.1f, [&]()
-        {
-            for (const auto& entity : _playerTeam->getAllEntities())
-            {
-                ScaleTo* scaleResizeAction = ScaleTo::create(0.1f, 1);
-                entity->runAction(scaleResizeAction);
-            }
-        }));
+    submitPlayerCommand(new BattleCommand(2.1f, [&]()
+    {
+        _enemyTeam->getEntity()->playAnimation(ANIMATION_STATE::ATTACK1, false);
+    }));
+}
 
-    submitPlayerCommand(new BattleCommand(2.1f, [=]()
-        {
-            _currentPlayerEntity->getSkill()->execute(_currentPlayerEntity, enemyEntity);
-        }));
+void BattleManager::playPlayerTurn(Entity* enemyEntity)
+{
+    _usedPlayerCommand = true;
 
     submitPlayerCommand(new BattleCommand(0.1f, [&]()
+    {
+        for (const auto& entity : _playerTeam->getAllEntities())
         {
-            _playerTeam->activeTeam(false);
-            _enemyTeam->activeTeam(true);
-        }));
+            ScaleTo* scaleResizeAction = ScaleTo::create(0.1f, 1);
+            entity->runAction(scaleResizeAction);
+        }
+    }));
+
+    submitPlayerCommand(new BattleCommand(2.7f, [=]()
+    {
+        _currentPlayerEntity->getSkill()->execute(_currentPlayerEntity, enemyEntity);
+    }));
+
 }
 
 void BattleManager::submitPlayerCommand(BattleCommand* cmd)
 {
-    _usedPlayerCommand = true;
     _commandQueue.push(cmd);
 }

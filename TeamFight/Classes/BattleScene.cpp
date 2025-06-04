@@ -1,8 +1,17 @@
 #include "BattleScene.h"
-
 #include "Entities.h"
 
+
 USING_NS_CC;
+
+enum LAYER
+{
+    NONE = 0,
+    BACKGROUND = -100,
+    ENEMY = -99,
+    PLAYER = 1,
+    
+};
 
 Scene* BattleScene::createScene()
 {
@@ -33,18 +42,12 @@ bool BattleScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 screenCenter = { visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y };
 
-    std::string defaultString = "";
-    _mainLabel = Label::createWithTTF(defaultString.c_str(), "fonts/SunBatang/SunBatang-Bold.ttf", 35);
-
-    _mainLabel->setPosition(screenCenter.x , visibleSize.height * 0.92f);
-    addChild(_mainLabel);
-
     //init tilemap
     {
         auto map = TMXTiledMap::create("Tilemap/BattleBackground.tmx");
         map->setAnchorPoint({ 0.5f , 0.5f });
         map->setPosition(screenCenter);
-        addChild(map,-100);
+        addChild(map, LAYER::BACKGROUND);
     }
 
     //init knight
@@ -99,21 +102,43 @@ bool BattleScene::init()
         entity->addChild(drawNode);
 #endif 
 
-        addChild(entity,1);
+        addChild(entity, LAYER::PLAYER);
     }
     
     //enemyInit
     {
-        Entity* entity = Entity::create();
-        entity->initAnimationSheet("Characters/Goblins/Troops/Torch/Blue/Torch_Blue.png" ,7 ,5 );
-        entity->getMainSprite()->setFlippedX(true);
-        entity->playAnimation(ANIMATION_STATE::IDLE , true);
+        Goblin* entity = Goblin::create();
 
         Vec2 pos = { visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y };
         entity->setPosition(pos);
         
         _enemyTeam->add(ENTITY_TYPE::KNIGHT, entity);
-        addChild(entity);
+    }
+
+
+    for (const auto& entity : _enemyTeam->getAllEntities())
+    {
+#if true
+        auto drawNode = DrawNode::create();
+        auto boundingBox = entity->getMainSprite()->getBoundingBox();
+
+        Vec2 bottomLeft(boundingBox.getMinX(), boundingBox.getMinY());
+        Vec2 bottomRight(boundingBox.getMaxX(), boundingBox.getMinY());
+        Vec2 topRight(boundingBox.getMaxX(), boundingBox.getMaxY());
+        Vec2 topLeft(boundingBox.getMinX(), boundingBox.getMaxY());
+
+        drawNode->drawPolygon(
+            std::vector<Vec2>{bottomLeft, bottomRight, topRight, topLeft}.data(),
+            4,
+            Color4F(0, 0, 0, 0),
+            1.0f,
+            Color4F::RED
+        );
+
+        entity->addChild(drawNode);
+#endif 
+
+        addChild(entity, LAYER::PLAYER);
     }
 
     //mouse Event
@@ -125,7 +150,7 @@ bool BattleScene::init()
     }
     
     _battleManager->setTeam(_playerTeam.get() , _enemyTeam.get());
-    _enemyTeam->activeTeam(false);
+    //_enemyTeam->activeTeam(false);
 
     scheduleUpdate();
 
@@ -143,7 +168,11 @@ void BattleScene::mouseDownEvent(EventMouse* event)
     if (!isplayerTurn)return;
 
     Vec2 worldClick = event->getLocationInView();
-    _battleManager->PlayPlayerTurn(_battleManager->selectEnemyEntity(worldClick));
+
+    Entity* enemy = _battleManager->selectEnemyEntity(worldClick);
+    if (enemy == nullptr)return;
+
+    _battleManager->playPlayerTurn(enemy);
 }
 
 
