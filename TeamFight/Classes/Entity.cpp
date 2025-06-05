@@ -1,5 +1,15 @@
 #include "Entity.h"
 
+Entity::~Entity()
+{
+    size_t skllListSize = _skillList.size();
+    for (size_t i = 0; i < skllListSize; i++)
+    {
+        delete _skillList[i];
+        _skillList[i] = nullptr;
+    }
+}
+
 bool Entity::init()
 {
     if (!Node::init()) 

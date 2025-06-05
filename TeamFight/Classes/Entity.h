@@ -40,6 +40,7 @@ class StatController;
 class Entity : public Node
 {
 public :
+    virtual ~Entity();
     virtual bool init();
     virtual void update(float dt);
 
