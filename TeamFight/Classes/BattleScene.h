@@ -9,6 +9,7 @@ class BattleScene : public cocos2d::Scene
 public:
     static cocos2d::Scene* createScene();
     virtual bool init();
+    virtual void onEnter();
     virtual void update(float dt);
 
     CREATE_FUNC(BattleScene);
@@ -21,7 +22,7 @@ private:
     std::unique_ptr<BattleManager> _battleManager = nullptr;
 private:
 
-    std::vector<Vec2> playerTeamPosition;
-    std::vector<Vec2> enemyTeamPosition;
+    std::vector<Vec2> _playerTeamPosition;
+    std::vector<Vec2> _enemyTeamPosition;
 
 };

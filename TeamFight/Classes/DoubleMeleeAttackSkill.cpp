@@ -1,18 +1,17 @@
-#include "MeleeAttackSkill.h"
+#include "DoubleMeleeAttackSkill.h"
 #include "Entity.h"
 
-MeleeAttackSkill::MeleeAttackSkill(const std::string& skillName, int skillPower, SKILL_TYPE skillType, const std::string& skillIconPath)
+DoubleMeleeAttackSkill::DoubleMeleeAttackSkill(const std::string& skillName, int skillPower, SKILL_TYPE skillType, const std::string& skillIconPath)
 	:Skill(skillName, skillPower, skillType, skillIconPath)
 {
 
 }
 
-MeleeAttackSkill::~MeleeAttackSkill()
+DoubleMeleeAttackSkill::~DoubleMeleeAttackSkill()
 {
-
 }
 
-void MeleeAttackSkill::execute(Entity* caster, Entity* target)
+void DoubleMeleeAttackSkill::execute(Entity* caster, Entity* target)
 {
 	if (_type == SKILL_TYPE::DAMAGE)
 	{
@@ -37,10 +36,14 @@ void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 	auto delay = DelayTime::create(0.9f);
 	auto animation = CallFunc::create([caster]()
 		{
-			caster->playAnimation(ANIMATION_STATE::ATTACK1, false);
+			caster->playAnimation(ANIMATION_STATE::ATTACK2, false,1.2f);
+		});
+	auto animation2 = CallFunc::create([caster]()
+		{
+			caster->playAnimation(ANIMATION_STATE::ATTACK1, false,1.2f);
 		});
 	auto moveBack = MoveTo::create(0.4f, originalPos);
-	auto sequence = Sequence::create(moveToEnemy, animation, delay, moveBack, nullptr);
+	auto sequence = Sequence::create(moveToEnemy, animation, delay->clone(), animation2, delay->clone(), moveBack, nullptr);
 
 	caster->runAction(sequence);
 }

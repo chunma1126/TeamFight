@@ -1,5 +1,6 @@
 #pragma once
 #include "cocos2d.h"
+#include <vector>
 #include <map>
 #include <unordered_map>
 #include <memory>
@@ -44,10 +45,12 @@ public :
 
     CREATE_FUNC(Entity);
 public:
-    void playAnimation(ANIMATION_STATE state, bool loop = true);
+    void playAnimation(ANIMATION_STATE state, bool loop = false, float animationSpeed = 1);
     virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
 public:
-    Skill* getSkill() const { return skil; }
+    std::vector<Skill*> getSkillList() const { return _skillList; }
+    Skill* getSkill(int index) const { return _skillList[index]; }
+    
     Sprite* getMainSprite() const { return _mainSprite; }
     StatController* getStatController() const { return _statController.get(); }
 
@@ -57,7 +60,7 @@ protected:
     AnimationSheetInfo getAnimationSheetInfo(const std::string& path);
 protected:
     Sprite* _mainSprite; 
-    Skill* skil;
+    std::vector<Skill*> _skillList;
 
     std::unique_ptr<StatController> _statController;
     std::unordered_map<ANIMATION_STATE, Vector<SpriteFrame*>> _animator;

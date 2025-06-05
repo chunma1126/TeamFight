@@ -23,12 +23,12 @@ void Entity::update(float dt)
     _statController->update(dt);
 }
 
-void Entity::playAnimation(ANIMATION_STATE state, bool loop)
+void Entity::playAnimation(ANIMATION_STATE state, bool loop, float animationSpeed)
 {
     auto it = _animator.find(state);
     if (it == _animator.end()) return;
 
-    float frameInterval = 0.1f; 
+    float frameInterval = 0.1f / animationSpeed;
 
     auto animation = Animation::createWithSpriteFrames(it->second, frameInterval);
     auto animate = Animate::create(animation);
@@ -38,7 +38,8 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop)
     if (loop)
         _mainSprite->runAction(RepeatForever::create(animate));
     else {
-        auto callback = CallFunc::create([this]() {
+        auto callback = CallFunc::create([this]()
+            {
             this->playAnimation(ANIMATION_STATE::IDLE, true); 
             });
 

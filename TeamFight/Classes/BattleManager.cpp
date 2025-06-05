@@ -1,4 +1,5 @@
 #include "BattleManager.h"
+#include "UIController.h"
 #include "cocos2d.h"
 
 BattleManager::BattleManager()
@@ -20,6 +21,11 @@ BattleManager::~BattleManager()
         delete _commandQueue.front();
         _commandQueue.pop();
     }
+}
+
+void BattleManager::init()
+{
+    _uiController = std::make_unique<UIController>();
 }
 
 void BattleManager::setTeam(Team* playerTeam, Team* enemyTeam)
@@ -95,6 +101,7 @@ void BattleManager::changeTurn()
         _currentPlayerEntity = selectPlayerEntity();
         _usedPlayerCommand = false;
 
+        _uiController->setCurrentSkillIndex(-1);
         _enemyTeam->activeTeam(false);
         _playerTeam->activeTeam(true);
     }
@@ -104,8 +111,17 @@ Entity* BattleManager::selectPlayerEntity()
 {
     Entity* entity = _playerTeam->getEntity();
 
-    auto sizeUpEvent = ScaleTo::create(0.1f, 1.25f);
+    auto sizeUpEvent = ScaleTo::create(0.1f, 1.15f);
     entity->runAction(sizeUpEvent);
+
+    std::vector<std::string> skillPaths;
+    for (const auto& skill : entity->getSkillList())
+    {
+        skillPaths.push_back(skill->getIconPath()); 
+    }
+    _uiController->setSkillIcons(skillPaths);
+
+   
 
     return entity;
 }
@@ -115,6 +131,12 @@ Entity* BattleManager::selectEnemyEntity(Vec2 worldMousePos)
     for (const auto& entity : _enemyTeam->getAllEntities())
     {
         Rect entityRect = entity->getMainSprite()->getBoundingBox();
+
+        entityRect.origin.x += entityRect.size.width / 4;
+        entityRect.origin.y += entityRect.size.height / 4;
+        entityRect.size.width /= 2;
+        entityRect.size.height /= 2;
+
         Vec2 localPos = entity->convertToNodeSpace(worldMousePos);
 
         if (entityRect.containsPoint(localPos))
@@ -134,7 +156,12 @@ void BattleManager::playEnemyTurn()
     }));
 }
 
-void BattleManager::playPlayerTurn(Entity* enemyEntity)
+int BattleManager::getCurrentSkillIndex()
+{
+    return _uiController->getCurrentSkillIndex();
+}
+
+void BattleManager::playPlayerTurn(Entity* enemyEntity,int currentSkillIndex)
 {
     _usedPlayerCommand = true;
 
@@ -149,7 +176,7 @@ void BattleManager::playPlayerTurn(Entity* enemyEntity)
 
     submitPlayerCommand(new BattleCommand(2.7f, [=]()
     {
-        _currentPlayerEntity->getSkill()->execute(_currentPlayerEntity, enemyEntity);
+        _currentPlayerEntity->getSkill(currentSkillIndex)->execute(_currentPlayerEntity, enemyEntity);
     }));
 
 }

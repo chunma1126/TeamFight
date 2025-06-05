@@ -52,6 +52,12 @@
     <ClCompile Include="..\Classes\Goblin.cpp">
       <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UIController.cpp">
+      <Filter>Source Files\Classes\05UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DoubleMeleeAttackSkill.cpp">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -129,6 +135,15 @@
     <ClInclude Include="..\Classes\Goblin.h">
       <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\UIController.h">
+      <Filter>Source Files\Classes\05UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DoubleMeleeAttackSkill.h">
+      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\CMakeLists.txt" />
@@ -180,6 +195,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\01.Entity\01.Player">
       <UniqueIdentifier>{4aa44f15-cce5-4006-8857-1d8d332e81da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\05UI">
+      <UniqueIdentifier>{9ad478a6-b1d7-42ad-91e6-6990aba803dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,17 +1,9 @@
 #include "BattleScene.h"
 #include "Entities.h"
-
+#include "Layer.h"
 
 USING_NS_CC;
 
-enum LAYER
-{
-    NONE = 0,
-    BACKGROUND = -100,
-    ENEMY = -99,
-    PLAYER = 1,
-    
-};
 
 Scene* BattleScene::createScene()
 {
@@ -30,7 +22,11 @@ bool BattleScene::init()
     {
         return false;
     }
-    
+
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    Vec2 screenCenter = { visibleSize.width * 0.5f + origin.x , visibleSize.height * 0.5f + origin.y };
+
     //init unique_ptr
     {
         _playerTeam = std::make_unique<Team>();
@@ -38,9 +34,18 @@ bool BattleScene::init()
         _battleManager = std::make_unique<BattleManager>();
     }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    Vec2 screenCenter = { visibleSize.width / 2 + origin.x , visibleSize.height / 2 + origin.y };
+    //init positions
+    {
+        _playerTeamPosition.reserve(3);
+        _playerTeamPosition.push_back({ visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y });
+        _playerTeamPosition.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.3f + origin.y });
+        _playerTeamPosition.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.7f + origin.y });
+
+        _enemyTeamPosition.reserve(3);
+        _enemyTeamPosition.push_back({ visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y });
+        _enemyTeamPosition.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.3f + origin.y });
+        _enemyTeamPosition.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.7f + origin.y });
+    }
 
     //init tilemap
     {
@@ -53,9 +58,7 @@ bool BattleScene::init()
     //init knight
     {
         Knight* entity = Knight::create();
-
-        Vec2 pos = { visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y };
-        entity->setPosition(pos);
+        entity->setPosition(_playerTeamPosition[0]);
 
         _playerTeam->add(ENTITY_TYPE::KNIGHT , entity);
     }
@@ -63,9 +66,7 @@ bool BattleScene::init()
     //init archer
     {
         Archer* entity = Archer::create();
-
-        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.3f + origin.y };
-        entity->setPosition(pos);
+        entity->setPosition(_playerTeamPosition[1]);
 
         _playerTeam->add(ENTITY_TYPE::ARCHER, entity);
     }
@@ -73,9 +74,7 @@ bool BattleScene::init()
     //init pawn
     {
         Pawn* entity = Pawn::create();
-
-        Vec2 pos = { visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.7f + origin.y };
-        entity->setPosition(pos);
+        entity->setPosition(_playerTeamPosition[2]);
 
         _playerTeam->add(ENTITY_TYPE::PAWN, entity);
     }
@@ -107,20 +106,29 @@ bool BattleScene::init()
     
     //enemyInit
     {
-        Goblin* entity = Goblin::create();
+        for (int i = 0; i < 3; i++)
+        {
+            Goblin* entity = Goblin::create();
 
-        Vec2 pos = { visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y };
-        entity->setPosition(pos);
-        
-        _enemyTeam->add(ENTITY_TYPE::KNIGHT, entity);
+            entity->setPosition(_enemyTeamPosition[i]);
+
+            _enemyTeam->add(ENTITY_TYPE::KNIGHT, entity);
+        }
+       
     }
 
-
+    
     for (const auto& entity : _enemyTeam->getAllEntities())
     {
 #if true
         auto drawNode = DrawNode::create();
         auto boundingBox = entity->getMainSprite()->getBoundingBox();
+
+        boundingBox.origin.x += boundingBox.size.width / 4;
+        boundingBox.origin.y += boundingBox.size.height / 4;
+        boundingBox.size.width /= 2;
+        boundingBox.size.height /= 2;
+
 
         Vec2 bottomLeft(boundingBox.getMinX(), boundingBox.getMinY());
         Vec2 bottomRight(boundingBox.getMaxX(), boundingBox.getMinY());
@@ -138,7 +146,7 @@ bool BattleScene::init()
         entity->addChild(drawNode);
 #endif 
 
-        addChild(entity, LAYER::PLAYER);
+        addChild(entity, LAYER::ENEMY);
     }
 
     //mouse Event
@@ -150,12 +158,17 @@ bool BattleScene::init()
     }
     
     _battleManager->setTeam(_playerTeam.get() , _enemyTeam.get());
-    //_enemyTeam->activeTeam(false);
-
     scheduleUpdate();
 
     return true;
 }
+
+void BattleScene::onEnter()
+{
+    Scene::onEnter();
+    _battleManager->init();
+}
+
 
 void BattleScene::update(float dt)
 {
@@ -170,9 +183,10 @@ void BattleScene::mouseDownEvent(EventMouse* event)
     Vec2 worldClick = event->getLocationInView();
 
     Entity* enemy = _battleManager->selectEnemyEntity(worldClick);
-    if (enemy == nullptr)return;
+    int currentSkillIndex = _battleManager->getCurrentSkillIndex();
+    if (enemy == nullptr || currentSkillIndex == -1)return;
 
-    _battleManager->playPlayerTurn(enemy);
+    _battleManager->playPlayerTurn(enemy,currentSkillIndex);
 }
 
 

@@ -14,7 +14,7 @@ bool Archer::init()
     _statController->setDefaultStat(STAT_TYPE::DEF , 5);
     _statController->setDefaultStat(STAT_TYPE::HP , 10);
 
-    skil = new RangeSkill("Legend Shot" , 10 , SKILL_TYPE::DAMAGE);
+    _skillList.push_back(new RangeSkill("Legend Shot", 10, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_04.png"));
 
     return true;
 }

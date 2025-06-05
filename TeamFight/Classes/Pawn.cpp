@@ -14,7 +14,7 @@ bool Pawn::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 20);
     _statController->setDefaultStat(STAT_TYPE::HP, 25);
 
-    skil = new MeleeAttackSkill("Take a ohama", 10, SKILL_TYPE::DAMAGE);
+    _skillList.push_back(new MeleeAttackSkill("Take a ohama", 10, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_00.png"));
 
     return true;
 }
