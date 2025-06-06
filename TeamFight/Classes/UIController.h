@@ -29,12 +29,14 @@ public:
 	void setSelectSkillIndex(int index) { _selectSkillIndex = index; }
 
 	int getCurrentSkillIndex() { return _currentSkillIndex; }
+	int setCurrentSkillIndex(int index) { _currentSkillIndex = index; }
 
 	void setSkillIcons(std::vector<std::string> skillIconPathList);
 	void onSkillButtonClicked(int index);
 	void onSkillButtonHover(int index);
 
 	void setSkillTooltipDescription(int index, std::string description);
+	void ResetAllSkillTooltip();
 private:
 	std::vector<SkillButtonInfo> _skillButtonList;
 

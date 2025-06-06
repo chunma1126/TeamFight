@@ -130,14 +130,7 @@ void UIController::initSkillButtonMouseHover()
         }
         };
 
-    
-    for (auto& buttonInfo : _skillButtonList) 
-    {
-        buttonInfo.hoverState = false;
-        buttonInfo.skillTooltipLabel->setVisible(false);
-        buttonInfo.skillTooltipLabel->setOpacity(0);
-    }
-    
+    ResetAllSkillTooltip();
 
     Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, Director::getInstance()->getRunningScene());
 }
@@ -192,7 +185,6 @@ void UIController::onSkillButtonHover(int index)
 
     _skillButtonList[_currentSkillIndex].skillTooltipLabel->stopAllActions();
     _skillButtonList[_currentSkillIndex].skillTooltipLabel->runAction(seq);
-    
 
     //CCLOG("%s" , _skillButtonList[_currentSkillIndex].skillTooltipLabel->getString().c_str());
 }
@@ -200,5 +192,16 @@ void UIController::onSkillButtonHover(int index)
 void UIController::setSkillTooltipDescription(int index, std::string description)
 {
     _skillButtonList[index].skillTooltipLabel->setString(description);
+    ResetAllSkillTooltip();
+}
+
+void UIController::ResetAllSkillTooltip()
+{
+    for (auto& buttonInfo : _skillButtonList)
+    {
+        buttonInfo.hoverState = false;
+        buttonInfo.skillTooltipLabel->setVisible(false);
+        buttonInfo.skillTooltipLabel->setOpacity(0);
+    }
 }
 

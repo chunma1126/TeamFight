@@ -99,9 +99,9 @@ void BattleManager::changeTurn()
     }
     else if(_currentTurn == TURN_TYPE::PLAYER)
     {
-        _currentPlayerEntity = selectPlayerEntity();
         _usedPlayerCommand = false;
-
+        _currentPlayerEntity = selectPlayerEntity();
+        _uiController->setSelectSkillIndex(-1);
         int skillCount = _currentPlayerEntity->getSkillList().size();
         for (int i = 0; i < skillCount; i++)
         {
