@@ -1,16 +1,8 @@
 #include "RangeSkill.h"
 #include "Entity.h"
 
-RangeSkill::RangeSkill(const std::string& skillName, int skillPower, SKILL_TYPE skillType, const std::string& skillIconPath)
-	:Skill(skillName, skillPower, skillType, skillIconPath)
-{
-
-}
 
 
-RangeSkill::~RangeSkill()
-{
-}
 
 void RangeSkill::execute(Entity* caster, Entity* target)
 {

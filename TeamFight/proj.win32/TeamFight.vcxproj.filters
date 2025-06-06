@@ -138,11 +138,11 @@
     <ClInclude Include="..\Classes\UIController.h">
       <Filter>Source Files\Classes\05UI</Filter>
     </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>Source Files\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\DoubleMeleeAttackSkill.h">
       <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enum.h">
+      <Filter>Source Files\Classes\04.Utis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

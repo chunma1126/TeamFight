@@ -33,7 +33,7 @@ public:
     void playPlayerTurn(Entity* enemyEntity,int currentSkillIndex);
     void playEnemyTurn();
     
-    int getCurrentSkillIndex();
+    int getSelectSkillIndex();
 public:
     bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
     const char* turnTypeToString(TURN_TYPE turn)

@@ -1,16 +1,6 @@
 #include "MeleeAttackSkill.h"
 #include "Entity.h"
 
-MeleeAttackSkill::MeleeAttackSkill(const std::string& skillName, int skillPower, SKILL_TYPE skillType, const std::string& skillIconPath)
-	:Skill(skillName, skillPower, skillType, skillIconPath)
-{
-
-}
-
-MeleeAttackSkill::~MeleeAttackSkill()
-{
-
-}
 
 void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 {

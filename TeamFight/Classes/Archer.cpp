@@ -1,6 +1,8 @@
 #include "Archer.h"
 #include "RangeSkill.h"
 
+#pragma execution_character_set("utf-8")
+
 bool Archer::init()
 {
     if (!Entity::init()) {
@@ -14,7 +16,14 @@ bool Archer::init()
     _statController->setDefaultStat(STAT_TYPE::DEF , 5);
     _statController->setDefaultStat(STAT_TYPE::HP , 10);
 
-    _skillList.push_back(new RangeSkill("Legend Shot", 10, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_04.png"));
+    RangeSkill* rangeSkill = new RangeSkill;
+    rangeSkill->setSkillName("Legend Shot");
+    rangeSkill->setPower(10);
+    rangeSkill->setType(SKILL_TYPE::DAMAGE);
+    rangeSkill->setIconPath("SkillPack/skill_icon_04.png");
+    rangeSkill->setDescription("적을 향해 화살을 쏩니다.");
+
+    _skillList.push_back(rangeSkill);
 
     return true;
 }

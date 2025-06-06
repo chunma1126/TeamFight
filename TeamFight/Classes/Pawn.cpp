@@ -1,5 +1,7 @@
 #include "Pawn.h"
 
+#pragma execution_character_set("utf-8")
+
 bool Pawn::init()
 {
     if (!Entity::init())
@@ -14,7 +16,28 @@ bool Pawn::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 20);
     _statController->setDefaultStat(STAT_TYPE::HP, 25);
 
-    _skillList.push_back(new MeleeAttackSkill("Take a ohama", 10, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_00.png"));
+    {
+        MeleeAttackSkill* meleeAttackSkill = new MeleeAttackSkill();
+        meleeAttackSkill->setSkillName("오함마 가지고 와라");
+        meleeAttackSkill->setPower(10);
+        meleeAttackSkill->setType(SKILL_TYPE::DAMAGE);
+        meleeAttackSkill->setIconPath("SkillPack/skill_icon_00.png");
+        meleeAttackSkill->setDescription("예림이 그패 봐바..!");
+        _skillList.push_back(meleeAttackSkill);
+    }
+    
+    {
+
+        MeleeAttackSkill* meleeAttackSkill = new MeleeAttackSkill();
+        meleeAttackSkill->setSkillName("오함마 가지고 와라");
+        meleeAttackSkill->setPower(10);
+        meleeAttackSkill->setType(SKILL_TYPE::DAMAGE);
+        meleeAttackSkill->setIconPath("SkillPack/skill_icon_00.png");
+        meleeAttackSkill->setDescription("예림이 그패 봐바..!");
+        _skillList.push_back(meleeAttackSkill);
+    }
+
+
 
     return true;
 }

@@ -1,6 +1,6 @@
 #include "BattleScene.h"
 #include "Entities.h"
-#include "Layer.h"
+#include "Enum.h"
 
 USING_NS_CC;
 
@@ -55,56 +55,40 @@ bool BattleScene::init()
         addChild(map, LAYER::BACKGROUND);
     }
 
-    //init knight
+    //init player
     {
-        Knight* entity = Knight::create();
-        entity->setPosition(_playerTeamPosition[0]);
+        //init knight
+        {
+            Knight* entity = Knight::create();
+            entity->setPosition(_playerTeamPosition[0]);
 
-        _playerTeam->add(ENTITY_TYPE::KNIGHT , entity);
-    }
+            _playerTeam->add(ENTITY_TYPE::KNIGHT, entity);
+        }
 
-    //init archer
-    {
-        Archer* entity = Archer::create();
-        entity->setPosition(_playerTeamPosition[1]);
+        //init archer
+        {
+            Archer* entity = Archer::create();
+            entity->setPosition(_playerTeamPosition[1]);
 
-        _playerTeam->add(ENTITY_TYPE::ARCHER, entity);
-    }
+            _playerTeam->add(ENTITY_TYPE::ARCHER, entity);
+        }
 
-    //init pawn
-    {
-        Pawn* entity = Pawn::create();
-        entity->setPosition(_playerTeamPosition[2]);
+        //init pawn
+        {
+            Pawn* entity = Pawn::create();
+            entity->setPosition(_playerTeamPosition[2]);
 
-        _playerTeam->add(ENTITY_TYPE::PAWN, entity);
+            _playerTeam->add(ENTITY_TYPE::PAWN, entity);
+        }
     }
     
+    //init playerEntity
     for (const auto& entity : _playerTeam->getAllEntities())
     {
-#if false
-        auto drawNode = DrawNode::create();
-        auto boundingBox = entity->getMainSprite()->getBoundingBox();
-
-        Vec2 bottomLeft(boundingBox.getMinX(), boundingBox.getMinY());
-        Vec2 bottomRight(boundingBox.getMaxX(), boundingBox.getMinY());
-        Vec2 topRight(boundingBox.getMaxX(), boundingBox.getMaxY());
-        Vec2 topLeft(boundingBox.getMinX(), boundingBox.getMaxY());
-
-        drawNode->drawPolygon(
-            std::vector<Vec2>{bottomLeft, bottomRight, topRight, topLeft}.data(),
-            4,
-            Color4F(0, 0, 0, 0),
-            1.0f,
-            Color4F::RED
-        );
-
-        entity->addChild(drawNode);
-#endif 
-
         addChild(entity, LAYER::PLAYER);
     }
     
-    //enemyInit
+    //init Enemy
     {
         for (int i = 0; i < 3; i++)
         {
@@ -117,10 +101,10 @@ bool BattleScene::init()
        
     }
 
-    
+    //init EnemyEntity
     for (const auto& entity : _enemyTeam->getAllEntities())
     {
-#if true
+#if IS_THIS_DEBUG
         auto drawNode = DrawNode::create();
         auto boundingBox = entity->getMainSprite()->getBoundingBox();
 
@@ -181,12 +165,12 @@ void BattleScene::mouseDownEvent(EventMouse* event)
     if (!isplayerTurn)return;
 
     Vec2 worldClick = event->getLocationInView();
-
     Entity* enemy = _battleManager->selectEnemyEntity(worldClick);
-    int currentSkillIndex = _battleManager->getCurrentSkillIndex();
-    if (enemy == nullptr || currentSkillIndex == -1)return;
+    int selectSkillIndex = _battleManager->getSelectSkillIndex();
 
-    _battleManager->playPlayerTurn(enemy,currentSkillIndex);
+    if (enemy == nullptr || selectSkillIndex == -1)return;
+
+    _battleManager->playPlayerTurn(enemy,selectSkillIndex);
 }
 
 

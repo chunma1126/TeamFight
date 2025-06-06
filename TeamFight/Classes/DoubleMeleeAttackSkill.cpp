@@ -1,15 +1,6 @@
 #include "DoubleMeleeAttackSkill.h"
 #include "Entity.h"
 
-DoubleMeleeAttackSkill::DoubleMeleeAttackSkill(const std::string& skillName, int skillPower, SKILL_TYPE skillType, const std::string& skillIconPath)
-	:Skill(skillName, skillPower, skillType, skillIconPath)
-{
-
-}
-
-DoubleMeleeAttackSkill::~DoubleMeleeAttackSkill()
-{
-}
 
 void DoubleMeleeAttackSkill::execute(Entity* caster, Entity* target)
 {

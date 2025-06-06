@@ -845,6 +845,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Goblin.h" />
     <ClInclude Include="..\Classes\Knight.h" />
+    <ClInclude Include="..\Classes\Enum.h" />
     <ClInclude Include="..\Classes\MeleeAttackSkill.h" />
     <ClInclude Include="..\Classes\Pawn.h" />
     <ClInclude Include="..\Classes\RangeSkill.h" />
@@ -876,7 +877,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\BattleScene.cpp" />
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.cpp" />
     <ClInclude Include="Entities.h" />
-    <ClInclude Include="Layer.h" />
     <ResourceCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\game.rc" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\CloseNormal.png" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\CloseSelected.png" />

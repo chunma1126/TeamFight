@@ -2,6 +2,8 @@
 #include "MeleeAttackSkill.h"
 #include "DoubleMeleeAttackSkill.h"
 
+#pragma execution_character_set("utf-8")
+
 bool Knight::init()
 {
     if (!Entity::init())
@@ -16,8 +18,22 @@ bool Knight::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 15);
     _statController->setDefaultStat(STAT_TYPE::HP, 20);
 
-    _skillList.push_back(new MeleeAttackSkill("Dragon Slash", 7, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_00.png"));
-    _skillList.push_back(new DoubleMeleeAttackSkill("DoubleSlash", 7, SKILL_TYPE::DAMAGE, "SkillPack/skill_icon_16.png"));
+    MeleeAttackSkill* meleeAttackSkill = new MeleeAttackSkill();
+    meleeAttackSkill->setSkillName("Dragon Slash");
+    meleeAttackSkill->setPower(7);
+    meleeAttackSkill->setType(SKILL_TYPE::DAMAGE);
+    meleeAttackSkill->setIconPath("SkillPack/skill_icon_00.png");
+    meleeAttackSkill->setDescription("적을 베어 가릅니다.");
+    _skillList.push_back(meleeAttackSkill);
+
+    DoubleMeleeAttackSkill* doubleAttackSkill = new DoubleMeleeAttackSkill();
+    doubleAttackSkill->setSkillName("DoubleSlash");
+    doubleAttackSkill->setPower(7);
+    doubleAttackSkill->setType(SKILL_TYPE::DAMAGE);
+    doubleAttackSkill->setIconPath("SkillPack/skill_icon_16.png");
+    doubleAttackSkill->setDescription("두번의 공격으로 적을 베어 가릅니다.");
+    _skillList.push_back(doubleAttackSkill);
+
 
     return true;
 }

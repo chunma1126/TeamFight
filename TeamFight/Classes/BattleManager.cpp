@@ -36,6 +36,8 @@ void BattleManager::setTeam(Team* playerTeam, Team* enemyTeam)
 
 void BattleManager::update(float dt)
 {
+    _uiController->update(dt);
+
     if (_turnQueue.empty())
     {
         _turnQueue.push(TURN_TYPE::PLAYER);
@@ -50,7 +52,6 @@ void BattleManager::update(float dt)
         _turnQueue.push(TURN_TYPE::PLAYER);
         _turnQueue.push(TURN_TYPE::ENEMY);
     }
-
     runCommand(dt);
 }
 
@@ -101,7 +102,12 @@ void BattleManager::changeTurn()
         _currentPlayerEntity = selectPlayerEntity();
         _usedPlayerCommand = false;
 
-        _uiController->setCurrentSkillIndex(-1);
+        int skillCount = _currentPlayerEntity->getSkillList().size();
+        for (int i = 0; i < skillCount; i++)
+        {
+            _uiController->setSkillTooltipDescription(i , _currentPlayerEntity->getSkill(i)->getDescription());
+        }
+
         _enemyTeam->activeTeam(false);
         _playerTeam->activeTeam(true);
     }
@@ -156,11 +162,6 @@ void BattleManager::playEnemyTurn()
     }));
 }
 
-int BattleManager::getCurrentSkillIndex()
-{
-    return _uiController->getCurrentSkillIndex();
-}
-
 void BattleManager::playPlayerTurn(Entity* enemyEntity,int currentSkillIndex)
 {
     _usedPlayerCommand = true;
@@ -185,3 +186,10 @@ void BattleManager::submitPlayerCommand(BattleCommand* cmd)
 {
     _commandQueue.push(cmd);
 }
+
+int BattleManager::getSelectSkillIndex()
+{
+    return _uiController->getSelecSkillIndex();
+}
+
+
