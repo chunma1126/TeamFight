@@ -18,6 +18,7 @@ public:
     virtual ~Skill() = default;
 
     virtual void execute(Entity* caster, Entity* target) = 0;
+    
 
     // Getters
     const std::string& getSkillName() const { return _name; }
@@ -32,7 +33,8 @@ public:
     void setType(SKILL_TYPE type) { _type = type; }
     void setIconPath(const std::string& path) { _iconPath = path; }
     void setDescription(const std::string& description) { _description = description; }
-
+protected:
+    virtual void applyDamage(Entity* caster, Entity* target);
 protected:
     std::string _name;
     int _power = 0;

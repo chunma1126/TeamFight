@@ -1,6 +1,7 @@
 #include "BattleManager.h"
 #include "UIController.h"
 #include "cocos2d.h"
+#include <random>
 
 BattleManager::BattleManager()
 {
@@ -158,7 +159,15 @@ void BattleManager::playEnemyTurn()
 {
     submitPlayerCommand(new BattleCommand(2.1f, [&]()
     {
-        _enemyTeam->getEntity()->playAnimation(ANIMATION_STATE::ATTACK1, false);
+        Entity* entity = _enemyTeam->getEntity();
+
+        int skillCount = entity->getSkillList().size();
+        int randomSkillIndex = std::rand() % skillCount;
+
+        int playerEntityIndex = _playerTeam->getAllEntities().size();
+        int randomEntityIndex = std::rand() % playerEntityIndex;
+
+        entity->getSkill(randomSkillIndex)->execute(_enemyTeam->getEntity() , _playerTeam->getAllEntities()[randomEntityIndex]);
     }));
 }
 

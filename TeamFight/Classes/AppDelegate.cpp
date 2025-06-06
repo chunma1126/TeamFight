@@ -24,7 +24,7 @@
 
 #include "AppDelegate.h"
 #include "BattleScene.h"
-
+#include <random>
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -124,10 +124,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     MoveWindow(hwnd, screenSizeX / 2 - width / 2, screenSizeY / 2 - height / 2, width, height, false);
 #endif
 
-
+    srand((unsigned int)time(NULL));
+    
     auto scene = BattleScene::createScene();
-
-    // run
     director->runWithScene(scene);
 
     return true;

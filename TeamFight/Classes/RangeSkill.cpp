@@ -1,11 +1,10 @@
 #include "RangeSkill.h"
 #include "Entity.h"
 
-
-
-
 void RangeSkill::execute(Entity* caster, Entity* target)
 {
+	applyDamage(caster, target);
+
 	Vec2 originalPos = caster->getPosition();
 	Vec2 enemyPos = target->getPosition();
 	enemyPos.x -= enemyPos.x / 3;

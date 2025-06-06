@@ -3,9 +3,6 @@
 
 #include "cocos2d.h"
 
-
-
-
 #define BUTTON_INTERVAL 50
 #define SKILL_TOOLTIP_LABEL_SIZE 7
 
