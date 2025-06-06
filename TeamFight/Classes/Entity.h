@@ -48,6 +48,7 @@ public :
 public:
     void playAnimation(ANIMATION_STATE state, bool loop = false, float animationSpeed = 1);
     virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
+
 public:
     std::vector<Skill*> getSkillList() const { return _skillList; }
     Skill* getSkill(int index) const { return _skillList[index]; }

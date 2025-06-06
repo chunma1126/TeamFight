@@ -7,20 +7,8 @@
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\cocos2d\cocos\precheader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity.cpp">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\BattleScene.cpp">
       <Filter>Source Files\Classes\02.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Team.cpp">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BattleManager.cpp">
-      <Filter>Source Files\Classes\03.Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BattleCommand.cpp">
-      <Filter>Source Files\Classes\03.Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Archer.cpp">
       <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
@@ -32,22 +20,22 @@
       <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Stat.cpp">
-      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+      <Filter>Source Files\Classes\01.Entity\03.Stat</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StatController.cpp">
-      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+      <Filter>Source Files\Classes\01.Entity\03.Stat</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Skill.cpp">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes\04.Utis</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MeleeAttackSkill.cpp">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RangeSkill.cpp">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Goblin.cpp">
       <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
@@ -56,7 +44,22 @@
       <Filter>Source Files\Classes\05UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\DoubleMeleeAttackSkill.cpp">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleCommand.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleManager.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity.cpp">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Team.cpp">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CameraShakeAction.cpp">
+      <Filter>Source Files\Classes\03.Combat\02.Feedback</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,23 +84,8 @@
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Resources\res\.gitkeep">
       <Filter>Resources\res</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\BattleScene.h">
       <Filter>Source Files\Classes\02.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Team.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BattleManager.h">
-      <Filter>Source Files\Classes\03.Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BattleCommand.h">
-      <Filter>Source Files\Classes\03.Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Archer.h">
       <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
@@ -109,13 +97,13 @@
       <Filter>Source Files\Classes\01.Entity\01.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Stat.h">
-      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+      <Filter>Source Files\Classes\01.Entity\03.Stat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StatController.h">
-      <Filter>Source Files\Classes\01.Entity\Stat</Filter>
+      <Filter>Source Files\Classes\01.Entity\03.Stat</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Skill.h">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Action.h">
       <Filter>Source Files\Classes\04.Utis</Filter>
@@ -123,14 +111,11 @@
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h">
       <Filter>Source Files\Classes\04.Utis</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entities.h">
-      <Filter>Source Files\Classes\01.Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MeleeAttackSkill.h">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RangeSkill.h">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Goblin.h">
       <Filter>Source Files\Classes\01.Entity\02.Enemy</Filter>
@@ -139,10 +124,31 @@
       <Filter>Source Files\Classes\05UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\DoubleMeleeAttackSkill.h">
-      <Filter>Source Files\Classes\03.Combat\Skill</Filter>
+      <Filter>Source Files\Classes\03.Combat\01.Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Enum.h">
       <Filter>Source Files\Classes\04.Utis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleCommand.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleManager.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entities.h">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities.h">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity.h">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Team.h">
+      <Filter>Source Files\Classes\01.Entity\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CameraShakeAction.h">
+      <Filter>Source Files\Classes\03.Combat\02.Feedback</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,12 +187,6 @@
     <Filter Include="Source Files\Classes\03.Combat">
       <UniqueIdentifier>{878516fe-30fc-43f9-9de3-aad80b036e40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\01.Entity\Stat">
-      <UniqueIdentifier>{5fa74a7b-425b-4645-9972-575194295361}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\03.Combat\Skill">
-      <UniqueIdentifier>{9873ffd7-d8e2-4fa4-9d80-3da2fe84527e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Classes\04.Utis">
       <UniqueIdentifier>{01cd3069-a318-46f1-9281-050eecfb9697}</UniqueIdentifier>
     </Filter>
@@ -198,6 +198,21 @@
     </Filter>
     <Filter Include="Source Files\Classes\05UI">
       <UniqueIdentifier>{9ad478a6-b1d7-42ad-91e6-6990aba803dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\00.Core">
+      <UniqueIdentifier>{b80130f1-88ef-42a4-9332-a5a0fe2760f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\01.Entity\03.Stat">
+      <UniqueIdentifier>{5fa74a7b-425b-4645-9972-575194295361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat\00.Core">
+      <UniqueIdentifier>{4c18b807-3896-4485-bacd-0a2a0a429718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat\01.Skill">
+      <UniqueIdentifier>{9873ffd7-d8e2-4fa4-9d80-3da2fe84527e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat\02.Feedback">
+      <UniqueIdentifier>{4e552556-af55-41ab-b851-307a9c48f11a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

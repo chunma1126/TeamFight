@@ -4,22 +4,34 @@
 
 void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 {
-	applyDamage(caster , target);
+    Vec2 originalPos = caster->getPosition();
+    Vec2 enemyPos = target->getPosition();
 
-	Vec2 originalPos = caster->getPosition();
-	Vec2 enemyPos = target->getPosition();
+    _direction = (originalPos - enemyPos).getNormalized().x;
+    enemyPos.x += _direction * caster->getMainSprite()->getContentSize().width / 3;
 
-	_direction = (originalPos - enemyPos).getNormalized().x;
-	enemyPos.x += _direction * caster->getMainSprite()->getContentSize().width / 3;
+    auto moveToEnemy = MoveTo::create(0.35f, enemyPos);
+    auto animation = CallFunc::create([caster]() {
+        caster->playAnimation(ANIMATION_STATE::ATTACK1, false);
+        });
+    auto delay1 = DelayTime::create(0.3f);
+    auto applyDmg = CallFunc::create([this, caster, target]() {
+        applyDamage(caster, target);
+        });
 
-	auto moveToEnemy = MoveTo::create(0.35f, enemyPos);
-	auto delay = DelayTime::create(0.9f);
-	auto animation = CallFunc::create([caster]()
-		{
-			caster->playAnimation(ANIMATION_STATE::ATTACK1, false);
-		});
-	auto moveBack = MoveTo::create(0.4f, originalPos);
-	auto sequence = Sequence::create(moveToEnemy, animation, delay, moveBack, nullptr);
+    auto delay2 = DelayTime::create(0.65f);
+    auto moveBack = MoveTo::create(0.4f, originalPos);
 
-	caster->runAction(sequence);
+    auto sequence = Sequence::create(
+        moveToEnemy,
+        animation,
+        delay1,
+        applyDmg,
+        delay2,
+        moveBack,
+        nullptr
+    );
+
+    caster->runAction(sequence);
 }
+

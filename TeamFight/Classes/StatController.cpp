@@ -1,4 +1,6 @@
 #include "StatController.h"
+#include "CameraShakeAction.h"
+
 #include <algorithm>
 #include <cocos2d.h>
 
@@ -18,6 +20,18 @@ void StatController::init()
     _stats[STAT_TYPE::DEF] = Stat(0.0f);
     _stats[STAT_TYPE::SPD] = Stat(0.0f);
     _stats[STAT_TYPE::HP] = Stat(0.0f);
+
+    _stats[STAT_TYPE::HP].onChangeValueEvent.add([&](float value)
+        {
+            auto camShake = CameraShakeAction::create(0.4f, 1.2f, 1.2f);
+
+            auto camera = cocos2d::Director::getInstance()->getRunningScene()->getDefaultCamera();
+            if (camera)
+            {
+                camera->stopAllActions(); 
+                camera->runAction(camShake);
+            }
+        });
 }
 
 void StatController::update(float dt)

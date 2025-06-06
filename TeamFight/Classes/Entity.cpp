@@ -50,7 +50,7 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop, float animationSpee
     else {
         auto callback = CallFunc::create([this]()
             {
-            this->playAnimation(ANIMATION_STATE::IDLE, true); 
+                this->playAnimation(ANIMATION_STATE::IDLE, true); 
             });
 
         auto seq = Sequence::create(animate, callback, nullptr);

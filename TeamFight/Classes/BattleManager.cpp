@@ -103,6 +103,7 @@ void BattleManager::changeTurn()
         _usedPlayerCommand = false;
         _currentPlayerEntity = selectPlayerEntity();
         _uiController->setSelectSkillIndex(-1);
+
         int skillCount = _currentPlayerEntity->getSkillList().size();
         for (int i = 0; i < skillCount; i++)
         {

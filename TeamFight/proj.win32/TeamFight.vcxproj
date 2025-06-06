@@ -840,6 +840,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Archer.h" />
     <ClInclude Include="..\Classes\BattleManager.h" />
     <ClInclude Include="..\Classes\BattleCommand.h" />
+    <ClInclude Include="..\Classes\CameraShakeAction.h" />
     <ClInclude Include="..\Classes\DoubleMeleeAttackSkill.h" />
     <ClInclude Include="..\Classes\Entities.h" />
     <ClInclude Include="..\Classes\Entity.h" />
@@ -861,6 +862,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\Archer.cpp" />
     <ClCompile Include="..\Classes\BattleManager.cpp" />
     <ClCompile Include="..\Classes\BattleCommand.cpp" />
+    <ClCompile Include="..\Classes\CameraShakeAction.cpp" />
     <ClCompile Include="..\Classes\DoubleMeleeAttackSkill.cpp" />
     <ClCompile Include="..\Classes\Entity.cpp" />
     <ClCompile Include="..\Classes\Goblin.cpp" />
