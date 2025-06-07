@@ -18,6 +18,8 @@ bool Knight::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 15);
     _statController->setDefaultStat(STAT_TYPE::HP, 20);
 
+    _healthBar->initMaxHealthBar(_statController->getValue(STAT_TYPE::HP));
+
     MeleeAttackSkill* meleeAttackSkill = new MeleeAttackSkill();
     meleeAttackSkill->setSkillName("Dragon Slash");
     meleeAttackSkill->setPower(7);

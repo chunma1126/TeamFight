@@ -16,6 +16,8 @@ bool Archer::init()
     _statController->setDefaultStat(STAT_TYPE::DEF , 5);
     _statController->setDefaultStat(STAT_TYPE::HP , 10);
 
+    _healthBar->initMaxHealthBar(_statController->getValue(STAT_TYPE::HP));
+
     RangeSkill* rangeSkill = new RangeSkill;
     rangeSkill->setSkillName("Legend Shot");
     rangeSkill->setPower(10);

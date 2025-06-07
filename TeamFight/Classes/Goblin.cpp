@@ -10,9 +10,10 @@ bool Goblin::init()
 	getMainSprite()->setFlippedX(true);
 
 	getStatController()->setDefaultStat(STAT_TYPE::HP , 1);
+	_healthBar->initMaxHealthBar(_statController->getValue(STAT_TYPE::HP));
 
 	auto* meleeAttackSkill = new MeleeAttackSkill;
-	meleeAttackSkill->setPower(100);
+	meleeAttackSkill->setPower(5);
 	meleeAttackSkill->setType(SKILL_TYPE::DAMAGE);
 
 	_skillList.push_back(meleeAttackSkill);

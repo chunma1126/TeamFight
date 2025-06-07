@@ -22,11 +22,13 @@ public:
     void init();
     void update(float dt);
     void runCommand(float dt);
-
+public:
     Entity* selectPlayerEntity();
     Entity* selectEnemyEntity(Vec2 worldMousePos);
 
     void changeTurn();
+    void clearCurrentLevel();
+    void gameOver();
     void submitPlayerCommand(BattleCommand* cmd);
     void setTeam(Team* playerTeam , Team* enemyTeam);
     

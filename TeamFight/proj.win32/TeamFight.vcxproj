@@ -845,6 +845,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Entities.h" />
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Goblin.h" />
+    <ClInclude Include="..\Classes\HealthBar.h" />
     <ClInclude Include="..\Classes\Knight.h" />
     <ClInclude Include="..\Classes\Enum.h" />
     <ClInclude Include="..\Classes\MeleeAttackSkill.h" />
@@ -866,6 +867,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\DoubleMeleeAttackSkill.cpp" />
     <ClCompile Include="..\Classes\Entity.cpp" />
     <ClCompile Include="..\Classes\Goblin.cpp" />
+    <ClCompile Include="..\Classes\HealthBar.cpp" />
     <ClCompile Include="..\Classes\Knight.cpp" />
     <ClCompile Include="..\Classes\MeleeAttackSkill.cpp" />
     <ClCompile Include="..\Classes\Pawn.cpp" />

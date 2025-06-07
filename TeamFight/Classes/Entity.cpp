@@ -17,19 +17,16 @@ bool Entity::init()
         return false;
     }
 
+    _healthBar = HealthBar::create();
+    addChild(_healthBar);
+
     _statController = std::make_unique<StatController>();
     _statController->getStat(STAT_TYPE::HP).onChangeValueEvent.add([&](float value)
         {
-            if (value <= 0)
-            {
-                playAnimation(ANIMATION_STATE::DEAD, false, 1.0f, CallFunc::create([&]()
-                    {
-                        this->setVisible(false);
-                    }));
-            }
-                        
-        });
+            this->tryDead(value);
 
+            _healthBar->updateHealthText(value);
+        });
 
     for (size_t state = 0; state < (int)ANIMATION_STATE::END; state++)
     {
@@ -38,6 +35,17 @@ bool Entity::init()
 
     scheduleUpdate();
     return true;
+}
+
+void Entity::tryDead(float value)
+{
+    if (value > 0)return;
+
+    playAnimation(ANIMATION_STATE::DEAD, false, 1.0f, CallFunc::create([&]()
+    {
+        this->setVisible(false);
+    }));
+
 }
 
 void Entity::update(float dt)

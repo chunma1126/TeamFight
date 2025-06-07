@@ -1,7 +1,6 @@
 #include "MeleeAttackSkill.h"
 #include "Entity.h"
 
-
 void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 {
     Vec2 originalPos = caster->getPosition();
@@ -9,7 +8,7 @@ void MeleeAttackSkill::execute(Entity* caster, Entity* target)
 
     _direction = (originalPos - enemyPos).getNormalized().x;
     enemyPos.x += _direction * caster->getMainSprite()->getContentSize().width / 3;
-
+    
     auto moveToEnemy = MoveTo::create(0.35f, enemyPos);
     auto animation = CallFunc::create([caster]() {
         caster->playAnimation(ANIMATION_STATE::ATTACK1, false);

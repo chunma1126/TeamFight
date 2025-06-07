@@ -7,6 +7,7 @@
 
 #include "StatController.h"
 #include "Skill.h"
+#include "HealthBar.h"
 
 USING_NS_CC;
 
@@ -42,6 +43,7 @@ class Entity : public Node
 public :
     virtual ~Entity();
     virtual bool init();
+    void tryDead(float value);
     virtual void update(float dt);
 
     CREATE_FUNC(Entity);
@@ -70,6 +72,8 @@ protected:
     AnimationSheetInfo _animationSheetInfo = {};
     float _animationSheetFrameWidth = 0;
     float _animationSheetFrameHeight = 0;
+
+    HealthBar* _healthBar;
 };
 
 

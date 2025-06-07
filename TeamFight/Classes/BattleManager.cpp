@@ -94,10 +94,13 @@ void BattleManager::changeTurn()
     if (_playerTeam->isAllDead())
     {
         _playerTeam->clearEntities();
+
+        gameOver();
     }
     else if (_enemyTeam->isAllDead()) 
     {
-        CCLOG("azqsxazwdc");
+        clearCurrentLevel();
+
         _enemyTeam->clearEntities();
     }
     else if (_currentTurn == TURN_TYPE::ENEMY)
@@ -123,6 +126,19 @@ void BattleManager::changeTurn()
         _enemyTeam->activeTeam(false);
         _playerTeam->activeTeam(true);
     }
+}
+
+void BattleManager::clearCurrentLevel()
+{
+    for (const auto& player : _playerTeam->getAliveEntities())
+    {
+        player->playAnimation(ANIMATION_STATE::MOVE,true);
+    }
+}
+
+void BattleManager::gameOver()
+{
+    
 }
 
 Entity* BattleManager::selectPlayerEntity()
@@ -212,5 +228,3 @@ int BattleManager::getSelectSkillIndex()
 {
     return _uiController->getSelecSkillIndex();
 }
-
-

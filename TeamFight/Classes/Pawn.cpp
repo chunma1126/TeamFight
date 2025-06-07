@@ -16,6 +16,8 @@ bool Pawn::init()
     _statController->setDefaultStat(STAT_TYPE::DEF, 20);
     _statController->setDefaultStat(STAT_TYPE::HP, 25);
 
+    _healthBar->initMaxHealthBar(_statController->getValue(STAT_TYPE::HP));
+
     {
         MeleeAttackSkill* meleeAttackSkill = new MeleeAttackSkill();
         meleeAttackSkill->setSkillName("오함마 가지고 와라");

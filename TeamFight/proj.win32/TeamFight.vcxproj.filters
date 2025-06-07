@@ -61,6 +61,9 @@
     <ClCompile Include="..\Classes\CameraShakeAction.cpp">
       <Filter>Source Files\Classes\03.Combat\02.Feedback</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HealthBar.cpp">
+      <Filter>Source Files\Classes\05UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CameraShakeAction.h">
       <Filter>Source Files\Classes\03.Combat\02.Feedback</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HealthBar.h">
+      <Filter>Source Files\Classes\05UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

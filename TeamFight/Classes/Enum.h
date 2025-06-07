@@ -12,6 +12,6 @@ enum LAYER
 
 #define IS_THIS_DEBUG false
 
-#define FONT_SUNBATANG_BOLD "fonts/SunBatang/SunBatang-Bold.ttf"
 #define FONT_HEIROF_BOLD "fonts/HeirofLightBold.ttf"
+#define FONT_BMJUA "fonts/BMJUA_ttf.ttf"
 #define FONT_DEFAULT "fonts/arial.ttf"
