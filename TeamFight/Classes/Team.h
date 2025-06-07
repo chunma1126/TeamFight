@@ -18,7 +18,6 @@ public:
 	const std::vector<Entity*> getAliveEntities();
 	void clearEntities(); 
 private:
-	std::unordered_map<ENTITY_TYPE,Entity*> _entityMap;
 	std::vector<Entity*> _entityList;
 	size_t _nextEntity = 0;
 };

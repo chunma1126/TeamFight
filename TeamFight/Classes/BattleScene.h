@@ -15,14 +15,8 @@ public:
     CREATE_FUNC(BattleScene);
 private:
     void mouseDownEvent(EventMouse* event);
-
 private:
-    std::unique_ptr<Team> _playerTeam = nullptr;
-    std::unique_ptr<Team> _enemyTeam = nullptr;
     std::unique_ptr<BattleManager> _battleManager = nullptr;
-private:
 
-    std::vector<Vec2> _playerTeamPosition;
-    std::vector<Vec2> _enemyTeamPosition;
 
 };

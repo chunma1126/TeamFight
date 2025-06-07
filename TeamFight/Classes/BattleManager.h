@@ -3,9 +3,9 @@
 #include <string>
 #include <memory>
 
-#include "Team.h"
 #include "BattleCommand.h"
 #include "Entity.h"
+#include "Action.h"
 
 enum class TURN_TYPE
 {
@@ -20,24 +20,14 @@ public:
     ~BattleManager();
 
     void init();
+    void EnemySpawn();
     void update(float dt);
     void runCommand(float dt);
 public:
-    Entity* selectPlayerEntity();
-    Entity* selectEnemyEntity(Vec2 worldMousePos);
-
-    void changeTurn();
-    void clearCurrentLevel();
-    void gameOver();
-    void submitPlayerCommand(BattleCommand* cmd);
-    void setTeam(Team* playerTeam , Team* enemyTeam);
-    
+    void setPositions(std::vector<Vec2>& playerTeamPosition , std::vector<Vec2>& enemyTeamPosition);
     void playPlayerTurn(Entity* enemyEntity,int currentSkillIndex);
-    void playEnemyTurn();
-    
-    int getSelectSkillIndex();
+   
 public:
-    bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
     const char* turnTypeToString(TURN_TYPE turn)
     {
         switch (turn)
@@ -47,14 +37,34 @@ public:
         default:                return "UNKNOWN";
         }
     }
+    int getSelectSkillIndex();
+    Entity* selectPlayerEntity();
+    Entity* selectEnemyEntity(Vec2 worldMousePos);
+    bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
+private:
+    void playEnemyTurn();
+
+    void changeTurn();
+    void submitPlayerCommand(BattleCommand* cmd);
+
+    void clearCurrentLevel();
+    void gameOver();
+public:
+    ::Action<float> onLevelClearEvent;
+    ::Action<float> onGameOverEvent;
 private:
     std::queue<TURN_TYPE> _turnQueue;
     std::queue<BattleCommand*> _commandQueue;
     std::unique_ptr<class UIController> _uiController;
+    std::unique_ptr<class EnemySpawner> _enemySpawner;
+
+    std::vector<Vec2> _playerTeamPosition;
+    std::vector<Vec2> _enemyTeamPosition;
+
 private:
     BattleCommand* _currentCommand = nullptr;
-    Team* _playerTeam = nullptr;
-    Team* _enemyTeam = nullptr;
+    std::unique_ptr <class Team> _playerTeam = nullptr;
+    std::unique_ptr <class Team> _enemyTeam = nullptr;
 
     Entity* _currentEnemyEntity = nullptr;
     Entity* _currentPlayerEntity = nullptr;

@@ -842,6 +842,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\BattleCommand.h" />
     <ClInclude Include="..\Classes\CameraShakeAction.h" />
     <ClInclude Include="..\Classes\DoubleMeleeAttackSkill.h" />
+    <ClInclude Include="..\Classes\EnemySpawner.h" />
     <ClInclude Include="..\Classes\Entities.h" />
     <ClInclude Include="..\Classes\Entity.h" />
     <ClInclude Include="..\Classes\Goblin.h" />
@@ -855,6 +856,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\Classes\Stat.h" />
     <ClInclude Include="..\Classes\StatController.h" />
     <ClInclude Include="..\Classes\Team.h" />
+    <ClInclude Include="..\Classes\TileMap.h" />
     <ClInclude Include="..\Classes\UIController.h" />
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BattleScene.h" />
@@ -865,6 +867,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\BattleCommand.cpp" />
     <ClCompile Include="..\Classes\CameraShakeAction.cpp" />
     <ClCompile Include="..\Classes\DoubleMeleeAttackSkill.cpp" />
+    <ClCompile Include="..\Classes\EnemySpawner.cpp" />
     <ClCompile Include="..\Classes\Entity.cpp" />
     <ClCompile Include="..\Classes\Goblin.cpp" />
     <ClCompile Include="..\Classes\HealthBar.cpp" />
@@ -876,6 +879,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Classes\Stat.cpp" />
     <ClCompile Include="..\Classes\StatController.cpp" />
     <ClCompile Include="..\Classes\Team.cpp" />
+    <ClCompile Include="..\Classes\TileMap.cpp" />
     <ClCompile Include="..\Classes\UIController.cpp" />
     <ClCompile Include="C:\Users\user\Desktop\TeamFight\TeamFight\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BattleScene.cpp" />

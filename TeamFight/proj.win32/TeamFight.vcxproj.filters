@@ -64,6 +64,12 @@
     <ClCompile Include="..\Classes\HealthBar.cpp">
       <Filter>Source Files\Classes\05UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TileMap.cpp">
+      <Filter>Source Files\Classes\02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnemySpawner.cpp">
+      <Filter>Source Files\Classes\01.Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -155,6 +161,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HealthBar.h">
       <Filter>Source Files\Classes\05UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileMap.h">
+      <Filter>Source Files\Classes\02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnemySpawner.h">
+      <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

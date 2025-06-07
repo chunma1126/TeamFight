@@ -3,25 +3,46 @@
 
 Team::Team()
 {
-	_entityList.reserve(3);
+	_entityList.resize(3);
 }
 
 Team::~Team()
 {
-	_entityMap.clear();
 	_entityList.clear();
 }
 
 void Team::add(ENTITY_TYPE entityType, Entity* entity)
 {
-	_entityMap[entityType] = entity;
-	_entityList.push_back(entity);
+	if ((int)entityType < (int)ENTITY_TYPE::PLAYER_ENTITY_END)
+	{
+		size_t index = (int)entityType;
+		_entityList[index] = entity;
+	}
+	else
+	{
+		for (int i = 0; i < _entityList.size(); i++)
+		{
+			if (_entityList[i] == nullptr)
+			{
+				_entityList[i] = entity;
+				break;
+			}
+		}
+	}
 
 	std::sort(_entityList.begin(), _entityList.end(),
-		[](Entity* a,Entity* b) 
+		[](Entity* a, Entity* b)
 		{
-			return a->getStatController()->getValue(STAT_TYPE::SPD) >
-				   b->getStatController()->getValue(STAT_TYPE::SPD);
+			if (!a) return false;
+			if (!b) return true;
+
+			auto aStat = a->getStatController();
+			auto bStat = b->getStatController();
+
+			if (!aStat) return false;
+			if (!bStat) return true;
+
+			return aStat->getValue(STAT_TYPE::SPD) > bStat->getValue(STAT_TYPE::SPD);
 		});
 
 }
@@ -75,7 +96,8 @@ Entity* Team::getEntity()
 
 Entity* Team::getEntity(ENTITY_TYPE entityType)
 {
-	return _entityMap[entityType];
+	size_t index = (int)entityType % (int)(ENTITY_TYPE::PLAYER_ENTITY_END);
+	return _entityList[index];
 }
 
 const std::vector<Entity*> Team::getAliveEntities()
@@ -94,12 +116,13 @@ const std::vector<Entity*> Team::getAliveEntities()
 
 void Team::clearEntities()
 {
-	for (auto* entity : _entityList)
+	for (auto*& entity : _entityList)
 	{
-		if (entity->getParent())
+		if (entity && entity->getParent())
 			entity->removeFromParent();
 	}
+	_entityList.clear();
+	_entityList.resize(3);
 
-	_entityList.clear(); 
 }
 
