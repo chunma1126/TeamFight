@@ -1,16 +1,16 @@
 #include "Stat.h"
 
-Stat::Stat() : _value(0.0f), _amountValue(0.0f)
+Stat::Stat() : _value(0.0f)
 {
 }
 
-Stat::Stat(float value) : _value(value), _amountValue(0.0f)
+Stat::Stat(float value) : _value(value)
 {
 }
 
 const float Stat::getValue() const
 {
-    return _value + _amountValue;
+    return _value;
 }
 
 void Stat::setValue(float value)
@@ -20,12 +20,12 @@ void Stat::setValue(float value)
 
 void Stat::addStat(float value)
 {
-    _amountValue += value;
+    _value += value;
     onChangeValueEvent.invoke(getValue());
 }
 
 void Stat::removeStat(float value)
 {
-    _amountValue = std::max(_amountValue - value, 0.0f);
+    _value = std::max(_value - value, 0.0f);
     onChangeValueEvent.invoke(getValue());
 }

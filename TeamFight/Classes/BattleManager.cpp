@@ -91,12 +91,22 @@ void BattleManager::changeTurn()
     _currentTurn = _turnQueue.front();
     _turnQueue.pop();
 
-    if (_currentTurn == TURN_TYPE::ENEMY)
+    if (_playerTeam->isAllDead())
     {
-        playEnemyTurn();
-
+        _playerTeam->clearEntities();
+    }
+    else if (_enemyTeam->isAllDead()) 
+    {
+        CCLOG("azqsxazwdc");
+        _enemyTeam->clearEntities();
+    }
+    else if (_currentTurn == TURN_TYPE::ENEMY)
+    {
         _enemyTeam->activeTeam(true);
         _playerTeam->activeTeam(false);
+
+        playEnemyTurn();
+
     }
     else if(_currentTurn == TURN_TYPE::PLAYER)
     {
@@ -127,16 +137,15 @@ Entity* BattleManager::selectPlayerEntity()
     {
         skillPaths.push_back(skill->getIconPath()); 
     }
+
     _uiController->setSkillIcons(skillPaths);
-
-   
-
+    
     return entity;
 }
 
 Entity* BattleManager::selectEnemyEntity(Vec2 worldMousePos)
 {
-    for (const auto& entity : _enemyTeam->getAllEntities())
+    for (const auto& entity : _enemyTeam->getAliveEntities())
     {
         Rect entityRect = entity->getMainSprite()->getBoundingBox();
 
@@ -160,15 +169,17 @@ void BattleManager::playEnemyTurn()
 {
     submitPlayerCommand(new BattleCommand(2.1f, [&]()
     {
-        Entity* entity = _enemyTeam->getEntity();
+        Entity* entity;
+        entity = _enemyTeam->getEntity();
 
         int skillCount = entity->getSkillList().size();
         int randomSkillIndex = std::rand() % skillCount;
 
-        int playerEntityIndex = _playerTeam->getAllEntities().size();
+        int playerEntityIndex = _playerTeam->getAliveEntities().size();
         int randomEntityIndex = std::rand() % playerEntityIndex;
 
-        entity->getSkill(randomSkillIndex)->execute(_enemyTeam->getEntity() , _playerTeam->getAllEntities()[randomEntityIndex]);
+        Entity* target = _playerTeam->getAliveEntities()[randomEntityIndex];
+        entity->getSkill(randomSkillIndex)->execute(entity, target);
     }));
 }
 

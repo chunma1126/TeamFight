@@ -46,8 +46,8 @@ public :
 
     CREATE_FUNC(Entity);
 public:
-    void playAnimation(ANIMATION_STATE state, bool loop = false, float animationSpeed = 1);
-    virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::DEAD);
+    void playAnimation(ANIMATION_STATE state, bool loop = false, float animationSpeed = 1, CallFunc* animationEndCallback = nullptr);
+    virtual void initAnimationSheet(const std::string& path, int row, int col,ANIMATION_STATE animationState = ANIMATION_STATE::ATTACK2);
 
 public:
     std::vector<Skill*> getSkillList() const { return _skillList; }

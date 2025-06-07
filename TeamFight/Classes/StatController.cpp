@@ -23,7 +23,7 @@ void StatController::init()
 
     _stats[STAT_TYPE::HP].onChangeValueEvent.add([&](float value)
         {
-            auto camShake = CameraShakeAction::create(0.4f, 1.2f, 1.2f);
+            auto camShake = CameraShakeAction::create(0.1f, 1.2f, 1.2f);
 
             auto camera = cocos2d::Director::getInstance()->getRunningScene()->getDefaultCamera();
             if (camera)
@@ -32,6 +32,7 @@ void StatController::init()
                 camera->runAction(camShake);
             }
         });
+
 }
 
 void StatController::update(float dt)

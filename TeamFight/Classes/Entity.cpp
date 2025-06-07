@@ -18,6 +18,18 @@ bool Entity::init()
     }
 
     _statController = std::make_unique<StatController>();
+    _statController->getStat(STAT_TYPE::HP).onChangeValueEvent.add([&](float value)
+        {
+            if (value <= 0)
+            {
+                playAnimation(ANIMATION_STATE::DEAD, false, 1.0f, CallFunc::create([&]()
+                    {
+                        this->setVisible(false);
+                    }));
+            }
+                        
+        });
+
 
     for (size_t state = 0; state < (int)ANIMATION_STATE::END; state++)
     {
@@ -33,7 +45,7 @@ void Entity::update(float dt)
     _statController->update(dt);
 }
 
-void Entity::playAnimation(ANIMATION_STATE state, bool loop, float animationSpeed)
+void Entity::playAnimation(ANIMATION_STATE state, bool loop, float animationSpeed, CallFunc* animationEndCallback)
 {
     auto it = _animator.find(state);
     if (it == _animator.end()) return;
@@ -53,7 +65,13 @@ void Entity::playAnimation(ANIMATION_STATE state, bool loop, float animationSpee
                 this->playAnimation(ANIMATION_STATE::IDLE, true); 
             });
 
-        auto seq = Sequence::create(animate, callback, nullptr);
+        Vector<FiniteTimeAction*> actions;
+        actions.pushBack(animate);
+        actions.pushBack(callback);
+        if (animationEndCallback != nullptr)
+            actions.pushBack(animationEndCallback);
+
+        auto seq = Sequence::create(actions);
         _mainSprite->runAction(seq);
     }
 

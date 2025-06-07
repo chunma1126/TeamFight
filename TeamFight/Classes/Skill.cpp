@@ -17,4 +17,5 @@ void Skill::applyDamage(Entity* caster, Entity* target)
 		healAmount += _power;
 		target->getStatController()->addStat(STAT_TYPE::HP, healAmount);
 	}
+
 }

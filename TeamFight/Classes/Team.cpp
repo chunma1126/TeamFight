@@ -28,9 +28,9 @@ void Team::add(ENTITY_TYPE entityType, Entity* entity)
 
 bool Team::isAllDead()
 {
-	for (const auto& entity : _entityMap)
+	for (const auto& entity : _entityList)
 	{
-		if (entity.second->getStatController()->getValue(STAT_TYPE::HP) > 0)
+		if (!entity->getStatController()->isDead())
 		{
 			return false;
 		}
@@ -59,12 +59,47 @@ void Team::activeTeam(bool active)
 
 Entity* Team::getEntity()
 {
-	size_t nextIndex = _nextEntity++ % _entityList.size();
-	return _entityList[nextIndex];
+	if (isAllDead()) return nullptr;
+
+	size_t count = _entityList.size();
+	for (size_t i = 0; i < count; ++i)
+	{
+		size_t index = _nextEntity++ % count;
+		Entity* entity = _entityList[index];
+		if (!entity->getStatController()->isDead())
+			return entity;
+	}
+
+	return nullptr;
 }
 
 Entity* Team::getEntity(ENTITY_TYPE entityType)
 {
 	return _entityMap[entityType];
+}
+
+const std::vector<Entity*> Team::getAliveEntities()
+{
+	std::vector<Entity*> entities;
+
+	for (auto& entity : _entityList )
+	{
+		if (entity->getStatController()->isDead() == false) {
+			entities.push_back(entity);
+		}
+	}
+
+	return entities;
+}
+
+void Team::clearEntities()
+{
+	for (auto* entity : _entityList)
+	{
+		if (entity->getParent())
+			entity->removeFromParent();
+	}
+
+	_entityList.clear(); 
 }
 

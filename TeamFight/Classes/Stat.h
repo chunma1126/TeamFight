@@ -25,6 +25,5 @@ public:
 
 private:
     float _value;
-    float _amountValue;
 };
 

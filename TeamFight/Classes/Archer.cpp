@@ -25,6 +25,20 @@ bool Archer::init()
 
     _skillList.push_back(rangeSkill);
 
+    auto texture = Director::getInstance()->getTextureCache()->addImage("Characters/Knights/Troops/Archer/Arrow/Arrow.png");
+    Rect frameRect(0, 0, 30, 32);
+    auto arrowSprite = Sprite::createWithTexture(texture, frameRect);
+
+    _arrow = Node::create();
+    _arrow->addChild(arrowSprite);
+    _arrowPosition = getPosition();
+    _arrowPosition.y -= 6;
+    _arrowPosition.x += 2;
+    _arrow->setPosition(_arrowPosition);
+    _arrow->setVisible(false);
+    addChild(_arrow);
+
+
     return true;
 }
 

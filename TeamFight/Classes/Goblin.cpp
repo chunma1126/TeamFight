@@ -9,8 +9,10 @@ bool Goblin::init()
 	initAnimationSheet("Characters/Goblins/Troops/Torch/Blue/Torch_Blue.png", 7, 5);
 	getMainSprite()->setFlippedX(true);
 
+	getStatController()->setDefaultStat(STAT_TYPE::HP , 1);
+
 	auto* meleeAttackSkill = new MeleeAttackSkill;
-	meleeAttackSkill->setPower(10);
+	meleeAttackSkill->setPower(100);
 	meleeAttackSkill->setType(SKILL_TYPE::DAMAGE);
 
 	_skillList.push_back(meleeAttackSkill);
