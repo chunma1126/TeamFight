@@ -6,6 +6,7 @@
 #include "BattleCommand.h"
 #include "Entity.h"
 #include "Action.h"
+#include "UIController.h"
 
 enum class TURN_TYPE
 {
@@ -24,8 +25,8 @@ public:
     void update(float dt);
     void runCommand(float dt);
 public:
-    void setPositions(std::vector<Vec2>& playerTeamPosition , std::vector<Vec2>& enemyTeamPosition);
-    void playPlayerTurn(Entity* enemyEntity,int currentSkillIndex);
+    void setTeamPositions(std::vector<Vec2>& playerTeamPosition , std::vector<Vec2>& enemyTeamPosition);
+    void executePlayerTurn(Entity* enemyEntity,int currentSkillIndex);
    
 public:
     const char* turnTypeToString(TURN_TYPE turn)
@@ -37,15 +38,15 @@ public:
         default:                return "UNKNOWN";
         }
     }
-    int getSelectSkillIndex();
     Entity* selectPlayerEntity();
     Entity* selectEnemyEntity(Vec2 worldMousePos);
-    bool canPlayerInput() { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
-private:
-    void playEnemyTurn();
 
+    int getSelectSkillIndex() { return _uiController->getSelecSkillIndex(); };
+    bool getCanPlayerInput()  { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
+private:
+    void executeEnemyTurn();
     void changeTurn();
-    void submitPlayerCommand(BattleCommand* cmd);
+    void submitPlayerCommand(BattleCommand* cmd) { _commandQueue.push(cmd); }
 
     void clearCurrentLevel();
     void gameOver();

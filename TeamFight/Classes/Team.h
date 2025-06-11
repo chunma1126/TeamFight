@@ -9,16 +9,21 @@ public:
 	Team();
 	~Team();
 public:
-	void add(ENTITY_TYPE entityType , Entity* entity);
+	static bool entityCompare(Entity* a, Entity* b);
+public:
+	void addEntity(ENTITY_TYPE entityType , Entity* entity);
+	void setActiveTeam(bool active);
+	void clearEntities(); 
+public:
 	bool isAllDead();
-	void activeTeam(bool active);
 	Entity* getEntity();
 	Entity* getEntity(ENTITY_TYPE entityType);
-	const std::vector<Entity*> getAllEntities() { return _entityList; }
+	const std::vector<Entity*> getAllEntities() { return _entitiesSortedByType; }
 	const std::vector<Entity*> getAliveEntities();
-	void clearEntities(); 
 private:
-	std::vector<Entity*> _entityList;
+	std::vector<Entity*> _entitiesSortedByType;
+	std::vector<Entity*> _entitiesSortedBySpeed;
+
 	size_t _nextEntity = 0;
 };
 

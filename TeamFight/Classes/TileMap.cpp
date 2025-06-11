@@ -10,15 +10,26 @@ bool TileMap::init()
 		return false;
 	}
 
-	for (int i = 0; i < 3; i++)
-	{
-		_timeMapList[i] = TMXTiledMap::create(TILE_MAP_PATH);
+    for (int i = 0; i < 3; i++)
+    {
+        _timeMapList[i] = TMXTiledMap::create(TILE_MAP_PATH);
 
-		float offsetX = _timeMapList[i]->getContentSize().width * i;
-		_timeMapList[i]->setPosition(Vec2(offsetX, 0));
+        auto& layers = _timeMapList[i]->getChildren();
+        for (auto& child : layers)
+        {
+            auto layer = dynamic_cast<SpriteBatchNode*>(child);
+            if (layer)
+            {
+                layer->getTexture()->setAliasTexParameters();
+            }
+        }
 
-		addChild(_timeMapList[i], LAYER::BACKGROUND);
-	}
+        float offsetX = _timeMapList[i]->getContentSize().width * i;
+        _timeMapList[i]->setPosition(Vec2(static_cast<int>(offsetX + 0.5f), 0));
+
+        addChild(_timeMapList[i], LAYER::BACKGROUND);
+    }
+
 
     _tileWidth = _timeMapList[0]->getContentSize().width;
 

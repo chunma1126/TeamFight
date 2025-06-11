@@ -1,55 +1,60 @@
 #include "Team.h"
 #include "algorithm"
 
+#define MAX_ENTITY_COUNT 3
+
 Team::Team()
 {
-	_entityList.resize(3);
+	_entitiesSortedByType.resize(MAX_ENTITY_COUNT);
+	_entitiesSortedBySpeed.resize(MAX_ENTITY_COUNT);
 }
 
 Team::~Team()
 {
-	_entityList.clear();
+	_entitiesSortedByType.clear();
+	_entitiesSortedBySpeed.clear();
 }
 
-void Team::add(ENTITY_TYPE entityType, Entity* entity)
+bool Team::entityCompare(Entity* a, Entity* b)
+{
+	if (!a) return false;
+	if (!b) return true;
+
+	auto aStat = a->getStatController();
+	auto bStat = b->getStatController();
+
+	return aStat->getValue(STAT_TYPE::SPD) > bStat->getValue(STAT_TYPE::SPD);
+}
+
+void Team::addEntity(ENTITY_TYPE entityType, Entity* entity)
 {
 	if ((int)entityType < (int)ENTITY_TYPE::PLAYER_ENTITY_END)
 	{
 		size_t index = (int)entityType;
-		_entityList[index] = entity;
+		_entitiesSortedByType[index] = entity;
+		_entitiesSortedBySpeed[index] = entity;
 	}
 	else
 	{
-		for (int i = 0; i < _entityList.size(); i++)
+		for (int i = 0; i < _entitiesSortedByType.size(); i++)
 		{
-			if (_entityList[i] == nullptr)
+			if (_entitiesSortedByType[i] == nullptr)
 			{
-				_entityList[i] = entity;
+				_entitiesSortedByType[i] = entity;
+				_entitiesSortedBySpeed[i] = entity;
+
 				break;
 			}
 		}
 	}
 
-	std::sort(_entityList.begin(), _entityList.end(),
-		[](Entity* a, Entity* b)
-		{
-			if (!a) return false;
-			if (!b) return true;
-
-			auto aStat = a->getStatController();
-			auto bStat = b->getStatController();
-
-			if (!aStat) return false;
-			if (!bStat) return true;
-
-			return aStat->getValue(STAT_TYPE::SPD) > bStat->getValue(STAT_TYPE::SPD);
-		});
+	std::sort(_entitiesSortedBySpeed.begin(), _entitiesSortedBySpeed.end(),Team::entityCompare);
 
 }
 
 bool Team::isAllDead()
 {
-	for (const auto& entity : _entityList)
+	for (const auto& entity : _entitiesSortedByType)
 	{
 		if (!entity->getStatController()->isDead())
 		{
@@ -60,7 +65,7 @@ bool Team::isAllDead()
 	return true;
 }
 
-void Team::activeTeam(bool active)
+void Team::setActiveTeam(bool active)
 {
 	if (active) 
 	{
@@ -72,7 +77,7 @@ void Team::activeTeam(bool active)
 	else {
 		for (const auto& entity : getAllEntities())
 		{
-			entity->getMainSprite()->setOpacity(128);
+			entity->getMainSprite()->setOpacity(200);
 		}
 	}
 }
@@ -82,11 +87,11 @@ Entity* Team::getEntity()
 {
 	if (isAllDead()) return nullptr;
 
-	size_t count = _entityList.size();
+	size_t count = _entitiesSortedBySpeed.size();
 	for (size_t i = 0; i < count; ++i)
 	{
 		size_t index = _nextEntity++ % count;
-		Entity* entity = _entityList[index];
+		Entity* entity = _entitiesSortedBySpeed[index];
 		if (!entity->getStatController()->isDead())
 			return entity;
 	}
@@ -97,14 +102,14 @@ Entity* Team::getEntity()
 Entity* Team::getEntity(ENTITY_TYPE entityType)
 {
 	size_t index = (int)entityType % (int)(ENTITY_TYPE::PLAYER_ENTITY_END);
-	return _entityList[index];
+	return _entitiesSortedByType[index];
 }
 
 const std::vector<Entity*> Team::getAliveEntities()
 {
 	std::vector<Entity*> entities;
 
-	for (auto& entity : _entityList )
+	for (auto& entity : _entitiesSortedByType)
 	{
 		if (entity->getStatController()->isDead() == false) {
 			entities.push_back(entity);
@@ -114,15 +119,22 @@ const std::vector<Entity*> Team::getAliveEntities()
 	return entities;
 }
 
+
+
 void Team::clearEntities()
 {
-	for (auto*& entity : _entityList)
+	for (auto*& entity : _entitiesSortedByType)
 	{
 		if (entity && entity->getParent())
 			entity->removeFromParent();
 	}
-	_entityList.clear();
-	_entityList.resize(3);
+
+	_entitiesSortedByType.clear();
+	_entitiesSortedByType.resize(MAX_ENTITY_COUNT);
+
+	_entitiesSortedBySpeed.clear();
+	_entitiesSortedBySpeed.resize(MAX_ENTITY_COUNT);
+
 
 }
 

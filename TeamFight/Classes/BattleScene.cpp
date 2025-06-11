@@ -49,7 +49,7 @@ bool BattleScene::init()
         enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.3f + origin.y });
         enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.7f + origin.y });
 
-        _battleManager->setPositions(playerPositionList, enemyPositionList);
+        _battleManager->setTeamPositions(playerPositionList, enemyPositionList);
     }
 
     //init tilemap
@@ -61,40 +61,6 @@ bool BattleScene::init()
             });
         addChild(timeMap, LAYER::BACKGROUND);
     }
-
-    
-
-//    //init EnemyEntity
-//    for (const auto& entity : _enemyTeam->getAllEntities())
-//    {
-//#if IS_THIS_DEBUG
-//        auto drawNode = DrawNode::create();
-//        auto boundingBox = entity->getMainSprite()->getBoundingBox();
-//
-//        boundingBox.origin.x += boundingBox.size.width / 4;
-//        boundingBox.origin.y += boundingBox.size.height / 4;
-//        boundingBox.size.width /= 2;
-//        boundingBox.size.height /= 2;
-//
-//
-//        Vec2 bottomLeft(boundingBox.getMinX(), boundingBox.getMinY());
-//        Vec2 bottomRight(boundingBox.getMaxX(), boundingBox.getMinY());
-//        Vec2 topRight(boundingBox.getMaxX(), boundingBox.getMaxY());
-//        Vec2 topLeft(boundingBox.getMinX(), boundingBox.getMaxY());
-//
-//        drawNode->drawPolygon(
-//            std::vector<Vec2>{bottomLeft, bottomRight, topRight, topLeft}.data(),
-//            4,
-//            Color4F(0, 0, 0, 0),
-//            1.0f,
-//            Color4F::RED
-//        );
-//
-//        entity->addChild(drawNode);
-//#endif 
-//
-//        addChild(entity, LAYER::ENEMY);
-//    }
 
     //mouse Event
     {
@@ -122,7 +88,8 @@ void BattleScene::update(float dt)
 
 void BattleScene::mouseDownEvent(EventMouse* event)
 {
-    bool isplayerTurn = _battleManager->canPlayerInput();
+    
+    bool isplayerTurn = _battleManager->getCanPlayerInput();
     if (!isplayerTurn)return;
 
     Vec2 worldClick = event->getLocationInView();
@@ -131,7 +98,7 @@ void BattleScene::mouseDownEvent(EventMouse* event)
 
     if (enemy == nullptr || selectSkillIndex == -1)return;
 
-    _battleManager->playPlayerTurn(enemy,selectSkillIndex);
+    _battleManager->executePlayerTurn(enemy,selectSkillIndex);
 }
 
 

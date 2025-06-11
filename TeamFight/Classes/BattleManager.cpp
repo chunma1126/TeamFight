@@ -1,46 +1,36 @@
 #include "BattleManager.h"
-#include "UIController.h"
-#include "cocos2d.h"
 #include "EnemySpawner.h"
 
-#include <random>
+#include "cocos2d.h"
 
+#include <random>
 
 #define LEVEL_CLEAR_DELAY 2.0f
 
 BattleManager::BattleManager()
 {
-    _turnQueue.push(TURN_TYPE::PLAYER);
-    _turnQueue.push(TURN_TYPE::ENEMY);
-
     onLevelClearEvent.add([this](float delayDuration)
-        {
-            _canChangeTurn = false;
+    {
+        auto scene = cocos2d::Director::getInstance()->getRunningScene();
+        CCASSERT(scene , "ERROR : has not scene!!!");
 
-            auto scene = cocos2d::Director::getInstance()->getRunningScene();
-            if (scene)
-            {
-                auto delay = DelayTime::create(delayDuration);
-                auto animationEvent = CallFunc::create([this]() 
+        auto delay = DelayTime::create(delayDuration);
+        auto animationEvent = CallFunc::create([this]()
+                {
+                    for (auto* entity : _playerTeam->getAliveEntities())
                     {
-                        for (auto* entity : _playerTeam->getAliveEntities())
-                        {
-                            entity->playAnimation(ANIMATION_STATE::IDLE, true);
-                        }
-                    });
-                auto enemySpawn = CallFunc::create([this]()
-                    {
-                        _canChangeTurn = true;
-                        EnemySpawn();
-                    });
-
-
-                auto seq = Sequence::create(delay, animationEvent, enemySpawn, nullptr);
-
-                scene->runAction(seq);
-            }
-        });
-
+                        entity->playAnimation(ANIMATION_STATE::IDLE, true);
+                    }
+                });
+        auto enemySpawn = CallFunc::create([this]()
+                {
+                    _canChangeTurn = true;
+                    EnemySpawn();
+                });
+        auto seq = Sequence::create(delay, animationEvent, enemySpawn, nullptr);
+        
+        scene->runAction(seq);
+    });
     
 }
 
@@ -65,52 +55,31 @@ void BattleManager::init()
     _uiController = std::make_unique<UIController>();
     _enemySpawner = std::make_unique<EnemySpawner>();
 
-    _enemyTeam = std::make_unique<Team>();
     _playerTeam = std::make_unique<Team>();
+    _enemyTeam = std::make_unique<Team>();
 
-    EnemySpawn();
-   
+    _playerTeam->addEntity(ENTITY_TYPE::KNIGHT, Knight::create());
+    _playerTeam->addEntity(ENTITY_TYPE::ARCHER, Archer::create());
+    _playerTeam->addEntity(ENTITY_TYPE::PAWN, Pawn::create());
 
-    //init knight
+    for (int i = 0; i < _playerTeam->getAllEntities().size(); i++)
     {
-        Knight* entity = Knight::create();
-        entity->setPosition(_playerTeamPosition[0]);
+        Entity* entity = _playerTeam->getEntity((ENTITY_TYPE)i);
+        entity->setPosition(_playerTeamPosition[i]);
 
-        _playerTeam->add(ENTITY_TYPE::KNIGHT, entity);
         cocos2d::Director::getInstance()->getRunningScene()->addChild(entity);
-
     }
 
-    //init archer
-    {
-        Archer* entity = Archer::create();
-        entity->setPosition(_playerTeamPosition[1]);
-
-        _playerTeam->add(ENTITY_TYPE::ARCHER, entity);
-        cocos2d::Director::getInstance()->getRunningScene()->addChild(entity);
-
-    }
-
-    //init pawn
-    {
-        Pawn* entity = Pawn::create();
-        entity->setPosition(_playerTeamPosition[2]);
-
-        _playerTeam->add(ENTITY_TYPE::PAWN, entity);
-        cocos2d::Director::getInstance()->getRunningScene()->addChild(entity);
-
-    }
+    this->EnemySpawn();
 }
 
 void BattleManager::EnemySpawn()
 {
-    int a = 0;
     for (int i = 0; i < (int)ENTITY_TYPE::PLAYER_ENTITY_END; i++)
     {
         Entity* entity = _enemySpawner->EnemySpawn(_enemyTeamPosition[i]);
-        _enemyTeam->add(ENTITY_TYPE::GOBLIN, entity);
+        _enemyTeam->addEntity(ENTITY_TYPE::GOBLIN, entity);
     }
-    
 }
 
 void BattleManager::update(float dt)
@@ -183,10 +152,10 @@ void BattleManager::changeTurn()
     }
     else if (_currentTurn == TURN_TYPE::ENEMY)
     {
-        _enemyTeam->activeTeam(true);
-        _playerTeam->activeTeam(false);
+        _enemyTeam->setActiveTeam(true);
+        _playerTeam->setActiveTeam(false);
 
-        playEnemyTurn();
+        executeEnemyTurn();
 
     }
     else if(_currentTurn == TURN_TYPE::PLAYER)
@@ -201,8 +170,8 @@ void BattleManager::changeTurn()
             _uiController->setSkillTooltipDescription(i , _currentPlayerEntity->getSkill(i)->getDescription());
         }
 
-        _enemyTeam->activeTeam(false);
-        _playerTeam->activeTeam(true);
+        _enemyTeam->setActiveTeam(false);
+        _playerTeam->setActiveTeam(true);
     }
 }
 
@@ -261,7 +230,7 @@ Entity* BattleManager::selectEnemyEntity(Vec2 worldMousePos)
     return nullptr;
 }
 
-void BattleManager::playEnemyTurn()
+void BattleManager::executeEnemyTurn()
 {
     submitPlayerCommand(new BattleCommand(2.1f, [&]()
     {
@@ -279,13 +248,13 @@ void BattleManager::playEnemyTurn()
     }));
 }
 
-void BattleManager::setPositions(std::vector<Vec2>& playerTeamPosition, std::vector<Vec2>& enemyTeamPosition)
+void BattleManager::setTeamPositions(std::vector<Vec2>& playerTeamPosition, std::vector<Vec2>& enemyTeamPosition)
 {
     _playerTeamPosition = playerTeamPosition;
     _enemyTeamPosition = enemyTeamPosition;
 }
 
-void BattleManager::playPlayerTurn(Entity* enemyEntity,int currentSkillIndex)
+void BattleManager::executePlayerTurn(Entity* enemyEntity,int currentSkillIndex)
 {
     _usedPlayerCommand = true;
 
@@ -303,14 +272,4 @@ void BattleManager::playPlayerTurn(Entity* enemyEntity,int currentSkillIndex)
         _currentPlayerEntity->getSkill(currentSkillIndex)->execute(_currentPlayerEntity, enemyEntity);
     }));
 
-}
-
-void BattleManager::submitPlayerCommand(BattleCommand* cmd)
-{
-    _commandQueue.push(cmd);
-}
-
-int BattleManager::getSelectSkillIndex()
-{
-    return _uiController->getSelecSkillIndex();
 }

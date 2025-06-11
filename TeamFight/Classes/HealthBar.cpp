@@ -10,8 +10,8 @@ bool HealthBar::init()
         return false;
 
     _healthBar = Label::createWithTTF("", FONT_BMJUA, 7);
+    _healthBar->setColor(Color3B(236, 240, 241));
     _healthBar->setPosition(Vec2::ZERO);
-
     addChild(_healthBar, LAYER::UI);
     return true;
 }

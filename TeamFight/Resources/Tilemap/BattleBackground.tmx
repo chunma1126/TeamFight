@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.1" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
  <tileset firstgid="1" source="Background.tsx"/>
- <layer id="1" name="Tile Layer 1" width="32" height="24">
+ <layer id="1" name="Background" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJzt0U0aQmAYheEPsYMUO5DYQT/sgGIHFfa/AI+pSZO8Tc7gvq5zxo/nnPMRYIfQ8EfYI8YBRySGP0WGE3KcURj+EhdcccMdleGv0aDFA090hr936q/+6q/+6q/+6v/rvt+++v+//wtvfDCs9rjhX/aEGXQmm1E=
+   eJzt0TsBgDAQwNBTUVoLQC1AscDHvxWiordkeEPmlIhYUNFQJveKDTt6Qh84MXAl9I0HL76Env3b//73v//973//+9//uf9/9EKggQ==
+  </data>
+ </layer>
+ <layer id="2" name="Env" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxHIDrQDhjAAhZ3cQDtiFIyCUTAKRgFBIMswWt9RAsip70brSNxgJIUNAFELAUQ=
   </data>
  </layer>
 </map>
