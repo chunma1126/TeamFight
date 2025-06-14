@@ -1,80 +1,55 @@
 #pragma once
+
 #include <queue>
 #include <string>
 #include <memory>
+#include <vector>
 
-#include "BattleCommand.h"
+#include "cocos2d.h" 
 #include "Entity.h"
 #include "Action.h"
+#include "BattleCommand.h"
+
+#include "TurnController.h"
 #include "UIController.h"
+#include "RewardManager.h"
+#include "TeamController.h"
+#include "EnemySpawner.h"
+#include "CommandController.h"
+#include "SelectController.h"
 
-enum class TURN_TYPE
+class BattleManager 
 {
-	PLAYER,
-	ENEMY,
-	END
-};
-
-class BattleManager {
 public:
     BattleManager();
     ~BattleManager();
 
     void init();
-    void EnemySpawn();
+    void initRewardButtons();
     void update(float dt);
-    void runCommand(float dt);
+    void setTeamPositions(std::vector<cocos2d::Vec2>& playerTeamPosition, std::vector<cocos2d::Vec2>& enemyTeamPosition);
 public:
-    void setTeamPositions(std::vector<Vec2>& playerTeamPosition , std::vector<Vec2>& enemyTeamPosition);
-    void executePlayerTurn(Entity* enemyEntity,int currentSkillIndex);
-   
+    int getSelectSkillIndex();
+    bool getCanPlayerInput();
 public:
-    const char* turnTypeToString(TURN_TYPE turn)
-    {
-        switch (turn)
-        {
-        case TURN_TYPE::PLAYER: return "PLAYER";
-        case TURN_TYPE::ENEMY:  return "ENEMY";
-        default:                return "UNKNOWN";
-        }
-    }
-    Entity* selectPlayerEntity();
-    Entity* selectEnemyEntity(Vec2 worldMousePos);
+   TurnController* getTurnController() { return _turnController.get(); }
+   UIController* getUIController() { return _uiController.get(); }
+   RewardManager* getRewardManager() { return _rewardManager.get(); }
+   TeamController* getTeamController() { return _teamController.get(); }
+   EnemySpawner* getEnemySpawner() { return _enemySpawner.get(); }
+   CommandController* getCommandController() { return _commandController.get(); }
+   SelectController* getSelectController() { return _selectController.get(); }
 
-    int getSelectSkillIndex() { return _uiController->getSelecSkillIndex(); };
-    bool getCanPlayerInput()  { return _currentTurn == TURN_TYPE::PLAYER && !_usedPlayerCommand; }
 private:
-    void executeEnemyTurn();
-    void changeTurn();
-    void submitPlayerCommand(BattleCommand* cmd) { _commandQueue.push(cmd); }
-
-    void clearCurrentLevel();
     void gameOver();
-public:
-    ::Action<float> onLevelClearEvent;
-    ::Action<float> onGameOverEvent;
-private:
-    std::queue<TURN_TYPE> _turnQueue;
-    std::queue<BattleCommand*> _commandQueue;
-    std::unique_ptr<class UIController> _uiController;
-    std::unique_ptr<class EnemySpawner> _enemySpawner;
-
-    std::vector<Vec2> _playerTeamPosition;
-    std::vector<Vec2> _enemyTeamPosition;
+    void clearCurrentLevel(float duration);
 
 private:
-    BattleCommand* _currentCommand = nullptr;
-    std::unique_ptr <class Team> _playerTeam = nullptr;
-    std::unique_ptr <class Team> _enemyTeam = nullptr;
-
-    Entity* _currentEnemyEntity = nullptr;
-    Entity* _currentPlayerEntity = nullptr;
-
-    TURN_TYPE _currentTurn = TURN_TYPE::END;
-
-    bool _canChangeTurn = true;
-    bool _usedPlayerCommand = false;
-
+    std::unique_ptr<TurnController> _turnController;
+    std::unique_ptr<UIController> _uiController;
+    std::unique_ptr<RewardManager> _rewardManager;
+    std::unique_ptr<TeamController> _teamController;
+    std::unique_ptr<EnemySpawner> _enemySpawner;
+    std::unique_ptr<CommandController> _commandController;
+    std::unique_ptr<SelectController> _selectController;
 };
-
-

@@ -1,47 +1,47 @@
 #pragma once
-#include <vector>
 
+#include <vector>
 #include "cocos2d.h"
-#include "ui/CocosGUI.h"
+#include "JYDButton.h"
 
 USING_NS_CC;
-struct SkillButtonInfo
-{
-	cocos2d::ui::Button* skillButton;
-	cocos2d::Label* skillTooltipLabel;
 
-	bool hoverState;
-};
-
-class UIController
+class UIController 
 {
 public:
-	UIController();
-	~UIController();
+    UIController();
+    ~UIController();
 
-	void init();
-	void initSkillButton(cocos2d::Vec2& pos);
-	void initSkillButtonMouseHover();
-	void update(float dt);
+    void init();
+    void update(float dt);
 
-public:
-	int getSelecSkillIndex() { return _selectSkillIndex; }
-	void setSelectSkillIndex(int index) { _selectSkillIndex = index; }
+    void setSkillIcons(const std::vector<std::string>& icons);
+    void setRewardIcons(const std::vector<std::string>& icons);
 
-	int getCurrentSkillIndex() { return _currentSkillIndex; }
-	int setCurrentSkillIndex(int index) { _currentSkillIndex = index; }
+    void setSkillTooltipDescription(int index, const std::string& description);
+    void ResetAllSkillTooltip();
 
-	void setSkillIcons(std::vector<std::string> skillIconPathList);
-	void onSkillButtonClicked(int index);
-	void onSkillButtonHover(int index);
+    int getSelecSkillIndex() const { return _selectSkillIndex; }
+    void setSelectSkillIndex(int index) { _selectSkillIndex = index; }
 
-	void setSkillTooltipDescription(int index, std::string description);
-	void ResetAllSkillTooltip();
+    void setActiveRewardButtons(bool active);
+    void setActiveRewardBackground(bool active);
+
+    std::vector<JYDButton*>& getRewardButtons() { return _rewardButtons; }
+
 private:
-	std::vector<SkillButtonInfo> _skillButtonList;
+    void initSkillButton(const cocos2d::Vec2& pos);
+    void initRewardButton(const cocos2d::Vec2& pos);
+    void initRewardBackground(const cocos2d::Size& visibleSize, const cocos2d::Vec2& origin);
+private:
+    LayerColor* _rewardBackground;
 
-	int _selectSkillIndex = -1;
-	int _currentSkillIndex = 1;
+    std::vector<JYDButton*> _skillButtons;
+    std::vector<JYDButton*> _rewardButtons;
+    std::vector<Sprite*> rewardSprites;
 
+
+    int _selectSkillIndex = -1;
+    int _currentSkillIndex = 1;
 };
 

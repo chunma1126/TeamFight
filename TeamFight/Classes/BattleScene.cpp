@@ -1,7 +1,6 @@
 #include "BattleScene.h"
 #include "Entities.h"
 #include "TileMap.h"
-
 #include "Enum.h"
 
 USING_NS_CC;
@@ -28,40 +27,7 @@ bool BattleScene::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 screenCenter = { visibleSize.width * 0.5f + origin.x , visibleSize.height * 0.5f + origin.y };
-
-    //init unique_ptr
-    {
-        _battleManager = std::make_unique<BattleManager>();
-    }
-
-    //init positions
-    {
-        std::vector<Vec2> playerPositionList;
-        
-        playerPositionList.reserve(3);
-        playerPositionList.push_back({ visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y });
-        playerPositionList.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.3f + origin.y });
-        playerPositionList.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.7f + origin.y });
-
-        std::vector<Vec2> enemyPositionList;
-        enemyPositionList.reserve(3);
-        enemyPositionList.push_back({ visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y });
-        enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.3f + origin.y });
-        enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.7f + origin.y });
-
-        _battleManager->setTeamPositions(playerPositionList, enemyPositionList);
-    }
-
-    //init tilemap
-    {
-        auto timeMap = TileMap::create();
-        _battleManager->onLevelClearEvent.add([=](float value)
-            {
-                timeMap->move(value);
-            });
-        addChild(timeMap, LAYER::BACKGROUND);
-    }
-
+    
     //mouse Event
     {
         auto mouseListener = EventListenerMouse::create();
@@ -78,7 +44,41 @@ bool BattleScene::init()
 void BattleScene::onEnter()
 {
     Scene::onEnter();
+
+    _battleManager = std::make_unique<BattleManager>();
     _battleManager->init();
+
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    //init positions
+    {
+        std::vector<Vec2> playerPositionList;
+
+        playerPositionList.reserve(3);
+        playerPositionList.push_back({ visibleSize.width * 0.34f + origin.x, visibleSize.height * 0.5f + origin.y });
+        playerPositionList.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.3f + origin.y });
+        playerPositionList.push_back({ visibleSize.width * 0.21f + origin.x, visibleSize.height * 0.7f + origin.y });
+
+        std::vector<Vec2> enemyPositionList;
+        enemyPositionList.reserve(3);
+        enemyPositionList.push_back({ visibleSize.width * 0.7f + origin.x, visibleSize.height * 0.5f + origin.y });
+        enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.3f + origin.y });
+        enemyPositionList.push_back({ visibleSize.width * 0.85f + origin.x, visibleSize.height * 0.7f + origin.y });
+
+        _battleManager->setTeamPositions(playerPositionList, enemyPositionList);
+
+    }
+    //init tilemap
+    {
+        auto timeMap = TileMap::create();
+        _battleManager->getCommandController()->onLevelClearEvent.add([=](float value)
+        {
+            timeMap->move(value);
+        });
+        addChild(timeMap, LAYER::BACKGROUND);
+    }
+    
 }
 
 void BattleScene::update(float dt)
@@ -93,12 +93,12 @@ void BattleScene::mouseDownEvent(EventMouse* event)
     if (!isplayerTurn)return;
 
     Vec2 worldClick = event->getLocationInView();
-    Entity* enemy = _battleManager->selectEnemyEntity(worldClick);
+    Entity* enemy = _battleManager->getSelectController()->selectEnemyEntity(worldClick);
     int selectSkillIndex = _battleManager->getSelectSkillIndex();
 
     if (enemy == nullptr || selectSkillIndex == -1)return;
 
-    _battleManager->executePlayerTurn(enemy,selectSkillIndex);
+    _battleManager->getCommandController()->executePlayerTurn(enemy,selectSkillIndex);
 }
 
 

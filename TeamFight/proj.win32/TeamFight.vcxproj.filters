@@ -70,6 +70,30 @@
     <ClCompile Include="..\Classes\EnemySpawner.cpp">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Reward.cpp">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HealReward.cpp">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\JYDButton.cpp">
+      <Filter>Source Files\Classes\05UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RewardManager.cpp">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TurnController.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TeamController.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CommandController.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SelectController.cpp">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -168,6 +192,30 @@
     <ClInclude Include="..\Classes\EnemySpawner.h">
       <Filter>Source Files\Classes\01.Entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Reward.h">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HealReward.h">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JYDButton.h">
+      <Filter>Source Files\Classes\05UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RewardManager.h">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TurnController.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TeamController.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CommandController.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SelectController.h">
+      <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\user\Desktop\TeamFight\TeamFight\CMakeLists.txt" />
@@ -231,6 +279,9 @@
     </Filter>
     <Filter Include="Source Files\Classes\03.Combat\02.Feedback">
       <UniqueIdentifier>{4e552556-af55-41ab-b851-307a9c48f11a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\03.Combat\03.Reward">
+      <UniqueIdentifier>{40b6642c-25e9-4b5f-a990-fc184076987d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

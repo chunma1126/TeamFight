@@ -1,17 +1,14 @@
 #include "UIController.h"
 #include "Enum.h"
+#include <string>
 
-#include "cocos2d.h"
-
-#define BUTTON_INTERVAL 50
+#define SKILL_BUTTON_INTERVAL 50
+#define RWARD_BUTTON_INTERVAL 95
 #define SKILL_TOOLTIP_LABEL_SIZE 7
-
-#define SKILL_TOOLTIP_FADE_IN_DURATION 0.2f
-#define SKILL_TOOLTIP_FADE_OUT_DURATION 0.2f
 
 UIController::UIController()
 {
-	init();
+    init();
 }
 
 UIController::~UIController()
@@ -20,185 +17,167 @@ UIController::~UIController()
 
 void UIController::init()
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	Vec2 skillPos = { visibleSize.width * 0.9f + origin.x  , visibleSize.height * 0.15f + origin.y };
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    Vec2 skillPos = { visibleSize.width * 0.9f + origin.x, visibleSize.height * 0.15f + origin.y };
+    Vec2 rewardPos = { visibleSize.width * 0.5f + origin.x, visibleSize.height * 0.5f + origin.y };
 
     initSkillButton(skillPos);
-    initSkillButtonMouseHover();
+    initRewardButton(rewardPos);
+    initRewardBackground(visibleSize, origin);
 }
 
-void UIController::initSkillButton(cocos2d::Vec2& pos)
+void UIController::initRewardBackground(const cocos2d::Size& visibleSize, const cocos2d::Vec2& origin)
 {
-    _skillButtonList.push_back({ ui::Button::create(),Label::createWithTTF("",FONT_HEIROF_BOLD, SKILL_TOOLTIP_LABEL_SIZE),false });
-    _skillButtonList.push_back({ ui::Button::create(),Label::createWithTTF("",FONT_HEIROF_BOLD, SKILL_TOOLTIP_LABEL_SIZE),false });
+    _rewardBackground = LayerColor::create(Color4B(45, 52, 54, 0), visibleSize.width + origin.x, visibleSize.height + origin.y);
+    _rewardBackground->runAction(FadeTo::create(0.4f, 128));
+    Director::getInstance()->getRunningScene()->addChild(_rewardBackground, LAYER::UI);
 
-    for (int i = 0; i < _skillButtonList.size(); i++)
+    setActiveRewardBackground(false);
+}
+
+void UIController::setActiveRewardButtons(bool active)
+{
+    for (auto& button : _rewardButtons)
     {
-        pos.x -= BUTTON_INTERVAL * i;
+        button->setVisible(active);
+    }
+}
+
+void UIController::setActiveRewardBackground(bool active)
+{
+    if (active) 
+    {
+        _rewardBackground->setVisible(true); 
+        _rewardBackground->setOpacity(0);    
+
+        auto fadeIn = FadeTo::create(0.4f, 128);
+        _rewardBackground->runAction(fadeIn);
+    }
+    else {
+        auto fadeOut = FadeTo::create(0.4f, 0); 
+        auto hide = CallFunc::create([this]() {
+            _rewardBackground->setVisible(false);
+            });
+        auto sequence = Sequence::create(fadeOut, hide, nullptr);
+        _rewardBackground->runAction(sequence);
+    }
+}
+
+void UIController::initSkillButton(const Vec2& startPos) {
+    for (int i = 0; i < 2; ++i) {
+        Vec2 pos = startPos - Vec2(i * SKILL_BUTTON_INTERVAL, 0);
+
+        auto btn = JYDButton::create("", "");
+        btn->setPosition(pos);
+        btn->setScale(2.5f);
 
         int index = i;
-        _skillButtonList[i].skillButton->addClickEventListener([=](Ref* sender) {
-            onSkillButtonClicked(index);
+        btn->setClickCallback([=]() {
+            _selectSkillIndex = index;
             });
 
-
-        _skillButtonList[i].skillButton->setPosition(pos);
-        _skillButtonList[i].skillButton->setScale(2.5f);
-
-        _skillButtonList[i].skillTooltipLabel->setPosition({ pos.x,pos.y + 30 });
-
-        Director::getInstance()->getRunningScene()->addChild(_skillButtonList[i].skillButton, LAYER::UI);
-        Director::getInstance()->getRunningScene()->addChild(_skillButtonList[i].skillTooltipLabel, LAYER::UI + 100);
-    }
-}
-
-void UIController::initSkillButtonMouseHover()
-{
-#if IS_THIS_DEBUG
-    auto drawNode = DrawNode::create();
-    Director::getInstance()->getRunningScene()->addChild(drawNode, LAYER::UI + 100);
-#endif
-
-    auto mouseListener = EventListenerMouse::create();
-    mouseListener->onMouseMove = [=](EventMouse* event) {
-        Vec2 mousePos = event->getLocationInView();
-        bool anyHovered = false;
-
-#if IS_THIS_DEBUG
-        drawNode->clear();
-#endif
-
-        for (int i = 0; i < _skillButtonList.size(); i++)
+        btn->setHoverCallback([=](bool isEnter) 
         {
-            auto& btnInfo = _skillButtonList[i];
-
-            if (!btnInfo.skillButton->isVisible()) {
-                btnInfo.hoverState = false;
-                continue;
+            if (isEnter) {
+                _currentSkillIndex = index;
+                btn->showTooltip();
             }
-
-            Vec2 worldPos = btnInfo.skillButton->convertToWorldSpaceAR(Vec2::ZERO);
-            Size contentSize = btnInfo.skillButton->getContentSize();
-            Size scaledSize = {
-                contentSize.width * btnInfo.skillButton->getScaleX(),
-                contentSize.height * btnInfo.skillButton->getScaleY()
-            };
-
-            Rect rect(
-                worldPos.x - scaledSize.width * btnInfo.skillButton->getAnchorPoint().x,
-                worldPos.y - scaledSize.height * btnInfo.skillButton->getAnchorPoint().y,
-                scaledSize.width,
-                scaledSize.height
-            );
-
-#if IS_THIS_DEBUG
-            Vec2 verts[4] = {
-                Vec2(rect.getMinX(), rect.getMinY()),
-                Vec2(rect.getMaxX(), rect.getMinY()),
-                Vec2(rect.getMaxX(), rect.getMaxY()),
-                Vec2(rect.getMinX(), rect.getMaxY())
-            };
-            Color4F color = btnInfo.hoverState ? Color4F(0, 1, 0, 0.3f) : Color4F(1, 0, 0, 0.2f);
-            drawNode->drawSolidPoly(verts, 4, color);
-#endif
-
-            if (rect.containsPoint(mousePos))
-            {
-                if (!btnInfo.hoverState)
-                {
-                    onSkillButtonHover(i);
-                }
-                anyHovered = true;
+            else {
+                btn->hideTooltip();
             }
-            else if (btnInfo.hoverState)
-            {
-                btnInfo.hoverState = false;
-
-                auto labelTextFade = FadeOut::create(SKILL_TOOLTIP_FADE_OUT_DURATION);
-                auto offVisible = CallFunc::create([i, this]() {
-                    _skillButtonList[i].skillTooltipLabel->setVisible(false);
-                    });
-
-                auto seq = Sequence::create(labelTextFade, offVisible, nullptr);
-                _skillButtonList[i].skillTooltipLabel->stopAllActions();
-                _skillButtonList[i].skillTooltipLabel->runAction(seq);
-            }
-        }
-        };
-
-    ResetAllSkillTooltip();
-
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(mouseListener, Director::getInstance()->getRunningScene());
-}
-
-void UIController::update(float dt)
-{
-    
-}
-
-void UIController::setSkillIcons(std::vector<std::string> skillIconPathList)
-{
-	size_t skillIndex = 0;
-
-    CCASSERT(skillIconPathList.size() <= _skillButtonList.size(), "ERROR: Skill Icon Path list is bigger than Skill Button list!");
-    
-	for (skillIndex = 0; skillIndex < skillIconPathList.size(); skillIndex++)
-	{
-        _skillButtonList[skillIndex].skillButton->setEnabled(true);
-
-		auto texture = Director::getInstance()->getTextureCache()->addImage(skillIconPathList[skillIndex]);
-		texture->setAliasTexParameters();
-
-        _skillButtonList[skillIndex].skillButton->loadTextureNormal(skillIconPathList[skillIndex]);
-        _skillButtonList[skillIndex].skillButton->setVisible(true);
-	}
-
-	for (; skillIndex < _skillButtonList.size(); skillIndex++)
-	{
-        _skillButtonList[skillIndex].skillButton->setEnabled(false);
-        _skillButtonList[skillIndex].skillButton->loadTextureNormal("");
-        _skillButtonList[skillIndex].skillButton->setVisible(false);
-	}
-}
-
-void UIController::onSkillButtonClicked(int index)
-{
-	_selectSkillIndex = index;
-}
-
-void UIController::onSkillButtonHover(int index)
-{
-	_currentSkillIndex = index;
-    _skillButtonList[_currentSkillIndex].hoverState = true;
-
-    auto onVisible = CallFunc::create([=]()
-        {
-            _skillButtonList[_currentSkillIndex].skillTooltipLabel->setVisible(true);
         });
-    auto labelTextFade = FadeIn::create(SKILL_TOOLTIP_FADE_IN_DURATION);
 
-    Sequence* seq = Sequence::create(onVisible,labelTextFade, nullptr);
-
-    _skillButtonList[_currentSkillIndex].skillTooltipLabel->stopAllActions();
-    _skillButtonList[_currentSkillIndex].skillTooltipLabel->runAction(seq);
-
-    //CCLOG("%s" , _skillButtonList[_currentSkillIndex].skillTooltipLabel->getString().c_str());
-}
-
-void UIController::setSkillTooltipDescription(int index, std::string description)
-{
-    _skillButtonList[index].skillTooltipLabel->setString(description);
-    ResetAllSkillTooltip();
-}
-
-void UIController::ResetAllSkillTooltip()
-{
-    for (auto& buttonInfo : _skillButtonList)
-    {
-        buttonInfo.hoverState = false;
-        buttonInfo.skillTooltipLabel->setVisible(false);
-        buttonInfo.skillTooltipLabel->setOpacity(0);
+        Director::getInstance()->getRunningScene()->addChild(btn,LAYER::UI);
+        _skillButtons.push_back(btn);
     }
 }
 
+void UIController::initRewardButton(const Vec2& startPos) 
+{
+    auto texture = Director::getInstance()->getTextureCache()->addImage("Food.png");
+    float offsetX = 0;
+    float offsetY = 0;
+
+    if (texture)
+    {
+        Size textureSize = texture->getContentSize();
+        offsetX = textureSize.width / 8;
+        offsetY = textureSize.height / 8;
+    }
+
+    int rewardButtonCount = 3;
+    int middleIndex = rewardButtonCount / 2; 
+    
+    for (int i = 0; i < rewardButtonCount; ++i)
+    {
+        int offsetIndex = i - middleIndex; 
+        Vec2 pos = startPos + Vec2(offsetIndex * RWARD_BUTTON_INTERVAL, 0);
+
+        auto btn = JYDButton::create("", "");
+        btn->setPosition(pos);
+        btn->setScale(4.5f);
+        btn->setVisible(false);
+        btn->setIcon("Food.png" ,std::to_string(i), offsetX * i, 0 , offsetX, offsetY);
+
+        btn->setHoverCallback([=](bool isEnter)
+            {
+                if (isEnter) {
+                    btn->showTooltip();
+                }
+                else {
+                    btn->hideTooltip();
+                }
+            });
+
+        _rewardButtons.push_back(btn);
+        Director::getInstance()->getRunningScene()->addChild(btn,LAYER::UI + 10);
+    }
+}
+
+void UIController::setSkillIcons(const std::vector<std::string>& icons) {
+    CCASSERT(icons.size() <= _skillButtons.size(), "Too many icons");
+
+    for (size_t i = 0; i < _skillButtons.size(); ++i) {
+        if (i < icons.size()) {
+            _skillButtons[i]->setIcon(icons[i]);
+            _skillButtons[i]->setVisible(true);
+        }
+        else {
+            _skillButtons[i]->setVisible(false);
+        }
+    }
+}
+
+void UIController::setRewardIcons(const std::vector<std::string>& icons) {
+    CCASSERT(icons.size() <= _rewardButtons.size(), "Too many icons");
+
+    for (size_t i = 0; i < _rewardButtons.size(); ++i) {
+        if (i < icons.size()) {
+            _rewardButtons[i]->setIcon(icons[i]);
+            _rewardButtons[i]->setVisible(true);
+        }
+        else {
+            _rewardButtons[i]->setVisible(false);
+        }
+    }
+}
+
+void UIController::setSkillTooltipDescription(int index, const std::string& description) {
+    if (index < _skillButtons.size()) {
+        _skillButtons[index]->setTooltipText(description);
+    }
+}
+
+void UIController::ResetAllSkillTooltip() 
+{
+    for (auto btn : _skillButtons) {
+        btn->hideTooltip();
+    }
+}
+
+void UIController::update(float dt) 
+{
+
+}
