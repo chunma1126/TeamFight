@@ -1,11 +1,11 @@
 #pragma once
 #include "Reward.h"
-class HealReward : public Reward
+class AttackUpReward : public Reward
 {
 public:
-	HealReward();
+	AttackUpReward();
 	void execute() override;
 private:
-	int _healAmount = 5;
+	int _attackAmount = 2;
 };
 

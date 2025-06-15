@@ -60,6 +60,14 @@ void JYDButton::setTooltipText(const std::string& text)
     }
 }
 
+void JYDButton::setTooltipColor(Color3B color)
+{
+    if (_tooltipLabel)
+    {
+        _tooltipLabel->setColor(color);
+    }
+}
+
 void JYDButton::setIcon(const std::string& iconPath)
 {
     if (_button)

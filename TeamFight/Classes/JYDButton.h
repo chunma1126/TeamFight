@@ -10,6 +10,8 @@ public:
 
     void setPosition(const cocos2d::Vec2& position);
     void setTooltipText(const std::string& text);
+    void setTooltipColor(cocos2d::Color3B color);
+
     void setIcon(const std::string& iconPath);
     void setIcon(const std::string& iconPath , const std::string& iconName, float startX , float startY , float widht , float height);
 

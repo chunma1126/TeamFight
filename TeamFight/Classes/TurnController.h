@@ -7,17 +7,19 @@ enum class TURN_TYPE
     ENEMY,
     END
 };
-
+class TeamController;
 class TurnController {
 public:
     TurnController();
-
+    void init(TeamController* teamController);
+    void clearTurn();
     void fillDefaultTurns();
-    TURN_TYPE nextTurn();
     bool isQueueEmpty() const;
+    TURN_TYPE nextTurn();
     TURN_TYPE currentTurn() const;
 
 private:
     std::queue<TURN_TYPE> _turnQueue;
     TURN_TYPE _currentTurn;
+    TeamController* _teamController;
 };

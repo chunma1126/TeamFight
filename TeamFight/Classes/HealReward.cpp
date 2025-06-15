@@ -2,14 +2,13 @@
 
 #pragma execution_character_set("utf-8")
 
-
 HealReward::HealReward()
 {
 	_iconIndexList.push_back({4,4});
 	_iconIndexList.push_back({5,4});
 	_iconIndexList.push_back({6,4});
 
-	_description = "¸ÔÀ¸¸é È¸º¹ÇÏ´Â ¸ÀÀÕ´Â ÄÉÀÌÅ© ÀÔ´Ï´Ù.";
+	setDescription("¸ÔÀ¸¸é È¸º¹ÇÏ´Â ¸ÀÀÖ´Â ÄÉÀÌÅ© ÀÔ´Ï´Ù. +", _healAmount);
 }
 
 void HealReward::execute()

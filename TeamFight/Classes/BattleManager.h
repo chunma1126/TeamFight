@@ -43,7 +43,6 @@ public:
 private:
     void gameOver();
     void clearCurrentLevel(float duration);
-
 private:
     std::unique_ptr<TurnController> _turnController;
     std::unique_ptr<UIController> _uiController;
@@ -52,4 +51,5 @@ private:
     std::unique_ptr<EnemySpawner> _enemySpawner;
     std::unique_ptr<CommandController> _commandController;
     std::unique_ptr<SelectController> _selectController;
+
 };

@@ -38,11 +38,14 @@ void BattleManager::init()
         _teamController.get(),
         _uiController.get(),
         _selectController.get());
+
     _selectController->init(_teamController.get(), _uiController.get());
+    _turnController->init(_teamController.get());
 
     _commandController->onLevelClearEvent.add([this](float duration)
         {
             clearCurrentLevel(duration);
+            initRewardButtons();
         });
 
     initRewardButtons();
@@ -53,19 +56,15 @@ void BattleManager::initRewardButtons()
     auto buttons = _uiController->getRewardButtons();
 
     auto texture = Director::getInstance()->getTextureCache()->addImage("Food.png");
-    float offsetX = 0;
-    float offsetY = 0;
-
-    if (texture)
-    {
-        Size textureSize = texture->getContentSize();
-        offsetX = textureSize.width / 8;
-        offsetY = textureSize.height / 8;
-    }
+    Size textureSize = texture->getContentSize();
+    
+    float offsetX = textureSize.width / 8;
+    float offsetY = textureSize.height / 8;
 
     for (auto& button : buttons) 
     {
         Reward* newReward = _rewardManager->getReward();
+
         button->setClickCallback([=]() 
         {
             newReward->setTragetTeam(_teamController->getPlayerTeam().get());
@@ -120,9 +119,11 @@ void BattleManager::clearCurrentLevel(float duration)
     {
         _commandController->setChangeTurn(true);
         _teamController->spawnEnemyTeam();
+        _turnController->clearTurn();
+
     });
     auto seq = Sequence::create(delay, animationEvent, enemySpawn, nullptr);
-
+    
     scene->runAction(seq);
 }
 

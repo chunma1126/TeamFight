@@ -1,15 +1,50 @@
 #include "TurnController.h"
+#include "TeamController.h"
+#include "Entity.h"
 
 TurnController::TurnController() : _currentTurn(TURN_TYPE::END) 
 {
 
 }
 
+void TurnController::init(TeamController* teamController)
+{
+    _teamController = teamController;
+}
+
+void TurnController::clearTurn()
+{
+    while (!_turnQueue.empty())
+    {
+        _turnQueue.pop();
+    }
+}
+
 void TurnController::fillDefaultTurns()
 {
-    for (int i = 0; i < 4; ++i) {
-        _turnQueue.push(TURN_TYPE::PLAYER);
-        _turnQueue.push(TURN_TYPE::ENEMY);
+    std::vector<std::pair<int, TURN_TYPE>> turnCandidates;
+
+    for (const auto& player : _teamController->getAlivePlayers())
+    {
+        int spd = player->getStatController()->getValue(STAT_TYPE::SPD);
+        turnCandidates.push_back({ spd, TURN_TYPE::PLAYER });
+    }
+
+    for (const auto& enemy : _teamController->getAliveEnemies())
+    {
+        int spd = enemy->getStatController()->getValue(STAT_TYPE::SPD);
+        turnCandidates.push_back({ spd, TURN_TYPE::ENEMY });
+    }
+
+    std::sort(turnCandidates.begin(), turnCandidates.end(),
+        [](const std::pair<int, TURN_TYPE>& a, const std::pair<int, TURN_TYPE>& b)
+        {
+            return a.first > b.first; 
+        });
+
+    for (const auto& candidate : turnCandidates)
+    {
+        _turnQueue.push(candidate.second);
     }
 }
 

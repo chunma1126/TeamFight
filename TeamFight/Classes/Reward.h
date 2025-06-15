@@ -12,8 +12,10 @@ public:
 public:
 	virtual void execute() = 0; 
 protected:
+	void setDescription(const char* description, int amount);
 	Team* _team;
 	std::vector<std::pair<int,int>> _iconIndexList;
 	std::string _description;
+
 };
 

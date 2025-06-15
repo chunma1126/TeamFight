@@ -46,7 +46,6 @@ void UIController::setActiveRewardButtons(bool active)
         button->setScale(0.6f);
         button->setVisible(active);
         button->runAction(ScaleTo::create(0.25f , RWARD_BUTTON_SIZE));
-
     }
 }
 
@@ -114,6 +113,7 @@ void UIController::initRewardButton(const Vec2& startPos)
         btn->setPosition(pos);
         btn->setScale(RWARD_BUTTON_SIZE);
         btn->setVisible(false);
+        btn->setTooltipColor((Color3B(116, 247, 83)));
 
         btn->setHoverCallback([=](bool isEnter)
             {

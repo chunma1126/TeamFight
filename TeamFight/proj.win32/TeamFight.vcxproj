@@ -836,12 +836,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\AttackUpReward.cpp" />
     <ClCompile Include="..\Classes\CommandController.cpp" />
     <ClCompile Include="..\Classes\SelectController.cpp" />
     <ClCompile Include="..\Classes\TeamController.cpp" />
     <ClCompile Include="..\Classes\TurnController.cpp" />
     <ClInclude Include="..\Classes\Action.h" />
     <ClInclude Include="..\Classes\Archer.h" />
+    <ClInclude Include="..\Classes\AttackUpReward.h" />
     <ClInclude Include="..\Classes\BattleManager.h" />
     <ClInclude Include="..\Classes\BattleCommand.h" />
     <ClInclude Include="..\Classes\CameraShakeAction.h" />

@@ -94,6 +94,9 @@
     <ClCompile Include="..\Classes\SelectController.cpp">
       <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AttackUpReward.cpp">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\user\Desktop\TeamFight\TeamFight\proj.win32\main.h">
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SelectController.h">
       <Filter>Source Files\Classes\03.Combat\00.Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AttackUpReward.h">
+      <Filter>Source Files\Classes\03.Combat\03.Reward</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
