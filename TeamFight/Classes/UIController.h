@@ -16,7 +16,6 @@ public:
     void update(float dt);
 
     void setSkillIcons(const std::vector<std::string>& icons);
-    void setRewardIcons(const std::vector<std::string>& icons);
 
     void setSkillTooltipDescription(int index, const std::string& description);
     void ResetAllSkillTooltip();

@@ -3,8 +3,10 @@
 #include <string>
 
 #define SKILL_BUTTON_INTERVAL 50
-#define RWARD_BUTTON_INTERVAL 95
 #define SKILL_TOOLTIP_LABEL_SIZE 7
+
+#define RWARD_BUTTON_INTERVAL 95
+#define RWARD_BUTTON_SIZE 4.5f
 
 UIController::UIController()
 {
@@ -41,7 +43,10 @@ void UIController::setActiveRewardButtons(bool active)
 {
     for (auto& button : _rewardButtons)
     {
+        button->setScale(0.6f);
         button->setVisible(active);
+        button->runAction(ScaleTo::create(0.25f , RWARD_BUTTON_SIZE));
+
     }
 }
 
@@ -65,7 +70,8 @@ void UIController::setActiveRewardBackground(bool active)
     }
 }
 
-void UIController::initSkillButton(const Vec2& startPos) {
+void UIController::initSkillButton(const Vec2& startPos)
+{
     for (int i = 0; i < 2; ++i) {
         Vec2 pos = startPos - Vec2(i * SKILL_BUTTON_INTERVAL, 0);
 
@@ -96,17 +102,6 @@ void UIController::initSkillButton(const Vec2& startPos) {
 
 void UIController::initRewardButton(const Vec2& startPos) 
 {
-    auto texture = Director::getInstance()->getTextureCache()->addImage("Food.png");
-    float offsetX = 0;
-    float offsetY = 0;
-
-    if (texture)
-    {
-        Size textureSize = texture->getContentSize();
-        offsetX = textureSize.width / 8;
-        offsetY = textureSize.height / 8;
-    }
-
     int rewardButtonCount = 3;
     int middleIndex = rewardButtonCount / 2; 
     
@@ -117,9 +112,8 @@ void UIController::initRewardButton(const Vec2& startPos)
 
         auto btn = JYDButton::create("", "");
         btn->setPosition(pos);
-        btn->setScale(4.5f);
+        btn->setScale(RWARD_BUTTON_SIZE);
         btn->setVisible(false);
-        btn->setIcon("Food.png" ,std::to_string(i), offsetX * i, 0 , offsetX, offsetY);
 
         btn->setHoverCallback([=](bool isEnter)
             {
@@ -146,20 +140,6 @@ void UIController::setSkillIcons(const std::vector<std::string>& icons) {
         }
         else {
             _skillButtons[i]->setVisible(false);
-        }
-    }
-}
-
-void UIController::setRewardIcons(const std::vector<std::string>& icons) {
-    CCASSERT(icons.size() <= _rewardButtons.size(), "Too many icons");
-
-    for (size_t i = 0; i < _rewardButtons.size(); ++i) {
-        if (i < icons.size()) {
-            _rewardButtons[i]->setIcon(icons[i]);
-            _rewardButtons[i]->setVisible(true);
-        }
-        else {
-            _rewardButtons[i]->setVisible(false);
         }
     }
 }

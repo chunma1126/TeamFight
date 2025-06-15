@@ -17,7 +17,7 @@ public:
 	void init(TurnController* turnController, TeamController* teamController, UIController* uiController, SelectController* selectController);
 public:
 	void changeTurn();
-	void runCommand(float dt);
+	void update(float dt);
 	void executePlayerTurn(Entity* enemyEntity, int currentSkillIndex);
 public:
 	void submitPlayerCommand(BattleCommand* cmd) { _commandQueue.push(cmd); }

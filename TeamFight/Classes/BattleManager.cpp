@@ -38,7 +38,6 @@ void BattleManager::init()
         _teamController.get(),
         _uiController.get(),
         _selectController.get());
-
     _selectController->init(_teamController.get(), _uiController.get());
 
     _commandController->onLevelClearEvent.add([this](float duration)
@@ -46,25 +45,64 @@ void BattleManager::init()
             clearCurrentLevel(duration);
         });
 
-    this->initRewardButtons();
+    initRewardButtons();
+}
+
+void BattleManager::initRewardButtons() 
+{
+    auto buttons = _uiController->getRewardButtons();
+
+    auto texture = Director::getInstance()->getTextureCache()->addImage("Food.png");
+    float offsetX = 0;
+    float offsetY = 0;
+
+    if (texture)
+    {
+        Size textureSize = texture->getContentSize();
+        offsetX = textureSize.width / 8;
+        offsetY = textureSize.height / 8;
+    }
+
+    for (auto& button : buttons) 
+    {
+        Reward* newReward = _rewardManager->getReward();
+        button->setClickCallback([=]() 
+        {
+            newReward->setTragetTeam(_teamController->getPlayerTeam().get());
+            newReward->execute();
+
+            _uiController->setActiveRewardBackground(false);
+            _uiController->setActiveRewardButtons(false);
+
+            _commandController->onLevelClearEvent.invoke(LEVEL_CLEAR_DELAY);
+
+            button->hideTooltip();
+        });
+
+        std::pair<int,int> iconIndex = { newReward->getIconIndex().first , newReward->getIconIndex().second };
+        button->setIcon("Food.png", typeid(*newReward).name(), offsetX * iconIndex.first, offsetY * iconIndex.second, offsetX, offsetY);
+        button->setTooltipText(newReward->getDescription());
+    }
+
 }
 
 void BattleManager::update(float dt) 
 {
-    _uiController->update(dt);
-
-    if (_turnController->isQueueEmpty()) {
+    if (_turnController->isQueueEmpty()) 
+    {
         _turnController->fillDefaultTurns();
     }
-    _commandController->runCommand(dt);
+
+    _uiController->update(dt);
+    _commandController->update(dt);
 }
 
 void BattleManager::clearCurrentLevel(float duration)
 {
+    _teamController->getEnemyTeam()->clearEntities();
+
     auto scene = cocos2d::Director::getInstance()->getRunningScene();
     CCASSERT(scene, "ERROR : has not scene!!!");
-
-    _teamController->getEnemyTeam()->clearEntities();
 
     for (auto* entity : _teamController->getPlayerTeam()->getAliveEntities())
     {
@@ -78,36 +116,14 @@ void BattleManager::clearCurrentLevel(float duration)
             entity->playAnimation(ANIMATION_STATE::IDLE, true);
         }
     });
-
     auto enemySpawn = CallFunc::create([this]()
     {
         _commandController->setChangeTurn(true);
         _teamController->spawnEnemyTeam();
     });
-
     auto seq = Sequence::create(delay, animationEvent, enemySpawn, nullptr);
+
     scene->runAction(seq);
-}
-
-void BattleManager::initRewardButtons() 
-{
-    auto buttons = _uiController->getRewardButtons();
-    for (auto& button : buttons) {
-        Reward* newReward = _rewardManager->getReward();
-        button->setClickCallback([=]() {
-            newReward->setTragetTeam(_teamController->getPlayerTeam().get());
-            newReward->execute();
-
-            _uiController->setActiveRewardBackground(false);
-            _uiController->setActiveRewardButtons(false);
-
-            _commandController->onLevelClearEvent.invoke(LEVEL_CLEAR_DELAY);
-
-            button->hideTooltip();
-            });
-
-        button->setTooltipText(typeid(*newReward).name());
-    }
 }
 
 int BattleManager::getSelectSkillIndex() 
@@ -125,5 +141,3 @@ void BattleManager::setTeamPositions(std::vector<Vec2>& playerTeamPosition, std:
     _teamController->initPlayerTeam(playerTeamPosition);
     _teamController->initEnemyTeam(enemyTeamPosition, _enemySpawner.get());
 }
-
-

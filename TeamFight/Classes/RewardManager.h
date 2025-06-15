@@ -2,7 +2,6 @@
 #include "Reward.h"
 #include "HealReward.h"
 
-
 class RewardManager
 {
 public:
@@ -10,7 +9,6 @@ public:
 	~RewardManager();
 public:
 	Reward* getReward();
-
 
 };
 

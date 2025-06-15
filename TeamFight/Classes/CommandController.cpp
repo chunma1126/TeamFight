@@ -31,7 +31,7 @@ void CommandController::init(TurnController* turnController, TeamController* tea
     _selectController = selectController;
 }
 
-void CommandController::runCommand(float dt)
+void CommandController::update(float dt)
 {
     if (_currentCommand != nullptr) {
         _currentCommand->update(dt);

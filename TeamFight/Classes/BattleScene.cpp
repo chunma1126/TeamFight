@@ -45,11 +45,11 @@ void BattleScene::onEnter()
 {
     Scene::onEnter();
 
-    _battleManager = std::make_unique<BattleManager>();
-    _battleManager->init();
-
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    _battleManager = std::make_unique<BattleManager>();
+    _battleManager->init();
 
     //init positions
     {
@@ -88,7 +88,6 @@ void BattleScene::update(float dt)
 
 void BattleScene::mouseDownEvent(EventMouse* event)
 {
-    
     bool isplayerTurn = _battleManager->getCanPlayerInput();
     if (!isplayerTurn)return;
 

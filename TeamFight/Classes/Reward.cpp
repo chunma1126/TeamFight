@@ -1,11 +1,9 @@
 #include "Reward.h"
 
-Reward::Reward()
+#include <random>
+
+std::pair<int, int> Reward::getIconIndex()
 {
-
-}
-
-Reward::~Reward()
-{
-
+	int randomIndex = rand() % _iconIndexList.size();
+	return _iconIndexList[randomIndex];
 }
