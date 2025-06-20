@@ -49,7 +49,7 @@
 #### ✅ 턴 및 커맨드 처리 (TurnController, CommandController)
 - 턴 흐름을 `TurnController`가 관리하며 `CommandController`에서 각 Entity의 행동들의 흐름을 관리 합니다.
 - 각 행동은 `Command` 추상클래스로 추상화되어 있으며, 실행 큐에 등록되어 순차적으로 실행됩니다.
-- 턴 종료 시 자동으로 다음 유닛으로 제어가 넘어갑니다.
+- 턴 종료 시 다음으로 `SPD`스탯이 높은 Entity에게 자동으로 넘어갑니다.
 
 #### ✅ 스탯 시스템 (StatController)
 - 각 Entity는 고유한 `StatController`를 가지고 있으며, 체력, 마나, 공격력 등의 스탯을 중앙에서 관리합니다.
@@ -61,10 +61,10 @@
 
 #### ✅ 옵저버 패턴
 - 레벨 종료, 체력 0, 특정 이벤트 발생 등은 `Observer` 패턴으로 처리되어 **비동기적**이고 **모듈화된 로직**을 구성합니다.
-- 예: `LevelManager`는 클리어 조건을 만족하면 `OnLevelClear` 이벤트를 구독자에게 전달합니다.
+- 예: `CommandController`는 클리어 조건을 만족하면 `OnLevelClear` 이벤트를 구독자에게 전달합니다.
 
 #### ✅ UI
 - `JYDButton`은 기존 Cocos 버튼을 확장한 커스텀 UI 컴포넌트입니다.
-- 클릭 이벤트 외에도 상태 변화에 따른 애니메이션 트리거나 커맨드 연동 기능을 내장했습니다.
+- 클릭 이벤트 외에도 Hover이벤트들을 등록하고 자유롭게 Sprite들을 바꿀수 있게 확장했습니다.
 
 ---
