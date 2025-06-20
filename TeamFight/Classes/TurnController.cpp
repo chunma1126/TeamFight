@@ -22,7 +22,7 @@ void TurnController::clearTurn()
 
 void TurnController::fillDefaultTurns()
 {
-    std::vector<std::pair<int, TURN_TYPE>> turnCandidates;
+    std::vector<std::pair<float, TURN_TYPE>> turnCandidates;
 
     for (const auto& player : _teamController->getAlivePlayers())
     {
@@ -37,7 +37,7 @@ void TurnController::fillDefaultTurns()
     }
 
     std::sort(turnCandidates.begin(), turnCandidates.end(),
-        [](const std::pair<int, TURN_TYPE>& a, const std::pair<int, TURN_TYPE>& b)
+        [](const std::pair<float, TURN_TYPE>& a, const std::pair<float, TURN_TYPE>& b)
         {
             return a.first > b.first; 
         });
